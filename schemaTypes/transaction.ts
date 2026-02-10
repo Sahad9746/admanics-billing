@@ -87,5 +87,34 @@ export default defineType({
       title: 'Last Edited At',
       type: 'datetime',
     }),
+    defineField({
+      name: 'createdBy',
+      title: 'Created By',
+      type: 'reference',
+      to: [{ type: 'user' }],
+    }),
+    defineField({
+      name: 'createdAt',
+      title: 'Created At',
+      type: 'datetime',
+      initialValue: () => new Date().toISOString(),
+    }),
+    defineField({
+      name: 'lastEditedBy',
+      title: 'Last Edited By',
+      type: 'reference',
+      to: [{ type: 'user' }],
+    }),
+    defineField({
+      name: 'deletedBy',
+      title: 'Deleted By',
+      type: 'reference',
+      to: [{ type: 'user' }],
+    }),
+    defineField({
+      name: 'deletedAt',
+      title: 'Deleted At',
+      type: 'datetime',
+    }),
   ],
 })

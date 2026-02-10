@@ -12,7 +12,13 @@ import { FilterBar, Filters } from "@/components/FilterBar"
 import { isSameDay, parseISO, format } from "date-fns"
 import Link from "next/link"
 
-export function Dashboard({ initialTransactions }: { initialTransactions: Transaction[] }) {
+export function Dashboard({ 
+  initialTransactions,
+  user 
+}: { 
+  initialTransactions: Transaction[]
+  user: { name: string; email: string; role: string }
+}) {
   const [filters, setFilters] = useState<Filters>({
     search: '',
     type: 'all',
@@ -62,7 +68,15 @@ export function Dashboard({ initialTransactions }: { initialTransactions: Transa
             <div className="flex items-center gap-4 self-end md:self-auto">
                 <CurrencyToggle />
                 <LogoutButton />
-                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-900/20">AF</div>
+                <div className="flex items-center gap-3">
+                  <div className="text-right hidden md:block">
+                    <p className="text-sm font-medium text-white">{user.name}</p>
+                    <p className="text-xs text-neutral-400 capitalize">{user.role}</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-900/20">
+                    {user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
+                  </div>
+                </div>
             </div>
         </header>
 

@@ -1,22 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow access to login page, studio, and public assets
-  if (pathname === '/login' || pathname.startsWith('/studio') || pathname.startsWith('/_next') || pathname.startsWith('/static')) {
+  // Allow access to login, register, studio, API routes, and public assets
+  if (
+    pathname === '/login' ||
+    pathname === '/register' ||
+    pathname.startsWith('/studio') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/static')
+  ) {
     return NextResponse.next()
   }
 
-  // Check for auth cookie
-  const authCookie = request.cookies.get('admanics-auth')
+  // Check for NextAuth session
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
   
-  // Verify cookie value (simple check, or use JWT in real app)
-  // Here just checking existence essentially, or could verify a hash
-  if (!authCookie || authCookie.value !== 'true') {
-      const url = request.nextUrl.clone()
-      url.pathname = '/login'
-      return NextResponse.redirect(url)
+  if (!token) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/login'
+    return NextResponse.redirect(url)
   }
 
   return NextResponse.next()

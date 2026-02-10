@@ -238,6 +238,49 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
                 </div>
             )}
 
+            {/* Audit Trail */}
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+                <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-4">Activity Log</h3>
+                <div className="space-y-3">
+                    {transaction.createdBy && (
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm text-neutral-400">Created by</span>
+                            <span className="text-white font-medium">{transaction.createdBy.name}</span>
+                        </div>
+                    )}
+                    {transaction.createdAt && (
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm text-neutral-400">Created on</span>
+                            <span className="text-white">{format(new Date(transaction.createdAt), 'PPpp')}</span>
+                        </div>
+                    )}
+                    {transaction.lastEditedBy && (
+                        <div className="flex items-center justify-between border-t border-neutral-800 pt-3">
+                            <span className="text-sm text-neutral-400">Last edited by</span>
+                            <span className="text-white font-medium">{transaction.lastEditedBy.name}</span>
+                        </div>
+                    )}
+                    {transaction.lastEditedAt && (
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm text-neutral-400">Last edited on</span>
+                            <span className="text-white">{format(new Date(transaction.lastEditedAt), 'PPpp')}</span>
+                        </div>
+                    )}
+                    {transaction.deletedBy && (
+                        <div className="flex items-center justify-between border-t border-neutral-800 pt-3">
+                            <span className="text-sm text-neutral-400">Deleted by</span>
+                            <span className="text-red-400 font-medium">{transaction.deletedBy.name}</span>
+                        </div>
+                    )}
+                    {transaction.deletedAt && (
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm text-neutral-400">Deleted on</span>
+                            <span className="text-red-400">{format(new Date(transaction.deletedAt), 'PPpp')}</span>
+                        </div>
+                    )}
+                </div>
+            </div>
+
             {/* Actions */}
             <div className="pt-8 border-t border-neutral-800 flex flex-col sm:flex-row gap-4">
               <button 
