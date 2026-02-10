@@ -1,6 +1,6 @@
 import { client } from "@/lib/sanity"
 import { Transaction } from "@/types"
-import { Dashboard } from "@/components/Dashboard"
+import { TransactionsHistory } from "@/components/TransactionsHistory"
 
 export const dynamic = 'force-dynamic'
 
@@ -15,10 +15,10 @@ async function getData(): Promise<Transaction[]> {
   }
 }
 
-export default async function Home() {
+export default async function TransactionsPage() {
   const transactions = await getData()
   
   return (
-    <Dashboard initialTransactions={transactions} />
+    <TransactionsHistory initialTransactions={transactions} />
   )
 }
