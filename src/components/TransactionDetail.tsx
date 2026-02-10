@@ -5,11 +5,36 @@ import { formatCurrency } from "@/lib/utils"
 import { useCurrency } from "@/components/Providers"
 import { format } from "date-fns"
 import jsPDF from "jspdf"
-import { ArrowLeft, Download, FileText, FileSpreadsheet } from "lucide-react"
+import { ArrowLeft, Download, FileText, FileSpreadsheet, Pencil, Trash2, X } from "lucide-react"
 import Link from "next/link"
+import { deleteTransaction } from "@/app/actions"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { EntryForm } from "@/components/EntryForm"
+import { ConfirmationModal } from "@/components/ConfirmationModal"
+import toast from "react-hot-toast"
 
 export default function TransactionDetail({ transaction }: { transaction: Transaction }) {
   const { currency } = useCurrency()
+  const router = useRouter()
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+
+  const handleDelete = async () => {
+    setIsDeleting(true)
+    const result = await deleteTransaction(transaction._id)
+    setIsDeleting(false)
+    setShowDeleteModal(false)
+    
+    if (result.success) {
+      toast.success("Transaction deleted successfully")
+      router.push('/')
+      router.refresh()
+    } else {
+      toast.error(result.error || "Failed to delete transaction")
+    }
+  }
 
   const downloadPDF = () => {
     const doc = new jsPDF()
@@ -77,27 +102,100 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white p-6 md:p-12 font-sans">
-      <div className="max-w-3xl mx-auto space-y-8">
-        <Link href="/" className="inline-flex items-center text-neutral-400 hover:text-white transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Dashboard
-        </Link>
+    <div className="min-h-screen bg-neutral-950 text-white p-6 md:p-12 font-sans relative">
+      {/* Edit Modal */}
+      {isEditing && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="max-w-xl w-full relative">
+            <button 
+                onClick={() => setIsEditing(false)}
+                className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors"
+            >
+                <X className="w-8 h-8" />
+            </button>
+            <EntryForm 
+                initialData={transaction} 
+                onSuccess={() => {
+                    setIsEditing(false)
+                    router.refresh()
+                }} 
+            />
+          </div>
+        </div>
+      )}
 
-        <div className="bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden shadow-2xl">
+      {/* Delete Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleDelete}
+        title="Delete Transaction"
+        description="Are you sure you want to delete this transaction? It will be marked as deleted but can be restored by an admin."
+        confirmText={isDeleting ? "Deleting..." : "Delete"}
+        isDestructive
+      />
+
+      <div className="max-w-3xl mx-auto space-y-8">
+        <div className="flex items-center justify-between">
+            <Link href="/" className="inline-flex items-center text-neutral-400 hover:text-white transition-colors">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Dashboard
+            </Link>
+            
+            <div className="flex items-center gap-3">
+                <button
+                    onClick={() => setIsEditing(true)}
+                    disabled={transaction.status === 'deleted'}
+                    className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <Pencil className="w-4 h-4" />
+                    Edit
+                </button>
+                <button
+                    onClick={() => setShowDeleteModal(true)}
+                    disabled={isDeleting || transaction.status === 'deleted'}
+                    className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <Trash2 className="w-4 h-4" />
+                    {transaction.status === 'deleted' ? 'Deleted' : 'Delete'}
+                </button>
+            </div>
+        </div>
+
+        <div className={`bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden shadow-2xl relative ${transaction.status === 'deleted' ? 'opacity-75 grayscale-[0.5]' : ''}`}>
+          
+          {/* Status Badge */}
+          {transaction.status === 'deleted' && (
+             <div className="absolute top-0 left-0 right-0 bg-red-500 text-white text-center text-sm font-bold py-1 z-10">
+                 THIS TRANSACTION IS DELETED
+             </div>
+          )}
+
           <div className="p-8 md:p-12 space-y-8">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-neutral-800 pb-8">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-neutral-800 pb-8 mt-4">
               <div>
-                <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider mb-3 ${
-                  transaction.type === 'income' 
-                    ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
-                    : 'bg-red-500/10 text-red-400 border border-red-500/20'
-                }`}>
-                  {transaction.type}
-                </span>
-                <h1 className="text-3xl md:text-4xl font-bold text-white">{transaction.title}</h1>
+                <div className="flex items-center gap-2 mb-3">
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider ${
+                    transaction.type === 'income' 
+                        ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
+                        : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                    }`}>
+                    {transaction.type}
+                    </span>
+                    {transaction.isEdited && (
+                        <span className="inline-block px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider bg-yellow-500/10 text-yellow-500 border border-yellow-500/20">
+                            Edited
+                        </span>
+                    )}
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white max-w-lg break-words">{transaction.title}</h1>
                 <p className="text-neutral-400 mt-2">{format(new Date(transaction.date), 'EEEE, MMMM do, yyyy')}</p>
+                {transaction.isEdited && transaction.lastEditedAt && (
+                    <p className="text-xs text-neutral-500 mt-1">
+                        Last edited: {format(new Date(transaction.lastEditedAt), 'h:mm a, MMM d')}
+                    </p>
+                )}
               </div>
               <div className="text-right">
                 <p className="text-sm text-neutral-400 mb-1">Amount</p>
@@ -125,6 +223,29 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
                 </div>
               </div>
             </div>
+
+            {/* Description */}
+            {transaction.description && (
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+                    <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-3">Description</h3>
+                    <p className="text-white whitespace-pre-wrap leading-relaxed">{transaction.description}</p>
+                </div>
+            )}
+
+            {/* Custom Fields */}
+            {transaction.customFields && transaction.customFields.length > 0 && (
+                <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+                    <h3 className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-4">Additional Details</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {transaction.customFields.map((field, index) => (
+                            <div key={index} className="flex flex-col">
+                                <span className="text-sm text-neutral-500 mb-1">{field.label}</span>
+                                <span className="text-white font-medium">{field.value}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {/* Actions */}
             <div className="pt-8 border-t border-neutral-800 flex flex-col sm:flex-row gap-4">

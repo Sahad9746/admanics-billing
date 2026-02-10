@@ -17,7 +17,6 @@ export function Dashboard({ initialTransactions }: { initialTransactions: Transa
     search: '',
     type: 'all',
     category: 'all',
-    month: '',
     date: '',
   })
 
@@ -40,13 +39,7 @@ export function Dashboard({ initialTransactions }: { initialTransactions: Transa
       return false
     }
 
-    // Month (YYYY-MM)
-    if (filters.month) {
-      const tMonth = format(tDate, 'yyyy-MM')
-      if (tMonth !== filters.month) {
-        return false
-      }
-    }
+
 
     // Date (YYYY-MM-DD)
     if (filters.date) {
@@ -78,14 +71,14 @@ export function Dashboard({ initialTransactions }: { initialTransactions: Transa
             <FilterBar filters={filters} setFilters={setFilters} />
         </section>
 
-        {/* Stats - Shows totals based on filtered data */}
+        {/* Stats - Shows totals based on filtered data (excluding deleted) */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-           <Stats transactions={filteredTransactions} />
+           <Stats transactions={filteredTransactions.filter(t => t.status !== 'deleted')} />
         </section>
 
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            <Chart transactions={filteredTransactions} />
+            <Chart transactions={filteredTransactions.filter(t => t.status !== 'deleted')} />
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-white">Recent Transactions</h2>
                 <Link href="/transactions" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">

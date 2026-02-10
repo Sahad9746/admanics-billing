@@ -28,15 +28,20 @@ export async function addTransaction(formData: FormData) {
   const type = formData.get('type') as string
   const category = formData.get('category') as string
   const date = formData.get('date') as string
+  const description = formData.get('description') as string
+  const customFieldsString = formData.get('customFields') as string
+  const customFields = customFieldsString ? JSON.parse(customFieldsString) : []
 
   try {
     await client.create({
       _type: 'transaction',
       title,
+      description,
       amount,
       type,
       category,
       date,
+      customFields,
     })
     revalidatePath('/')
     return { success: true }
@@ -49,4 +54,68 @@ export async function addTransaction(formData: FormData) {
 export async function logout() {
   (await cookies()).delete('admanics-auth')
   redirect('/login')
+}
+
+export async function deleteTransaction(id: string) {
+  try {
+    await client.patch(id).set({ status: 'deleted' }).commit()
+    revalidatePath('/')
+    revalidatePath('/transactions')
+    revalidatePath(`/transaction/${id}`)
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to delete transaction:", error)
+    return { success: false, error: 'Failed to delete transaction' }
+  }
+}
+
+export async function editTransaction(id: string, formData: FormData) {
+  const title = formData.get('title') as string
+  const amount = parseFloat(formData.get('amount') as string)
+  const type = formData.get('type') as string
+  const category = formData.get('category') as string
+  const date = formData.get('date') as string
+  const description = formData.get('description') as string
+  const customFieldsString = formData.get('customFields') as string
+  const customFields = customFieldsString ? JSON.parse(customFieldsString) : []
+
+  try {
+    await client.patch(id).set({
+      title,
+      description,
+      amount,
+      type,
+      category,
+      date,
+      customFields,
+      isEdited: true,
+      lastEditedAt: new Date().toISOString(),
+    }).commit()
+    revalidatePath('/')
+    revalidatePath('/transactions')
+    revalidatePath(`/transaction/${id}`)
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to edit transaction:", error)
+    return { success: false, error: 'Failed to edit transaction' }
+  }
+}
+
+export async function deleteTransactions(ids: string[]) {
+  try {
+    const transaction = client.transaction()
+    ids.forEach((id) => {
+      transaction.patch(id, (p) => p.set({ status: 'deleted' }))
+    })
+    await transaction.commit()
+    
+    revalidatePath('/')
+    revalidatePath('/transactions')
+    ids.forEach((id) => revalidatePath(`/transaction/${id}`))
+    
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to delete transactions:", error)
+    return { success: false, error: 'Failed to delete transactions' }
+  }
 }

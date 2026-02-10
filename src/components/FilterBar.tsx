@@ -6,7 +6,6 @@ export interface Filters {
   search: string
   type: string
   category: string
-  month: string
   date: string
 }
 
@@ -25,7 +24,6 @@ export function FilterBar({ filters, setFilters }: FilterBarProps) {
       search: '',
       type: 'all',
       category: 'all',
-      month: '',
       date: '',
     })
   }
@@ -34,7 +32,6 @@ export function FilterBar({ filters, setFilters }: FilterBarProps) {
     filters.search || 
     filters.type !== 'all' || 
     filters.category !== 'all' || 
-    filters.month || 
     filters.date
 
   return (
@@ -76,14 +73,7 @@ export function FilterBar({ filters, setFilters }: FilterBarProps) {
         <option value="Ads">Ads</option>
       </select>
 
-      {/* Month Filter */}
-      <input
-        type="month"
-        value={filters.month}
-        onChange={(e) => handleChange('month', e.target.value)}
-        className="bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-        aria-label="Filter by Month"
-      />
+
 
        {/* Date Filter */}
        <input
