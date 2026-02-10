@@ -58,7 +58,7 @@ export async function logout() {
 
 export async function deleteTransaction(id: string) {
   try {
-    await client.patch(id).set({ status: 'deleted' }).commit()
+    await client.delete(id)
     revalidatePath('/')
     revalidatePath('/transactions')
     revalidatePath(`/transaction/${id}`)
@@ -105,7 +105,7 @@ export async function deleteTransactions(ids: string[]) {
   try {
     const transaction = client.transaction()
     ids.forEach((id) => {
-      transaction.patch(id, (p) => p.set({ status: 'deleted' }))
+      transaction.delete(id)
     })
     await transaction.commit()
     

@@ -130,8 +130,8 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
         onClose={() => setShowDeleteModal(false)}
         onConfirm={handleDelete}
         title="Delete Transaction"
-        description="Are you sure you want to delete this transaction? It will be marked as deleted but can be restored by an admin."
-        confirmText={isDeleting ? "Deleting..." : "Delete"}
+        description="Are you sure you want to permanently delete this transaction? This action cannot be undone and the data will be removed from the database."
+        confirmText={isDeleting ? "Deleting..." : "Delete Permanently"}
         isDestructive
       />
 
@@ -145,35 +145,26 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
             <div className="flex items-center gap-3">
                 <button
                     onClick={() => setIsEditing(true)}
-                    disabled={transaction.status === 'deleted'}
-                    className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg transition-colors font-medium"
                 >
                     <Pencil className="w-4 h-4" />
                     Edit
                 </button>
                 <button
                     onClick={() => setShowDeleteModal(true)}
-                    disabled={isDeleting || transaction.status === 'deleted'}
+                    disabled={isDeleting}
                     className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     <Trash2 className="w-4 h-4" />
-                    {transaction.status === 'deleted' ? 'Deleted' : 'Delete'}
+                    Delete
                 </button>
             </div>
         </div>
 
-        <div className={`bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden shadow-2xl relative ${transaction.status === 'deleted' ? 'opacity-75 grayscale-[0.5]' : ''}`}>
-          
-          {/* Status Badge */}
-          {transaction.status === 'deleted' && (
-             <div className="absolute top-0 left-0 right-0 bg-red-500 text-white text-center text-sm font-bold py-1 z-10">
-                 THIS TRANSACTION IS DELETED
-             </div>
-          )}
-
+        <div className="bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden shadow-2xl relative">
           <div className="p-8 md:p-12 space-y-8">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-neutral-800 pb-8 mt-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-neutral-800 pb-8">
               <div>
                 <div className="flex items-center gap-2 mb-3">
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider ${

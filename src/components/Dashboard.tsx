@@ -71,14 +71,14 @@ export function Dashboard({ initialTransactions }: { initialTransactions: Transa
             <FilterBar filters={filters} setFilters={setFilters} />
         </section>
 
-        {/* Stats - Shows totals based on filtered data (excluding deleted) */}
+        {/* Stats - Shows totals based on filtered data */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-           <Stats transactions={filteredTransactions.filter(t => t.status !== 'deleted')} />
+           <Stats transactions={filteredTransactions} />
         </section>
 
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            <Chart transactions={filteredTransactions.filter(t => t.status !== 'deleted')} />
+            <Chart transactions={filteredTransactions} />
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-white">Recent Transactions</h2>
                 <Link href="/transactions" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">

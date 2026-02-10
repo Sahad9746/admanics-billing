@@ -104,8 +104,8 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
         onClose={() => setShowDeleteModal(false)}
         onConfirm={handleBulkDelete}
         title="Delete Transactions"
-        description={`Are you sure you want to delete ${selectedIds.length} transactions? This action cannot be undone immediately.`}
-        confirmText={isDeleting ? "Deleting..." : `Delete ${selectedIds.length} Items`}
+        description={`Are you sure you want to permanently delete ${selectedIds.length} transactions? This action cannot be undone and the data will be removed from the database.`}
+        confirmText={isDeleting ? "Deleting..." : `Delete ${selectedIds.length} Permanently`}
         isDestructive
       />
 

@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from 'next/server'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow access to login page and public assets
-  if (pathname === '/login' || pathname.startsWith('/_next') || pathname.startsWith('/static')) {
+  // Allow access to login page, studio, and public assets
+  if (pathname === '/login' || pathname.startsWith('/studio') || pathname.startsWith('/_next') || pathname.startsWith('/static')) {
     return NextResponse.next()
   }
 

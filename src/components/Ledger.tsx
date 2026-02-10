@@ -74,9 +74,7 @@ export function Ledger({
                 </tr>
             ) : (
                 transactions.map((t) => (
-                <tr key={t._id} className={`group cursor-pointer relative transition-colors ${
-                    t.status === 'deleted' ? 'bg-neutral-900/50 grayscale opacity-60' : 'hover:bg-neutral-800/50'
-                } ${selectedIds.includes(t._id) ? 'bg-blue-900/10 hover:bg-blue-900/20' : ''}`}>
+                <tr key={t._id} className={`group cursor-pointer relative transition-colors hover:bg-neutral-800/50 ${selectedIds.includes(t._id) ? 'bg-blue-900/10 hover:bg-blue-900/20' : ''}`}>
                     {selectable && (
                         <td className="px-6 py-4 relative z-20">
                              <input 
@@ -94,7 +92,6 @@ export function Ledger({
                     </td>
                     <td className="px-6 py-4 font-medium text-white relative z-10 pointer-events-none">
                         {t.title}
-                        {t.status === 'deleted' && <span className="ml-2 text-xs text-red-500 font-bold uppercase">(Deleted)</span>}
                     </td>
                     <td className="px-6 py-4 relative z-10 pointer-events-none">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-800 text-neutral-300 border border-neutral-700">
