@@ -6,7 +6,7 @@ import { useCurrency } from "@/components/Providers"
 import { formatCurrency } from "@/lib/utils"
 
 export function Chart({ transactions }: { transactions: Transaction[] }) {
-  const { currency } = useCurrency()
+  const { currency, exchangeRate } = useCurrency()
 
   // Aggregate data by month
   const data = transactions.reduce((acc, t) => {
@@ -56,12 +56,12 @@ export function Chart({ transactions }: { transactions: Transaction[] }) {
             tick={{ fill: '#888' }} 
             axisLine={false} 
             tickLine={false} 
-            tickFormatter={(value) => formatCurrency(value, currency)} 
+            tickFormatter={(value) => formatCurrency(value, currency, exchangeRate)} 
           />
           <Tooltip 
             contentStyle={{ backgroundColor: '#171717', border: '1px solid #333', borderRadius: '8px' }}
             itemStyle={{ color: '#fff' }}
-            formatter={(value: any) => [formatCurrency(value || 0, currency), '']}
+            formatter={(value: any) => [formatCurrency(value || 0, currency, exchangeRate), '']}
           />
           <Legend />
           <Bar dataKey="income" name="Income" fill="#22c55e" radius={[4, 4, 0, 0]} />

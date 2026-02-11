@@ -15,7 +15,7 @@ import { ConfirmationModal } from "@/components/ConfirmationModal"
 import toast from "react-hot-toast"
 
 export default function TransactionDetail({ transaction }: { transaction: Transaction }) {
-  const { currency } = useCurrency()
+  const { currency, exchangeRate } = useCurrency()
   const router = useRouter()
   const [isDeleting, setIsDeleting] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
@@ -66,7 +66,7 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
     
     // Amount
     doc.setFontSize(16)
-    doc.text(`Amount: ${formatCurrency(transaction.amount, currency)}`, 20, startY + lineHeight * 6)
+    doc.text(`Amount: ${formatCurrency(transaction.amount, currency, exchangeRate)}`, 20, startY + lineHeight * 6)
     
     // Footer
     doc.setFontSize(10)
@@ -193,7 +193,7 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
                 <div className={`text-4xl md:text-5xl font-bold ${
                    transaction.type === 'income' ? 'text-green-500' : 'text-red-500'
                 }`}>
-                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount, currency)}
+                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount, currency, exchangeRate)}
                 </div>
               </div>
             </div>

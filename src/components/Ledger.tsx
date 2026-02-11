@@ -17,7 +17,7 @@ export function Ledger({
   selectedIds?: string[]
   onSelect?: (ids: string[]) => void
 }) {
-  const { currency } = useCurrency()
+  const { currency, exchangeRate } = useCurrency()
 
   const handleSelectAll = () => {
     if (!onSelect) return
@@ -99,7 +99,7 @@ export function Ledger({
                     </span>
                     </td>
                     <td className={`px-6 py-4 text-right font-medium relative z-10 pointer-events-none ${t.type === 'income' ? 'text-green-500' : 'text-red-500'}`}>
-                    {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount, currency)}
+                    {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount, currency, exchangeRate)}
                     </td>
                 </tr>
                 ))
