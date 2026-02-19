@@ -21,7 +21,13 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [isDeleting, setIsDeleting] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
+  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+
+  const handleEdit = (t: Transaction) => {
+    setEditingTransaction(t)
+    setIsCreating(true)
+  }
   
   const [filters, setFilters] = useState<Filters>({
     search: '',
@@ -78,19 +84,25 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
 
   return (
     <main className="min-h-screen bg-neutral-950 text-white p-6 md:p-12 font-sans relative">
-      {/* Create Modal */}
+      {/* Create / Edit Modal */}
       {isCreating && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="max-w-xl w-full relative">
             <button 
-                onClick={() => setIsCreating(false)}
+                onClick={() => {
+                    setIsCreating(false)
+                    setEditingTransaction(null)
+                }}
                 className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors"
             >
                 <X className="w-8 h-8" />
             </button>
             <EntryForm 
+                key={editingTransaction?._id || 'new'}
+                initialData={editingTransaction || undefined}
                 onSuccess={() => {
                     setIsCreating(false)
+                    setEditingTransaction(null)
                     router.refresh()
                 }} 
             />
@@ -147,7 +159,7 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
 
         {/* Filters */}
         <section>
-            <FilterBar filters={filters} setFilters={setFilters} />
+            <FilterBar filters={filters} setFilters={setFilters} transactions={initialTransactions} />
         </section>
 
         {/* Ledger */}
@@ -157,6 +169,7 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
                 selectable
                 selectedIds={selectedIds}
                 onSelect={setSelectedIds}
+                onEdit={handleEdit}
             />
         </section>
       </div>

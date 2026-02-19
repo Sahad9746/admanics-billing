@@ -14,13 +14,16 @@ export interface Transaction {
   title: string
   description?: string
   amount: number
-  type: 'income' | 'expense'
+  type: 'income' | 'expense' | 'transfer'
   category: string
   date: string
   status?: 'active' | 'deleted'
   isEdited?: boolean
   lastEditedAt?: string
   customFields?: { label: string; value: string }[]
+  wallet?: { _ref: string }
+  project?: { _ref: string }
+  invoice?: { _ref: string }
   createdBy?: User
   createdAt?: string
   lastEditedBy?: User

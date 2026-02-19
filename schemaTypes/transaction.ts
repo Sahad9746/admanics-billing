@@ -39,25 +39,29 @@ export default defineType({
       name: 'type',
       title: 'Type',
       type: 'string',
-      options: {
-        list: [
-          { title: 'Income', value: 'income' },
-          { title: 'Expense', value: 'expense' },
-        ],
-      },
     }),
     defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
-      options: {
-        list: [
-          { title: 'Client', value: 'Client' },
-          { title: 'Payroll', value: 'Payroll' },
-          { title: 'Software', value: 'Software' },
-          { title: 'Ads', value: 'Ads' },
-        ],
-      },
+    }),
+    defineField({
+      name: 'wallet',
+      title: 'Wallet',
+      type: 'reference',
+      to: [{ type: 'wallet' }],
+    }),
+    defineField({
+      name: 'project',
+      title: 'Project',
+      type: 'reference',
+      to: [{ type: 'project' }],
+    }),
+    defineField({
+      name: 'invoice',
+      title: 'Invoice',
+      type: 'reference',
+      to: [{ type: 'invoice' }],
     }),
     defineField({
       name: 'date',

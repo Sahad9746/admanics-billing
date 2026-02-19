@@ -1,15 +1,16 @@
 'use client'
 
-import { addTransaction, editTransaction } from "@/app/actions"
+import { addTransaction, editTransaction, getWallets, getProjects, getInvoices } from "@/app/actions"
 import { useCurrency } from "@/components/Providers"
 import { Transaction } from "@/types"
 import { Loader2 } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { format } from "date-fns"
 
 import toast from "react-hot-toast"
 
 import { Trash2, Plus } from "lucide-react"
+import { SmartCombobox } from "@/components/SmartCombobox"
 
 interface EntryFormProps {
   initialData?: Transaction
@@ -22,6 +23,25 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
   const [customFields, setCustomFields] = useState<{ label: string; value: string }[]>(
     initialData?.customFields || []
   )
+
+  const defaultCategories = ['Ad Spend', 'Service Fee', 'Salary', 'Tools', 'Capital', 'Misc']
+
+
+  const [wallets, setWallets] = useState<any[]>([])
+  const [projects, setProjects] = useState<any[]>([])
+  const [invoices, setInvoices] = useState<any[]>([])
+  const [loadingData, setLoadingData] = useState(true)
+
+  useEffect(() => {
+    async function loadData() {
+      const [w, p, i] = await Promise.all([getWallets(), getProjects(), getInvoices()])
+      setWallets(w)
+      setProjects(p)
+      setInvoices(i)
+      setLoadingData(false)
+    }
+    loadData()
+  }, [])
 
   const handleAddField = () => {
     setCustomFields([...customFields, { label: '', value: '' }])
@@ -175,32 +195,53 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1.5">Type</label>
-            <select
-              name="type"
-              required
-              defaultValue={initialData?.type || 'income'}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all appearance-none"
-            >
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1.5">Category</label>
-            <select
-              name="category"
-              required
-              defaultValue={initialData?.category || 'Client'}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all appearance-none"
-            >
-              <option value="Client">Client</option>
-              <option value="Payroll">Payroll</option>
-              <option value="Software">Software</option>
-              <option value="Ads">Ads</option>
-            </select>
-          </div>
+          <SmartCombobox 
+            name="type"
+            label="Type"
+            options={[
+                { id: 'income', name: 'income' }, 
+                { id: 'expense', name: 'expense' }, 
+                { id: 'transfer', name: 'transfer' }
+            ]}
+            initialId={initialData?.type}
+            placeholder="e.g., income or custom"
+            required
+          />
+          <SmartCombobox 
+            name="category"
+            label="Category"
+            options={defaultCategories.map(c => ({ id: c, name: c }))}
+            initialId={initialData?.category}
+            placeholder="e.g., Service Fee or New Category"
+            required
+          />
+        </div>
+
+        <div className="space-y-4 pt-2 border-t border-neutral-800">
+           <SmartCombobox 
+             name="walletId"
+             label="Wallet"
+             options={wallets.map(w => ({ id: w._id, name: w.name }))}
+             initialId={initialData?.wallet?._ref}
+             placeholder="e.g., Main HDFC or New Wallet"
+             required
+           />
+           <div className="grid grid-cols-2 gap-4">
+             <SmartCombobox 
+               name="projectId"
+               label="Project (Optional)"
+               options={projects.map(p => ({ id: p._id, name: p.name }))}
+               initialId={initialData?.project?._ref}
+               placeholder="e.g., ADM-Q1 or New Project"
+             />
+             <SmartCombobox 
+               name="invoiceId"
+               label="Invoice (Optional)"
+               options={invoices.map(i => ({ id: i._id, name: i.invoiceNumber }))}
+               initialId={initialData?.invoice?._ref}
+               placeholder="e.g., INV-001 or New Invoice"
+             />
+           </div>
         </div>
 
         <div className="flex flex-col gap-3 pt-2">

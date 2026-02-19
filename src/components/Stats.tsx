@@ -7,30 +7,42 @@ import { useCurrency } from "@/components/Providers"
 export function Stats({ transactions }: { transactions: Transaction[] }) {
   const { currency, exchangeRate } = useCurrency()
 
-  const income = transactions
-    .filter((t) => t.type === 'income')
+  const adSpend = transactions
+    .filter((t) => t.category === 'Ad Spend' || t.category === 'Ads')
     .reduce((acc, t) => acc + t.amount, 0)
 
-  const expense = transactions
-    .filter((t) => t.type === 'expense')
+  const capital = transactions
+    .filter((t) => t.type === 'income' && t.category === 'Capital')
     .reduce((acc, t) => acc + t.amount, 0)
 
-  const net = income - expense
+  const grossRevenue = transactions
+    .filter((t) => t.type === 'income' && t.category !== 'Capital')
+    .reduce((acc, t) => acc + t.amount, 0)
+
+  const operatingExpenses = transactions
+    .filter((t) => t.type === 'expense' && t.category !== 'Ad Spend' && t.category !== 'Ads')
+    .reduce((acc, t) => acc + t.amount, 0)
+
+  const netProfit = grossRevenue - operatingExpenses
 
   return (
     <>
       <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800">
-        <h3 className="text-neutral-400 text-sm font-medium uppercase tracking-wider">Total Revenue</h3>
-        <p className="text-3xl font-bold text-white mt-2">{formatCurrency(income, currency, exchangeRate)}</p>
+        <h3 className="text-neutral-400 text-sm font-medium uppercase tracking-wider">Gross Revenue</h3>
+        <p className="text-3xl font-bold text-white mt-2">{formatCurrency(grossRevenue, currency, exchangeRate)}</p>
       </div>
       <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800">
-        <h3 className="text-neutral-400 text-sm font-medium uppercase tracking-wider">Total Expenses</h3>
-        <p className="text-3xl font-bold text-white mt-2">{formatCurrency(expense, currency, exchangeRate)}</p>
+        <h3 className="text-neutral-400 text-sm font-medium uppercase tracking-wider">Total Ad Spend</h3>
+        <p className="text-3xl font-bold text-purple-400 mt-2">{formatCurrency(adSpend, currency, exchangeRate)}</p>
       </div>
       <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800">
-        <h3 className="text-neutral-400 text-sm font-medium uppercase tracking-wider">Net Cash</h3>
-        <p className={`text-3xl font-bold mt-2 ${net >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-          {formatCurrency(net, currency, exchangeRate)}
+        <h3 className="text-neutral-400 text-sm font-medium uppercase tracking-wider">Operating Expenses</h3>
+        <p className="text-3xl font-bold text-red-400 mt-2">{formatCurrency(operatingExpenses, currency, exchangeRate)}</p>
+      </div>
+      <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800">
+        <h3 className="text-neutral-400 text-sm font-medium uppercase tracking-wider">Net Profit</h3>
+        <p className={`text-3xl font-bold mt-2 ${netProfit >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+          {formatCurrency(netProfit, currency, exchangeRate)}
         </p>
       </div>
     </>

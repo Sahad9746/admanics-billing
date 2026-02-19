@@ -12,9 +12,10 @@ export interface Filters {
 interface FilterBarProps {
   filters: Filters
   setFilters: (filters: Filters) => void
+  transactions?: any[]
 }
 
-export function FilterBar({ filters, setFilters }: FilterBarProps) {
+export function FilterBar({ filters, setFilters, transactions = [] }: FilterBarProps) {
   const handleChange = (key: keyof Filters, value: string) => {
     setFilters({ ...filters, [key]: value })
   }
@@ -33,6 +34,12 @@ export function FilterBar({ filters, setFilters }: FilterBarProps) {
     filters.type !== 'all' || 
     filters.category !== 'all' || 
     filters.date
+
+  const defaultCategories = ['Ad Spend', 'Service Fee', 'Salary', 'Tools', 'Capital', 'Misc']
+  const uniqueCategories = Array.from(new Set([
+    ...defaultCategories,
+    ...transactions.map(t => t.category).filter(Boolean)
+  ])).sort()
 
   return (
     <div className="bg-neutral-900 p-4 rounded-xl border border-neutral-800 space-y-4 md:space-y-0 md:flex md:items-center md:gap-4">
@@ -67,10 +74,9 @@ export function FilterBar({ filters, setFilters }: FilterBarProps) {
         className="bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
       >
         <option value="all">All Categories</option>
-        <option value="Client">Client</option>
-        <option value="Payroll">Payroll</option>
-        <option value="Software">Software</option>
-        <option value="Ads">Ads</option>
+        {uniqueCategories.map(cat => (
+          <option key={cat} value={cat}>{cat}</option>
+        ))}
       </select>
 
 

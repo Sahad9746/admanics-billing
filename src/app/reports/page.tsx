@@ -1,22 +1,15 @@
 import { client } from "@/lib/sanity"
 import { Transaction } from "@/types"
-import { Dashboard } from "@/components/Dashboard"
-import { AppLayout } from "@/components/AppLayout"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth.config"
 import { redirect } from "next/navigation"
-import { getWallets } from "@/app/actions"
+import { AppLayout } from "@/components/AppLayout"
+import { ReportsDashboard } from "@/components/ReportsDashboard"
 
 export const dynamic = 'force-dynamic'
 
 async function getData(): Promise<Transaction[]> {
-  const query = `*[_type == "transaction"] {
-    ...,
-    createdBy->,
-    lastEditedBy->,
-    deletedBy->
-  } | order(date desc)`
-  
+  const query = `*[_type == "transaction"] | order(date desc)`
   try {
     const data = await client.fetch(query)
     return data
@@ -26,7 +19,7 @@ async function getData(): Promise<Transaction[]> {
   }
 }
 
-export default async function Home() {
+export default async function ReportsPage() {
   const session = await getServerSession(authOptions)
   
   if (!session) {
@@ -34,15 +27,14 @@ export default async function Home() {
   }
 
   const transactions = await getData()
-  const wallets = await getWallets()
-  
+
   return (
-    <AppLayout user={session.user} title="Dashboard" description="Internal billing & fund flow dashboard">
-      <Dashboard 
-        initialTransactions={transactions} 
-        wallets={wallets}
-        user={session.user}
-      />
+    <AppLayout 
+      user={session.user} 
+      title="Reports & Analytics" 
+      description="Breakdown of financial performance"
+    >
+      <ReportsDashboard transactions={transactions} />
     </AppLayout>
   )
 }

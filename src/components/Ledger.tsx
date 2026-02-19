@@ -5,17 +5,20 @@ import { formatCurrency } from "@/lib/utils"
 import { format } from "date-fns"
 import { useCurrency } from "@/components/Providers"
 import Link from "next/link"
+import { Edit2 } from "lucide-react"
 
 export function Ledger({ 
   transactions,
   selectable = false,
   selectedIds = [],
-  onSelect
+  onSelect,
+  onEdit
 }: { 
   transactions: Transaction[]
   selectable?: boolean
   selectedIds?: string[]
   onSelect?: (ids: string[]) => void
+  onEdit?: (t: Transaction) => void
 }) {
   const { currency, exchangeRate } = useCurrency()
 
@@ -63,12 +66,13 @@ export function Ledger({
               <th className="px-6 py-4">Title</th>
               <th className="px-6 py-4">Category</th>
               <th className="px-6 py-4 text-right">Amount</th>
+              {onEdit && <th className="px-6 py-4 text-right w-16">Actions</th>}
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-800">
             {transactions.length === 0 ? (
                 <tr>
-                    <td colSpan={selectable ? 5 : 4} className="px-6 py-8 text-center text-neutral-500">
+                    <td colSpan={selectable ? (onEdit ? 6 : 5) : (onEdit ? 5 : 4)} className="px-6 py-8 text-center text-neutral-500">
                         No transactions found.
                     </td>
                 </tr>
@@ -101,6 +105,20 @@ export function Ledger({
                     <td className={`px-6 py-4 text-right font-medium relative z-10 pointer-events-none ${t.type === 'income' ? 'text-green-500' : 'text-red-500'}`}>
                     {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount, currency, exchangeRate)}
                     </td>
+                    {onEdit && (
+                        <td className="px-6 py-4 text-right relative z-20">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                    onEdit(t)
+                                }}
+                                className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg inline-flex"
+                            >
+                                <Edit2 className="w-4 h-4" />
+                            </button>
+                        </td>
+                    )}
                 </tr>
                 ))
             )}
