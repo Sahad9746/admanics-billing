@@ -224,7 +224,7 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
              name="walletId"
              label="Wallet"
              options={wallets.map(w => ({ id: w._id, name: w.name }))}
-             initialId={initialData?.wallet?._ref}
+             initialId={initialData?.wallet?._id || initialData?.wallet?._ref}
              placeholder="e.g., Main HDFC or New Wallet"
              required
            />
@@ -233,21 +233,21 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
                name="projectId"
                label="Project (Optional)"
                options={projects.map(p => ({ id: p._id, name: p.name }))}
-               initialId={initialData?.project?._ref}
+               initialId={initialData?.project?._id || initialData?.project?._ref}
                placeholder="e.g., ADM-Q1 or New Project"
              />
              <SmartCombobox 
                name="clientId"
                label="Client (Optional)"
                options={clients.map(c => ({ id: c._id, name: c.name }))}
-               initialId={initialData?.client?._ref}
+               initialId={initialData?.client?._id || initialData?.client?._ref}
                placeholder="Select a client..."
              />
              <SmartCombobox 
                name="invoiceId"
                label="Invoice (Optional)"
                options={invoices.map(i => ({ id: i._id, name: i.invoiceNumber }))}
-               initialId={initialData?.invoice?._ref}
+               initialId={initialData?.invoice?._id || initialData?.invoice?._ref}
                placeholder="e.g., INV-001 or New Invoice"
              />
            </div>

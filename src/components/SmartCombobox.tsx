@@ -16,14 +16,18 @@ export function SmartCombobox({ name, label, options, initialId, placeholder, re
   const [val, setVal] = useState(initialOption ? initialOption.name : '')
   const [show, setShow] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const hasInitialized = useRef(!!initialOption)
 
   useEffect(() => {
     // If options load asynchronously and we find the initial option later
-    if (!val && initialId) {
+    if (!hasInitialized.current && initialId) {
       const opt = options.find(o => o.id === initialId)
-      if (opt) setVal(opt.name)
+      if (opt) {
+        setVal(opt.name)
+        hasInitialized.current = true
+      }
     }
-  }, [options, initialId, val])
+  }, [options, initialId])
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

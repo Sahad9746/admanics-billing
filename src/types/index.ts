@@ -21,10 +21,10 @@ export interface Transaction {
   isEdited?: boolean
   lastEditedAt?: string
   customFields?: { label: string; value: string }[]
-  wallet?: { _ref: string }
+  wallet?: { _ref?: string; _id?: string; name?: string }
   client?: { _ref?: string; _id?: string; name?: string }
-  project?: { _ref: string }
-  invoice?: { _ref: string }
+  project?: { _ref?: string; _id?: string; name?: string }
+  invoice?: { _ref?: string; _id?: string; invoiceNumber?: string }
   createdBy?: User
   createdAt?: string
   lastEditedBy?: User
