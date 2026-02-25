@@ -1,5 +1,5 @@
 require('dotenv').config({ path: '.env.local' });
-const { createClient } = require('@sanity/client');
+const { createClient } = require('next-sanity');
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -10,7 +10,8 @@ const client = createClient({
 });
 
 async function run() {
-  await client.patch('U20l9Q2o7fBOHVEhu7nTE8').set({ synced: false }).commit();
-  console.log("Unsynced the log!");
+  const data = await client.fetch('*[_type == "user"]{name, email, role}');
+  console.log(JSON.stringify(data, null, 2));
 }
+
 run();
