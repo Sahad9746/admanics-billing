@@ -5,5 +5,6 @@ import project from './project'
 import wallet from './wallet'
 import invoice from './invoice'
 import transfer from './transfer'
+import dailyWorkLog from './dailyWorkLog'
 
-export const schemaTypes = [transaction, user, client, project, wallet, invoice, transfer]
+export const schemaTypes = [transaction, user, client, project, wallet, invoice, transfer, dailyWorkLog]

@@ -38,6 +38,12 @@ export default defineType({
       initialValue: 'active',
     }),
     defineField({
+      name: 'googleSheetId',
+      title: 'Google Sheet ID',
+      description: 'The ID of the specific Google Sheet where this client\'s daily updates should be synced.',
+      type: 'string',
+    }),
+    defineField({
       name: 'createdAt',
       title: 'Created At',
       type: 'datetime',

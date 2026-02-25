@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
 import { Plus, Edit2, Trash2, Loader2 } from "lucide-react"
 import { ClientForm } from "@/components/ClientForm"
 import { DeleteModal } from "@/components/DeleteModal"
@@ -91,7 +92,11 @@ export function ClientsList({ initialClients }: { initialClients: any[] }) {
               ) : (
                 initialClients.map((client) => (
                   <tr key={client._id} className="hover:bg-neutral-800/50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-white">{client.name}</td>
+                    <td className="px-6 py-4 font-medium">
+                      <Link href={`/clients/${client._id}`} className="text-white hover:text-blue-400 transition-colors">
+                        {client.name}
+                      </Link>
+                    </td>
                     <td className="px-6 py-4">{client.contactPerson || '-'}</td>
                     <td className="px-6 py-4">
                         <div className="flex flex-col">
@@ -110,9 +115,17 @@ export function ClientsList({ initialClients }: { initialClients: any[] }) {
                       {format(new Date(client.createdAt), 'MMM d, yyyy')}
                     </td>
                     <td className="px-6 py-4 text-right flex justify-end gap-2">
+                      <Link
+                        href={`/clients/${client._id}`}
+                        className="p-2 text-neutral-400 hover:text-blue-400 transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
+                        title="View Dashboard"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                      </Link>
                       <button
                         onClick={() => setEditingClient(client)}
                         className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
+                        title="Edit Client"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
@@ -120,6 +133,7 @@ export function ClientsList({ initialClients }: { initialClients: any[] }) {
                         onClick={() => setClientToDelete(client)}
                         disabled={deletingId === client._id}
                         className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                        title="Delete Client"
                       >
                         {deletingId === client._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
                       </button>

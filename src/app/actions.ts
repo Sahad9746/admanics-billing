@@ -629,3 +629,227 @@ export async function performTransfer(formData: FormData) {
     return { success: false, error: 'Failed to perform transfer' }
   }
 }
+
+// --- Work Log Actions ---
+export async function getWorkLogs() {
+  try {
+    const user = await getCurrentUser()
+    let query = ''
+    
+    if (checkPermission(user.role, ['edit', 'delete'])) {
+      // Admin/Editor sees all
+      query = `*[_type == "dailyWorkLog"] | order(date desc) {
+        ...,
+        client->{_id, name},
+        user->{_id, name, email}
+      }`
+    } else {
+      // Regular user sees only their own
+      query = `*[_type == "dailyWorkLog" && user._ref == "${user.id}"] | order(date desc) {
+        ...,
+        client->{_id, name},
+        user->{_id, name, email}
+      }`
+    }
+    
+    const logs = await client.fetch(query)
+    return logs
+  } catch (error) {
+    console.error("Failed to fetch work logs:", error)
+    return []
+  }
+}
+
+export async function getClientsWithProjects() {
+   try {
+     // Fetch active clients and their associated projects
+     const clients = await client.fetch(`*[_type == "client" && status == "active"] | order(name asc) {
+       _id,
+       name,
+       "projects": *[_type == "project" && references(^._id) && status == "active"] {
+         _id,
+         name
+       }
+     }`)
+     return clients
+   } catch (error) {
+     console.error("Failed to fetch clients with projects:", error)
+     return []
+   }
+}
+
+export async function addWorkLog(formData: FormData) {
+  try {
+    const user = await getCurrentUser()
+    // Anyone can create their own work log
+    const employeeName = formData.get('employeeName') as string || user.name
+    const clientId = formData.get('clientId') as string
+    const project = formData.get('project') as string
+    const taskSummary = formData.get('taskSummary') as string
+    const hoursWorkedStr = formData.get('hoursWorked') as string
+    const hoursWorked = hoursWorkedStr ? parseFloat(hoursWorkedStr) : undefined
+    const status = formData.get('status') as string
+    const notes = formData.get('notes') as string
+    const date = formData.get('date') as string
+
+    if (!clientId) return { success: false, error: 'Client is required' }
+
+    await client.create({
+      _type: 'dailyWorkLog',
+      employeeName,
+      client: { _type: 'reference', _ref: clientId },
+      project,
+      taskSummary,
+      hoursWorked,
+      status,
+      notes,
+      date,
+      synced: false,
+      user: { _type: 'reference', _ref: user.id }
+    })
+    
+    revalidatePath('/dashboard/daily-update')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to create work log:", error)
+    return { success: false, error: 'Failed to create work log' }
+  }
+}
+
+export async function editWorkLog(id: string, formData: FormData) {
+  try {
+    const user = await getCurrentUser()
+    const log = await client.fetch(`*[_type == "dailyWorkLog" && _id == $id][0]`, { id })
+    
+    if (!log) return { success: false, error: 'Work log not found' }
+    
+    // Admins can edit any, users can edit their own
+    if (!checkPermission(user.role, ['edit']) && log.user?._ref !== user.id) {
+      return { success: false, error: 'Unauthorized to edit this work log' }
+    }
+
+    const employeeName = formData.get('employeeName') as string || user.name
+    const clientId = formData.get('clientId') as string
+    const project = formData.get('project') as string
+    const taskSummary = formData.get('taskSummary') as string
+    const hoursWorkedStr = formData.get('hoursWorked') as string
+    const hoursWorked = hoursWorkedStr ? parseFloat(hoursWorkedStr) : undefined
+    const status = formData.get('status') as string
+    const notes = formData.get('notes') as string
+    const date = formData.get('date') as string
+
+    if (!clientId) return { success: false, error: 'Client is required' }
+
+    await client.patch(id).set({
+      employeeName,
+      client: { _type: 'reference', _ref: clientId },
+      project,
+      taskSummary,
+      hoursWorked,
+      status,
+      notes,
+      date,
+      synced: false, // Reset synced status so it pushes the update to Google Sheets
+    }).commit()
+    
+    revalidatePath('/dashboard/daily-update')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to edit work log:", error)
+    return { success: false, error: 'Failed to edit work log' }
+  }
+}
+
+export async function deleteWorkLog(id: string) {
+  try {
+    const user = await getCurrentUser()
+    const log = await client.fetch(`*[_type == "dailyWorkLog" && _id == $id][0]`, { id })
+    
+    if (!log) return { success: false, error: 'Work log not found' }
+    
+    // Admins can delete any, users can delete their own
+    if (!checkPermission(user.role, ['delete']) && log.user?._ref !== user.id) {
+      return { success: false, error: 'Unauthorized to delete this work log' }
+    }
+
+    await client.delete(id)
+    
+    revalidatePath('/dashboard/daily-update')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to delete work log:", error)
+    return { success: false, error: 'Failed to delete work log' }
+  }
+}
+
+// --- Client Dashboard Action ---
+export async function getClientDashboardData(clientId: string) {
+  try {
+    const user = await getCurrentUser()
+    const isAdminOrEditor = checkPermission(user.role, ['edit'])
+
+    // Fetch client details
+    const clientData = await client.fetch(`*[_type == "client" && _id == $clientId][0]`, { clientId })
+    if (!clientData) return null
+
+    // Fetch all invoices for this client
+    const invoices = await client.fetch(
+      `*[_type == "invoice" && client._ref == $clientId] | order(date desc) {
+        ...,
+        project->{_id, name}
+      }`, 
+      { clientId }
+    )
+
+    // Calculate total fees from invoices
+    const totalFees = invoices.reduce((sum: number, inv: any) => sum + (inv.amount || 0), 0)
+
+    // Fetch income transactions linked specifically to this client (through project or invoice)
+    // First figure out project and invoice ids
+    const projectIds = await client.fetch(`*[_type == "project" && client._ref == $clientId]._id`, { clientId })
+    const invoiceIds = invoices.map((inv: any) => inv._id)
+
+    let incomeQuery = `*[_type == "transaction" && type == "income" && (`
+    let conditions = []
+    
+    if (projectIds.length > 0) {
+      conditions.push(`project._ref in $projectIds`)
+    }
+    if (invoiceIds.length > 0) {
+      conditions.push(`invoice._ref in $invoiceIds`)
+    }
+    
+    let totalIncome = 0
+    if (conditions.length > 0) {
+      incomeQuery += conditions.join(' || ') + `)]`
+      const params: any = {}
+      if (projectIds.length > 0) params.projectIds = projectIds
+      if (invoiceIds.length > 0) params.invoiceIds = invoiceIds
+      
+      const incomeTransactions = await client.fetch(incomeQuery, params)
+      totalIncome = incomeTransactions.reduce((sum: number, t: any) => sum + (t.amount || 0), 0)
+    }
+
+    // Fetch work logs tied explicitly to this client
+    
+    const userCondition = isAdminOrEditor ? "" : `&& user._ref == "${user.id}"`
+    const workLogs = await client.fetch(
+      `*[_type == "dailyWorkLog" ${userCondition} && client._ref == $clientId] | order(date desc) {
+        ...,
+        user->{_id, name, email}
+      }`,
+      { clientId }
+    )
+
+    return {
+      client: clientData,
+      invoices,
+      totalFees,
+      totalIncome,
+      workLogs
+    }
+  } catch (error) {
+    console.error("Failed to fetch client dashboard data:", error)
+    return null
+  }
+}

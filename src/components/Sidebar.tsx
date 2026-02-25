@@ -9,7 +9,8 @@ import {
   Wallet, 
   FileText, 
   Settings,
-  PieChart
+  PieChart,
+  ClipboardList
 } from "lucide-react"
 
 export function Sidebar() {
@@ -22,6 +23,7 @@ export function Sidebar() {
     { name: 'Finance', href: '/finance', icon: Wallet },
     { name: 'Invoices', href: '/invoices', icon: FileText },
     { name: 'Reports', href: '/reports', icon: PieChart },
+    { name: 'Daily Update', href: '/dashboard/daily-update', icon: ClipboardList },
     { name: 'Settings', href: '/settings', icon: Settings },
   ]
 
