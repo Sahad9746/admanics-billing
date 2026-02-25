@@ -12,11 +12,11 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
     .reduce((acc, t) => acc + t.amount, 0)
 
   const capital = transactions
-    .filter((t) => t.type === 'income' && t.category === 'Capital')
+    .filter((t) => ['income', 'credit'].includes(t.type) && t.category === 'Capital')
     .reduce((acc, t) => acc + t.amount, 0)
 
   const grossRevenue = transactions
-    .filter((t) => t.type === 'income' && t.category !== 'Capital')
+    .filter((t) => ['income', 'credit'].includes(t.type) && t.category !== 'Capital')
     .reduce((acc, t) => acc + t.amount, 0)
 
   const operatingExpenses = transactions

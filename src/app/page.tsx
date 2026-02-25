@@ -12,6 +12,7 @@ export const dynamic = 'force-dynamic'
 async function getData(): Promise<Transaction[]> {
   const query = `*[_type == "transaction"] {
     ...,
+    client->{_id, name},
     createdBy->,
     lastEditedBy->,
     deletedBy->

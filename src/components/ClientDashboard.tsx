@@ -3,7 +3,7 @@
 import { format } from "date-fns"
 import { useCurrency } from "@/components/Providers"
 import { formatCurrency } from "@/lib/utils"
-import { Briefcase, Wallet, Clock, FileText, CheckCircle2 } from "lucide-react"
+import { Briefcase, Wallet, Clock, FileText, CheckCircle2, Megaphone } from "lucide-react"
 import Link from "next/link"
 
 interface ClientDashboardProps {
@@ -12,13 +12,15 @@ interface ClientDashboardProps {
     invoices: any[]
     totalFees: number
     totalIncome: number
+    totalExpenses: number
+    totalAdSpend: number
     workLogs: any[]
   }
 }
 
 export function ClientDashboard({ data }: ClientDashboardProps) {
   const { currency, exchangeRate } = useCurrency()
-  const { client, invoices, totalFees, totalIncome, workLogs } = data
+  const { client, invoices, totalFees, totalIncome, totalExpenses, totalAdSpend, workLogs } = data
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -41,7 +43,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       bgColor: "bg-blue-500/10",
     },
     {
-      title: "Total Income Received",
+      title: "Total Credited (Budget)",
       value: formatCurrency(totalIncome, currency, exchangeRate),
       icon: Wallet,
       color: "text-emerald-500",
@@ -49,7 +51,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
     },
     {
       title: "Outstanding Balance",
-      value: formatCurrency(totalFees - totalIncome, currency, exchangeRate),
+      value: formatCurrency(totalIncome - totalExpenses, currency, exchangeRate),
       icon: Briefcase,
       color: "text-amber-500",
       bgColor: "bg-amber-500/10",
@@ -60,6 +62,20 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       icon: Clock,
       color: "text-purple-500",
       bgColor: "bg-purple-500/10",
+    },
+    {
+      title: "Total Expenses",
+      value: formatCurrency(totalExpenses, currency, exchangeRate),
+      icon: Wallet,
+      color: "text-red-500",
+      bgColor: "bg-red-500/10",
+    },
+    {
+      title: "Ad Spend",
+      value: formatCurrency(totalAdSpend, currency, exchangeRate),
+      icon: Megaphone,
+      color: "text-pink-500",
+      bgColor: "bg-pink-500/10",
     }
   ]
 
@@ -85,7 +101,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         {statCards.map((stat, i) => {
           const Icon = stat.icon
           return (

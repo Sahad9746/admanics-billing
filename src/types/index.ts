@@ -14,7 +14,7 @@ export interface Transaction {
   title: string
   description?: string
   amount: number
-  type: 'income' | 'expense' | 'transfer'
+  type: 'income' | 'expense' | 'transfer' | 'credit'
   category: string
   date: string
   status?: 'active' | 'deleted'
@@ -22,6 +22,7 @@ export interface Transaction {
   lastEditedAt?: string
   customFields?: { label: string; value: string }[]
   wallet?: { _ref: string }
+  client?: { _ref?: string; _id?: string; name?: string }
   project?: { _ref: string }
   invoice?: { _ref: string }
   createdBy?: User

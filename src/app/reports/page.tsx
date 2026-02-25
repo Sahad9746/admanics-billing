@@ -9,7 +9,10 @@ import { ReportsDashboard } from "@/components/ReportsDashboard"
 export const dynamic = 'force-dynamic'
 
 async function getData(): Promise<Transaction[]> {
-  const query = `*[_type == "transaction"] | order(date desc)`
+  const query = `*[_type == "transaction"] {
+    ...,
+    client->{_id, name}
+  } | order(date desc)`
   try {
     const data = await client.fetch(query)
     return data

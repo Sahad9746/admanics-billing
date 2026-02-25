@@ -6,7 +6,12 @@ import { notFound } from "next/navigation"
 export const dynamic = 'force-dynamic'
 
 async function getTransaction(id: string): Promise<Transaction | null> {
-  const query = `*[_type == "transaction" && _id == $id][0]`
+  const query = `*[_type == "transaction" && _id == $id][0] {
+    ...,
+    client->{_id, name},
+    createdBy->,
+    lastEditedBy->
+  }`
   try {
     const data = await client.fetch(query, { id })
     return data

@@ -9,7 +9,7 @@ export function ReportsDashboard({ transactions }: { transactions: Transaction[]
   const { currency, exchangeRate } = useCurrency()
 
   const incomeByCategory = transactions
-    .filter(t => t.type === 'income')
+    .filter(t => ['income', 'credit'].includes(t.type))
     .reduce((acc, t) => {
       acc[t.category] = (acc[t.category] || 0) + t.amount
       return acc

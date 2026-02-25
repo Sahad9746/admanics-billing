@@ -168,7 +168,7 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
               <div>
                 <div className="flex items-center gap-2 mb-3">
                     <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider ${
-                    transaction.type === 'income' 
+                    ['income', 'credit'].includes(transaction.type)
                         ? 'bg-green-500/10 text-green-400 border border-green-500/20' 
                         : 'bg-red-500/10 text-red-400 border border-red-500/20'
                     }`}>
@@ -191,9 +191,9 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
               <div className="text-right">
                 <p className="text-sm text-neutral-400 mb-1">Amount</p>
                 <div className={`text-4xl md:text-5xl font-bold ${
-                   transaction.type === 'income' ? 'text-green-500' : 'text-red-500'
+                   ['income', 'credit'].includes(transaction.type) ? 'text-green-500' : 'text-red-500'
                 }`}>
-                  {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount, currency, exchangeRate)}
+                  {['income', 'credit'].includes(transaction.type) ? '+' : '-'}{formatCurrency(transaction.amount, currency, exchangeRate)}
                 </div>
               </div>
             </div>
@@ -213,6 +213,15 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
                   {transaction._id}
                 </div>
               </div>
+              {transaction.client?.name && (
+                <div>
+                  <p className="text-sm font-medium text-neutral-500 uppercase tracking-wider mb-2">Client</p>
+                  <div className="flex items-center text-lg text-white">
+                    <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
+                    {transaction.client.name}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Description */}

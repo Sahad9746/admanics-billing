@@ -1,6 +1,6 @@
 'use client'
 
-import { addTransaction, editTransaction, getWallets, getProjects, getInvoices } from "@/app/actions"
+import { addTransaction, editTransaction, getWallets, getProjects, getInvoices, getClients } from "@/app/actions"
 import { useCurrency } from "@/components/Providers"
 import { Transaction } from "@/types"
 import { Loader2 } from "lucide-react"
@@ -20,6 +20,7 @@ interface EntryFormProps {
 export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
   const [loading, setLoading] = useState(false)
   const { currency } = useCurrency()
+  const [resetCounter, setResetCounter] = useState(0)
   const [customFields, setCustomFields] = useState<{ label: string; value: string }[]>(
     initialData?.customFields || []
   )
@@ -30,14 +31,16 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
   const [wallets, setWallets] = useState<any[]>([])
   const [projects, setProjects] = useState<any[]>([])
   const [invoices, setInvoices] = useState<any[]>([])
+  const [clients, setClients] = useState<any[]>([])
   const [loadingData, setLoadingData] = useState(true)
 
   useEffect(() => {
     async function loadData() {
-      const [w, p, i] = await Promise.all([getWallets(), getProjects(), getInvoices()])
+      const [w, p, i, c] = await Promise.all([getWallets(), getProjects(), getInvoices(), getClients()])
       setWallets(w)
       setProjects(p)
       setInvoices(i)
+      setClients(c)
       setLoadingData(false)
     }
     loadData()
@@ -84,18 +87,16 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
         toast.success(initialData ? 'Transaction updated' : 'Transaction created')
         
         if (action === 'save_create_another') {
-            // Reset form
-            const form = document.getElementById('entry-form') as HTMLFormElement
-            form?.reset()
+            setResetCounter(c => c + 1)
             setCustomFields([])
-            // Don't close modal, just refresh list in background if needed (though router.refresh handles specific paths)
+            // Background refresh happens automatically due to Server Actions
         } else {
+            if (!initialData) {
+                setResetCounter(c => c + 1)
+                setCustomFields([])
+            }
             if (onSuccess) {
                 onSuccess()
-            } else if (!initialData) {
-                const form = document.getElementById('entry-form') as HTMLFormElement
-                form?.reset()
-                setCustomFields([])
             }
         }
     } else {
@@ -108,7 +109,7 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
       <h2 className="text-xl font-bold text-white mb-6">
         {initialData ? 'Edit Transaction' : 'New Entry'}
       </h2>
-      <form id="entry-form" action={handleSubmit} className="space-y-5">
+      <form key={resetCounter} id="entry-form" action={handleSubmit} className="space-y-5">
         <div>
           <label className="block text-sm font-medium text-neutral-400 mb-1.5">Title</label>
           <input
@@ -201,7 +202,8 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
             options={[
                 { id: 'income', name: 'income' }, 
                 { id: 'expense', name: 'expense' }, 
-                { id: 'transfer', name: 'transfer' }
+                { id: 'transfer', name: 'transfer' },
+                { id: 'credit', name: 'credit' }
             ]}
             initialId={initialData?.type}
             placeholder="e.g., income or custom"
@@ -233,6 +235,13 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
                options={projects.map(p => ({ id: p._id, name: p.name }))}
                initialId={initialData?.project?._ref}
                placeholder="e.g., ADM-Q1 or New Project"
+             />
+             <SmartCombobox 
+               name="clientId"
+               label="Client (Optional)"
+               options={clients.map(c => ({ id: c._id, name: c.name }))}
+               initialId={initialData?.client?._ref}
+               placeholder="Select a client..."
              />
              <SmartCombobox 
                name="invoiceId"

@@ -52,6 +52,13 @@ export default defineType({
       to: [{ type: 'wallet' }],
     }),
     defineField({
+      name: 'client',
+      title: 'Client',
+      type: 'reference',
+      to: [{ type: 'client' }],
+      weak: true,
+    }),
+    defineField({
       name: 'project',
       title: 'Project',
       type: 'reference',
@@ -67,6 +74,20 @@ export default defineType({
       name: 'date',
       title: 'Date',
       type: 'datetime',
+    }),
+    defineField({
+      name: 'type',
+      title: 'Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Income', value: 'income' },
+          { title: 'Expense', value: 'expense' },
+          { title: 'Transfer', value: 'transfer' },
+          { title: 'Credit', value: 'credit' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'status',

@@ -95,15 +95,21 @@ export function Ledger({
                     {t.date ? format(new Date(t.date), 'MMM d, yyyy') : 'N/A'}
                     </td>
                     <td className="px-6 py-4 font-medium text-white relative z-10 pointer-events-none">
-                        {t.title}
+                        <div>{t.title}</div>
+                        {t.client?.name && (
+                            <div className="text-xs text-neutral-400 font-normal mt-0.5 flex items-center gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                {t.client.name}
+                            </div>
+                        )}
                     </td>
                     <td className="px-6 py-4 relative z-10 pointer-events-none">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-neutral-800 text-neutral-300 border border-neutral-700">
                         {t.category}
                     </span>
                     </td>
-                    <td className={`px-6 py-4 text-right font-medium relative z-10 pointer-events-none ${t.type === 'income' ? 'text-green-500' : 'text-red-500'}`}>
-                    {t.type === 'income' ? '+' : '-'}{formatCurrency(t.amount, currency, exchangeRate)}
+                    <td className={`px-6 py-4 text-right font-medium relative z-10 pointer-events-none ${['income', 'credit'].includes(t.type) ? 'text-green-500' : 'text-red-500'}`}>
+                    {['income', 'credit'].includes(t.type) ? '+' : '-'}{formatCurrency(t.amount, currency, exchangeRate)}
                     </td>
                     {onEdit && (
                         <td className="px-6 py-4 text-right relative z-20">

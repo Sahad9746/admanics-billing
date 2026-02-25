@@ -85,6 +85,7 @@ export async function addTransaction(formData: FormData) {
     let walletId = formData.get('walletId') as string
     let projectId = formData.get('projectId') as string
     let invoiceId = formData.get('invoiceId') as string
+    let clientId = formData.get('clientId') as string
 
     // Dynamic Creation
     if (walletId && walletId.startsWith('new:')) {
@@ -99,6 +100,10 @@ export async function addTransaction(formData: FormData) {
       const newInvoice = await client.create({ _type: 'invoice', invoiceNumber: invoiceId.replace('new:', ''), status: 'draft', amount: amount, createdAt: new Date().toISOString() })
       invoiceId = newInvoice._id
     }
+    if (clientId && clientId.startsWith('new:')) {
+      const newClient = await client.create({ _type: 'client', name: clientId.replace('new:', ''), createdAt: new Date().toISOString() })
+      clientId = newClient._id
+    }
 
     await client.create({
       _type: 'transaction',
@@ -110,6 +115,7 @@ export async function addTransaction(formData: FormData) {
       date,
       customFields,
       wallet: walletId ? { _type: 'reference', _ref: walletId } : undefined,
+      client: clientId ? { _type: 'reference', _ref: clientId } : undefined,
       project: projectId ? { _type: 'reference', _ref: projectId } : undefined,
       invoice: invoiceId ? { _type: 'reference', _ref: invoiceId } : undefined,
       createdBy: {
@@ -166,6 +172,7 @@ export async function editTransaction(id: string, formData: FormData) {
     let walletId = formData.get('walletId') as string
     let projectId = formData.get('projectId') as string
     let invoiceId = formData.get('invoiceId') as string
+    let clientId = formData.get('clientId') as string
 
     // Dynamic Creation
     if (walletId && walletId.startsWith('new:')) {
@@ -180,8 +187,12 @@ export async function editTransaction(id: string, formData: FormData) {
       const newInvoice = await client.create({ _type: 'invoice', invoiceNumber: invoiceId.replace('new:', ''), status: 'draft', amount: amount, createdAt: new Date().toISOString() })
       invoiceId = newInvoice._id
     }
+    if (clientId && clientId.startsWith('new:')) {
+      const newClient = await client.create({ _type: 'client', name: clientId.replace('new:', ''), createdAt: new Date().toISOString() })
+      clientId = newClient._id
+    }
 
-    await client.patch(id).set({
+    const patch = client.patch(id).set({
       title,
       description,
       amount,
@@ -189,16 +200,27 @@ export async function editTransaction(id: string, formData: FormData) {
       category,
       date,
       customFields,
-      wallet: walletId ? { _type: 'reference', _ref: walletId } : undefined,
-      project: projectId ? { _type: 'reference', _ref: projectId } : undefined,
-      invoice: invoiceId ? { _type: 'reference', _ref: invoiceId } : undefined,
       isEdited: true,
       lastEditedAt: new Date().toISOString(),
       lastEditedBy: {
         _type: 'reference',
         _ref: user.id,
       },
-    }).commit()
+    })
+
+    if (walletId) patch.set({ wallet: { _type: 'reference', _ref: walletId } })
+    else patch.unset(['wallet'])
+
+    if (clientId) patch.set({ client: { _type: 'reference', _ref: clientId } })
+    else patch.unset(['client'])
+
+    if (projectId) patch.set({ project: { _type: 'reference', _ref: projectId } })
+    else patch.unset(['project'])
+
+    if (invoiceId) patch.set({ invoice: { _type: 'reference', _ref: invoiceId } })
+    else patch.unset(['invoice'])
+
+    await patch.commit()
     
     revalidatePath('/')
     revalidatePath('/transactions')
@@ -243,7 +265,7 @@ export async function getWallets() {
       name,
       type,
       currency,
-      "balance": math::sum(*[_type == "transaction" && wallet._ref == ^._id && type == "income"].amount) - math::sum(*[_type == "transaction" && wallet._ref == ^._id && type == "expense"].amount) + math::sum(*[_type == "transfer" && toWallet._ref == ^._id].amount) - math::sum(*[_type == "transfer" && fromWallet._ref == ^._id].amount)
+      "balance": math::sum(*[_type == "transaction" && wallet._ref == ^._id && type in ["income", "credit"]].amount) - math::sum(*[_type == "transaction" && wallet._ref == ^._id && type == "expense"].amount) + math::sum(*[_type == "transfer" && toWallet._ref == ^._id].amount) - math::sum(*[_type == "transfer" && fromWallet._ref == ^._id].amount)
     }`
     const wallets = await client.fetch(query)
     // Handle cases where math::sum returns null (no transactions match)
@@ -809,9 +831,12 @@ export async function getClientDashboardData(clientId: string) {
     const projectIds = await client.fetch(`*[_type == "project" && client._ref == $clientId]._id`, { clientId })
     const invoiceIds = invoices.map((inv: any) => inv._id)
 
-    let incomeQuery = `*[_type == "transaction" && type == "income" && (`
+    let incomeQuery = `*[_type == "transaction" && type in ["income", "credit"] && (`
     let conditions = []
     
+    // Also include transactions directly linked to this client, not just through projects/invoices
+    conditions.push(`client._ref == $clientId`)
+
     if (projectIds.length > 0) {
       conditions.push(`project._ref in $projectIds`)
     }
@@ -822,13 +847,24 @@ export async function getClientDashboardData(clientId: string) {
     let totalIncome = 0
     if (conditions.length > 0) {
       incomeQuery += conditions.join(' || ') + `)]`
-      const params: any = {}
+      const params: any = { clientId }
       if (projectIds.length > 0) params.projectIds = projectIds
       if (invoiceIds.length > 0) params.invoiceIds = invoiceIds
       
       const incomeTransactions = await client.fetch(incomeQuery, params)
       totalIncome = incomeTransactions.reduce((sum: number, t: any) => sum + (t.amount || 0), 0)
     }
+
+    // Fetch expenses tied directly to this client (since we added `client` reference to transactions)
+    const expenses = await client.fetch(
+      `*[_type == "transaction" && type == "expense" && client._ref == $clientId]`,
+      { clientId }
+    )
+    
+    const totalExpenses = expenses.reduce((sum: number, exp: any) => sum + (exp.amount || 0), 0)
+    const totalAdSpend = expenses
+        .filter((exp: any) => exp.category === 'Ad Spend')
+        .reduce((sum: number, exp: any) => sum + (exp.amount || 0), 0)
 
     // Fetch work logs tied explicitly to this client
     
@@ -846,7 +882,9 @@ export async function getClientDashboardData(clientId: string) {
       invoices,
       totalFees,
       totalIncome,
-      workLogs
+      workLogs,
+      totalExpenses,
+      totalAdSpend
     }
   } catch (error) {
     console.error("Failed to fetch client dashboard data:", error)

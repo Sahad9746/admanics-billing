@@ -15,15 +15,15 @@ export function Chart({ transactions }: { transactions: Transaction[] }) {
     const existing = acc.find((item) => item.month === month)
 
     if (existing) {
-      if (t.type === 'income') {
+      if (['income', 'credit'].includes(t.type)) {
         existing.income += t.amount
-      } else {
+      } else if (t.type === 'expense') {
         existing.expense += t.amount
       }
     } else {
       acc.push({
         month,
-        income: t.type === 'income' ? t.amount : 0,
+        income: ['income', 'credit'].includes(t.type) ? t.amount : 0,
         expense: t.type === 'expense' ? t.amount : 0,
       })
     }
