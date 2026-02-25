@@ -101,8 +101,18 @@ export async function addTransaction(formData: FormData) {
       invoiceId = newInvoice._id
     }
     if (clientId && clientId.startsWith('new:')) {
-      const newClient = await client.create({ _type: 'client', name: clientId.replace('new:', ''), createdAt: new Date().toISOString() })
+      const newClientName = clientId.replace('new:', '')
+      const newClient = await client.create({ _type: 'client', name: newClientName, createdAt: new Date().toISOString() })
       clientId = newClient._id
+      
+      // Auto-create a corresponding wallet
+      await client.create({
+        _type: 'wallet',
+        name: `${newClientName} Wallet`,
+        type: 'custom',
+        currency: 'INR',
+        createdAt: new Date().toISOString()
+      })
     }
 
     await client.create({
@@ -188,8 +198,18 @@ export async function editTransaction(id: string, formData: FormData) {
       invoiceId = newInvoice._id
     }
     if (clientId && clientId.startsWith('new:')) {
-      const newClient = await client.create({ _type: 'client', name: clientId.replace('new:', ''), createdAt: new Date().toISOString() })
+      const newClientName = clientId.replace('new:', '')
+      const newClient = await client.create({ _type: 'client', name: newClientName, createdAt: new Date().toISOString() })
       clientId = newClient._id
+      
+      // Auto-create a corresponding wallet
+      await client.create({
+        _type: 'wallet',
+        name: `${newClientName} Wallet`,
+        type: 'custom',
+        currency: 'INR',
+        createdAt: new Date().toISOString()
+      })
     }
 
     const patch = client.patch(id).set({
@@ -366,7 +386,7 @@ export async function addClient(formData: FormData) {
     const email = formData.get('email') as string
     const phone = formData.get('phone') as string
 
-    await client.create({
+    const newClient = await client.create({
       _type: 'client',
       name,
       contactPerson,
@@ -374,6 +394,15 @@ export async function addClient(formData: FormData) {
       phone,
       status: 'active',
       createdAt: new Date().toISOString(),
+    })
+    
+    // Auto-create a corresponding wallet
+    await client.create({
+      _type: 'wallet',
+      name: `${name} Wallet`,
+      type: 'bank',
+      currency: 'INR',
+      createdAt: new Date().toISOString()
     })
     
     revalidatePath('/clients')
@@ -824,7 +853,7 @@ export async function getClientDashboardData(clientId: string) {
     )
 
     // Calculate total fees from invoices
-    const totalFees = invoices.reduce((sum: number, inv: any) => sum + (inv.amount || 0), 0)
+    let totalFees = invoices.reduce((sum: number, inv: any) => sum + (inv.amount || 0), 0)
 
     // Fetch income transactions linked specifically to this client (through project or invoice)
     // First figure out project and invoice ids
@@ -852,7 +881,12 @@ export async function getClientDashboardData(clientId: string) {
       if (invoiceIds.length > 0) params.invoiceIds = invoiceIds
       
       const incomeTransactions = await client.fetch(incomeQuery, params)
-      totalIncome = incomeTransactions.reduce((sum: number, t: any) => sum + (t.amount || 0), 0)
+      
+      const serviceFees = incomeTransactions.filter((t: any) => t.category === 'Service Fee')
+      const coreIncome = incomeTransactions.filter((t: any) => t.category !== 'Service Fee')
+      
+      totalFees += serviceFees.reduce((sum: number, t: any) => sum + (t.amount || 0), 0)
+      totalIncome = coreIncome.reduce((sum: number, t: any) => sum + (t.amount || 0), 0)
     }
 
     // Fetch expenses tied directly to this client (since we added `client` reference to transactions)
@@ -865,6 +899,36 @@ export async function getClientDashboardData(clientId: string) {
     const totalAdSpend = expenses
         .filter((exp: any) => exp.category === 'Ad Spend')
         .reduce((sum: number, exp: any) => sum + (exp.amount || 0), 0)
+
+    // Fetch all transactions related to this client
+    let allTransactionsQuery = `*[_type == "transaction" && (`
+    let allTxConditions = []
+    
+    allTxConditions.push(`client._ref == $clientId`)
+
+    if (projectIds.length > 0) {
+      allTxConditions.push(`project._ref in $projectIds`)
+    }
+    if (invoiceIds.length > 0) {
+      allTxConditions.push(`invoice._ref in $invoiceIds`)
+    }
+    
+    let allTransactions = []
+    if (allTxConditions.length > 0) {
+      allTransactionsQuery += allTxConditions.join(' || ') + `)] | order(date desc) {
+        ...,
+        wallet->{_id, name},
+        project->{_id, name},
+        invoice->{_id, invoiceNumber},
+        createdBy->{_id, name}
+      }`
+      
+      const params: any = { clientId }
+      if (projectIds.length > 0) params.projectIds = projectIds
+      if (invoiceIds.length > 0) params.invoiceIds = invoiceIds
+      
+      allTransactions = await client.fetch(allTransactionsQuery, params)
+    }
 
     // Fetch work logs tied explicitly to this client
     
@@ -884,7 +948,8 @@ export async function getClientDashboardData(clientId: string) {
       totalIncome,
       workLogs,
       totalExpenses,
-      totalAdSpend
+      totalAdSpend,
+      allTransactions
     }
   } catch (error) {
     console.error("Failed to fetch client dashboard data:", error)

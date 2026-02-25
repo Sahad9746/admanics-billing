@@ -15,12 +15,13 @@ interface ClientDashboardProps {
     totalExpenses: number
     totalAdSpend: number
     workLogs: any[]
+    allTransactions?: any[]
   }
 }
 
 export function ClientDashboard({ data }: ClientDashboardProps) {
   const { currency, exchangeRate } = useCurrency()
-  const { client, invoices, totalFees, totalIncome, totalExpenses, totalAdSpend, workLogs } = data
+  const { client, invoices, totalFees, totalIncome, totalExpenses, totalAdSpend, workLogs, allTransactions } = data
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -218,6 +219,55 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
           </div>
         </div>
       </div>
+
+      {/* Recent Transactions */}
+      {allTransactions && allTransactions.length > 0 && (
+        <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden flex flex-col mt-8">
+          <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
+             <h2 className="text-lg font-bold text-white">Recent Transactions</h2>
+             <Link href="/transactions" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">View All</Link>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm text-neutral-300">
+              <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+                <tr>
+                  <th className="px-6 py-4">Date</th>
+                  <th className="px-6 py-4">Title</th>
+                  <th className="px-6 py-4">Type</th>
+                  <th className="px-6 py-4">Category</th>
+                  <th className="px-6 py-4 text-right">Amount</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-neutral-800">
+                {allTransactions.slice(0, 10).map((tx) => (
+                  <tr key={tx._id} className="hover:bg-neutral-800/50 transition-colors">
+                    <td className="px-6 py-4 whitespace-nowrap">{tx.date ? format(new Date(tx.date), 'MMM d, yyyy') : '-'}</td>
+                    <td className="px-6 py-4 font-medium text-white">
+                      <Link href={`/transaction/${tx._id}`} className="hover:text-blue-400 transition-colors">
+                        {tx.title}
+                      </Link>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-medium inline-block capitalize ${
+                        tx.type === 'income' ? 'bg-green-500/10 text-green-400' :
+                        tx.type === 'expense' ? 'bg-red-500/10 text-red-400' :
+                        tx.type === 'credit' ? 'bg-emerald-500/10 text-emerald-400' :
+                        'bg-blue-500/10 text-blue-400'
+                      }`}>
+                        {tx.type}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">{tx.category}</td>
+                    <td className="px-6 py-4 text-right font-bold text-white">
+                      {formatCurrency(tx.amount || 0, currency, exchangeRate)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
