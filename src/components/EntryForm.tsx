@@ -61,6 +61,7 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
   }
 
   async function handleSubmit(formData: FormData) {
+    if (loading) return  // prevent double-submit
     setLoading(true)
     
     // Add time to date if missing (for correct date storing)
@@ -267,22 +268,6 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
                 initialData ? 'Update Transaction' : 'Save Transaction'
             )}
             </button>
-            
-            {!initialData && (
-                <button
-                    type="submit"
-                    name="_action"
-                    value="save_create_another"
-                    disabled={loading}
-                    className="w-full bg-neutral-800 text-white font-semibold py-3 px-4 rounded-xl hover:bg-neutral-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center border border-neutral-700"
-                >
-                    {loading ? (
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                        'Save & Create Another'
-                    )}
-                </button>
-            )}
         </div>
       </form>
     </div>

@@ -38,7 +38,7 @@ export function Chart({ transactions }: { transactions: Transaction[] }) {
 
   return (
     <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800 h-[400px]">
-      <h3 className="text-xl font-semibold text-white mb-6">Financial Overview</h3>
+
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={chartData}
