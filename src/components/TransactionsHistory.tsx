@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Transaction } from "@/types"
 import { Ledger } from "@/components/Ledger"
 import { CurrencyToggle } from "@/components/CurrencyToggle"
@@ -16,13 +16,32 @@ import { EntryForm } from "@/components/EntryForm"
 import { ConfirmationModal } from "@/components/ConfirmationModal"
 import toast from "react-hot-toast"
 
-export function TransactionsHistory({ initialTransactions }: { initialTransactions: Transaction[] }) {
+interface TransactionsHistoryProps {
+  initialTransactions: Transaction[]
+  title?: string
+  subtitle?: string
+  backLink?: string
+  hideGlobalActions?: boolean
+  initialFilters?: Partial<Filters>
+}
+
+export function TransactionsHistory({ 
+  initialTransactions,
+  title = "All Transactions",
+  subtitle = "Full history of income and expenses",
+  backLink = "/",
+  hideGlobalActions = false,
+  initialFilters
+}: TransactionsHistoryProps) {
   const router = useRouter()
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [isDeleting, setIsDeleting] = useState(false)
   const [isCreating, setIsCreating] = useState(false)
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+  
+  const [currentPage, setCurrentPage] = useState(1)
+  const ITEMS_PER_PAGE = 10
 
   const handleEdit = (t: Transaction) => {
     setEditingTransaction(t)
@@ -30,11 +49,16 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
   }
   
   const [filters, setFilters] = useState<Filters>({
-    search: '',
-    type: 'all',
-    category: 'all',
-    date: '',
+    search: initialFilters?.search || '',
+    type: initialFilters?.type || 'all',
+    category: initialFilters?.category || 'all',
+    date: initialFilters?.date || '',
   })
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters])
 
   // Filtering Logic
   const filteredTransactions = initialTransactions.filter((t) => {
@@ -66,6 +90,13 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
 
     return true
   })
+
+  // Pagination Logic
+  const totalPages = Math.ceil(filteredTransactions.length / ITEMS_PER_PAGE)
+  const paginatedTransactions = filteredTransactions.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  )
 
   const handleBulkDelete = async () => {
     setIsDeleting(true)
@@ -124,12 +155,12 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
       <div className="max-w-7xl mx-auto space-y-8">
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-                <Link href="/" className="p-2 -ml-2 text-neutral-400 hover:text-white transition-colors">
+                <Link href={backLink} className="p-2 -ml-2 text-neutral-400 hover:text-white transition-colors">
                     <ArrowLeft className="w-5 h-5" />
                 </Link>
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">All Transactions</h1>
-                    <p className="text-neutral-400 mt-1">Full history of income and expenses</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-white">{title}</h1>
+                    <p className="text-neutral-400 mt-1">{subtitle}</p>
                 </div>
             </div>
             <div className="flex items-center gap-4 self-end md:self-auto">
@@ -150,10 +181,14 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
                     <Plus className="w-4 h-4" />
                     New Transaction
                 </button>
-                <div className="h-8 w-px bg-neutral-800 mx-2 hidden md:block"></div>
-                <CurrencyToggle />
-                <LogoutButton />
-                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-900/20">AF</div>
+                {!hideGlobalActions && (
+                  <>
+                    <div className="h-8 w-px bg-neutral-800 mx-2 hidden md:block"></div>
+                    <CurrencyToggle />
+                    <LogoutButton />
+                    <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-900/20">AF</div>
+                  </>
+                )}
             </div>
         </header>
 
@@ -165,12 +200,35 @@ export function TransactionsHistory({ initialTransactions }: { initialTransactio
         {/* Ledger */}
         <section>
             <Ledger 
-                transactions={filteredTransactions} 
+                transactions={paginatedTransactions} 
                 selectable
                 selectedIds={selectedIds}
                 onSelect={setSelectedIds}
                 onEdit={handleEdit}
             />
+            {totalPages > 1 && (
+                <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl mt-4">
+                    <p className="text-sm text-neutral-400">
+                        Showing {((currentPage - 1) * ITEMS_PER_PAGE) + 1} to {Math.min(currentPage * ITEMS_PER_PAGE, filteredTransactions.length)} of {filteredTransactions.length} results
+                    </p>
+                    <div className="flex gap-2">
+                        <button 
+                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors"
+                        >
+                            Previous
+                        </button>
+                        <button 
+                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+            )}
         </section>
       </div>
     </main>

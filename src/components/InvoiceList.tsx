@@ -8,12 +8,25 @@ import Link from "next/link"
 import { deleteInvoice } from "@/app/actions"
 import { DeleteModal } from "@/components/DeleteModal"
 import toast from "react-hot-toast"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 
 export function InvoiceList({ initialInvoices, clients, projects }: { initialInvoices: any[], clients: any[], projects: any[] }) {
   const { currency, exchangeRate } = useCurrency()
+  const searchParams = useSearchParams()
+  const urlClientFilter = searchParams.get('client')
+  
   const [invoiceToDelete, setInvoiceToDelete] = useState<any>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [clientFilter, setClientFilter] = useState(urlClientFilter || 'all')
+  const [statusFilter, setStatusFilter] = useState('all')
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const ITEMS_PER_PAGE = 10
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [clientFilter, statusFilter])
 
   const handleDeleteConfirm = async () => {
     if (!invoiceToDelete) return
@@ -37,12 +50,48 @@ export function InvoiceList({ initialInvoices, clients, projects }: { initialInv
     }
   }
 
+  const filteredInvoices = initialInvoices.filter(invoice => {
+    if (clientFilter !== 'all' && invoice.client?._id !== clientFilter) return false
+    if (statusFilter !== 'all' && invoice.status !== statusFilter) return false
+    return true
+  })
+
+  // Pagination Logic
+  const totalPages = Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE)
+  const paginatedInvoices = filteredInvoices.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  )
+
   return (
     <div className="space-y-6">
-      <div className="flex justify-end">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-neutral-900 border border-neutral-800 p-4 rounded-xl">
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <select
+            value={clientFilter}
+            onChange={(e) => setClientFilter(e.target.value)}
+            className="bg-neutral-950 border border-neutral-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 w-full sm:w-48"
+          >
+            <option value="all">All Clients</option>
+            {clients.map(c => (
+              <option key={c._id} value={c._id}>{c.name}</option>
+            ))}
+          </select>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="bg-neutral-950 border border-neutral-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 w-full sm:w-40"
+          >
+            <option value="all">All Status</option>
+            <option value="draft">Draft</option>
+            <option value="sent">Sent</option>
+            <option value="paid">Paid</option>
+            <option value="overdue">Overdue</option>
+          </select>
+        </div>
         <Link
           href="/invoices/create"
-          className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center"
         >
           <Plus className="w-4 h-4" />
           Create Invoice
@@ -73,14 +122,14 @@ export function InvoiceList({ initialInvoices, clients, projects }: { initialInv
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-800">
-              {initialInvoices.length === 0 ? (
+              {filteredInvoices.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-6 py-8 text-center text-neutral-500">
-                    No invoices generated yet.
+                    No invoices match the selected filters.
                   </td>
                 </tr>
               ) : (
-                initialInvoices.map((invoice) => (
+                paginatedInvoices.map((invoice) => (
                   <tr key={invoice._id} className="hover:bg-neutral-800/50 transition-colors">
                     <td className="px-6 py-4 font-medium text-white">{invoice.invoiceNumber}</td>
                     <td className="px-6 py-4">
@@ -122,6 +171,30 @@ export function InvoiceList({ initialInvoices, clients, projects }: { initialInv
           </table>
         </div>
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl">
+          <p className="text-sm text-neutral-400">
+            Showing {((currentPage - 1) * ITEMS_PER_PAGE) + 1} to {Math.min(currentPage * ITEMS_PER_PAGE, filteredInvoices.length)} of {filteredInvoices.length} results
+          </p>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors text-white"
+            >
+              Previous
+            </button>
+            <button 
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors text-white"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { useCurrency } from "@/components/Providers"
 import { formatCurrency } from "@/lib/utils"
 import { Briefcase, Wallet, Clock, FileText, CheckCircle2, Megaphone } from "lucide-react"
 import Link from "next/link"
+import React, { useState } from "react"
 
 interface ClientDashboardProps {
   data: {
@@ -22,6 +23,11 @@ interface ClientDashboardProps {
 export function ClientDashboard({ data }: ClientDashboardProps) {
   const { currency, exchangeRate } = useCurrency()
   const { client, invoices, totalFees, totalIncome, totalExpenses, totalAdSpend, workLogs, allTransactions } = data
+
+  const [txPage, setTxPage] = useState(1)
+  const TX_PER_PAGE = 10
+  const totalTxPages = Math.ceil((allTransactions?.length || 0) / TX_PER_PAGE)
+  const paginatedTx = (allTransactions || []).slice((txPage - 1) * TX_PER_PAGE, txPage * TX_PER_PAGE)
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -42,6 +48,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       icon: FileText,
       color: "text-blue-500",
       bgColor: "bg-blue-500/10",
+      link: `/invoices?client=${client._id}`
     },
     {
       title: "Total Credited (Budget)",
@@ -49,6 +56,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       icon: Wallet,
       color: "text-emerald-500",
       bgColor: "bg-emerald-500/10",
+      link: `/clients/${client._id}/transactions?filter=credited`
     },
     {
       title: "Outstanding Balance",
@@ -63,6 +71,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       icon: Clock,
       color: "text-purple-500",
       bgColor: "bg-purple-500/10",
+      link: `/dashboard/daily-update/${client._id}`
     },
     {
       title: "Total Expenses",
@@ -70,6 +79,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       icon: Wallet,
       color: "text-red-500",
       bgColor: "bg-red-500/10",
+      link: `/clients/${client._id}/transactions?filter=expenses`
     },
     {
       title: "Ad Spend",
@@ -77,6 +87,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       icon: Megaphone,
       color: "text-pink-500",
       bgColor: "bg-pink-500/10",
+      link: `/clients/${client._id}/transactions?filter=adspend`
     }
   ]
 
@@ -105,10 +116,11 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         {statCards.map((stat, i) => {
           const Icon = stat.icon
-          return (
-            <div key={i} className="bg-neutral-900 border border-neutral-800 p-6 rounded-xl">
+
+          const CardContent = (
+            <div className={`bg-neutral-900 border border-neutral-800 p-6 rounded-xl ${stat.link ? 'hover:bg-neutral-800/80 transition-colors cursor-pointer group' : ''}`}>
               <div className="flex items-center justify-between mb-4">
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${stat.bgColor} ${stat.color}`}>
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${stat.bgColor} ${stat.color} ${stat.link ? 'group-hover:scale-110 transition-transform' : ''}`}>
                   <Icon className="w-5 h-5" />
                 </div>
               </div>
@@ -118,6 +130,11 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
               </div>
             </div>
           )
+
+          if (stat.link) {
+             return <Link href={stat.link} key={i} className="block">{CardContent}</Link>
+          }
+          return <React.Fragment key={i}>{CardContent}</React.Fragment>
         })}
       </div>
 
@@ -225,7 +242,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
         <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden flex flex-col mt-8">
           <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
              <h2 className="text-lg font-bold text-white">Recent Transactions</h2>
-             <Link href="/transactions" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">View All</Link>
+             <Link href={`/clients/${client._id}/transactions`} className="text-sm text-blue-400 hover:text-blue-300 transition-colors">View All</Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-neutral-300">
@@ -239,7 +256,7 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-800">
-                {allTransactions.slice(0, 10).map((tx) => (
+                {paginatedTx.map((tx) => (
                   <tr key={tx._id} className="hover:bg-neutral-800/50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">{tx.date ? format(new Date(tx.date), 'MMM d, yyyy') : '-'}</td>
                     <td className="px-6 py-4 font-medium text-white">
@@ -266,6 +283,29 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
               </tbody>
             </table>
           </div>
+          {totalTxPages > 1 && (
+            <div className="p-4 border-t border-neutral-800 flex justify-between items-center">
+              <p className="text-sm text-neutral-400">
+                Showing {((txPage - 1) * TX_PER_PAGE) + 1}–{Math.min(txPage * TX_PER_PAGE, allTransactions.length)} of {allTransactions.length}
+              </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setTxPage(p => Math.max(1, p - 1))}
+                  disabled={txPage === 1}
+                  className="px-4 py-2 border border-neutral-700 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => setTxPage(p => Math.min(totalTxPages, p + 1))}
+                  disabled={txPage === totalTxPages}
+                  className="px-4 py-2 border border-neutral-700 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

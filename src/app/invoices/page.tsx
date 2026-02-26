@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { AppLayout } from "@/components/AppLayout"
 import { getInvoices, getClients, getProjects } from "@/app/actions"
 import { InvoiceList } from "@/components/InvoiceList"
+import { Suspense } from "react"
 
 export const dynamic = 'force-dynamic'
 
@@ -26,7 +27,9 @@ export default async function InvoicesPage() {
       title="Invoices" 
       description="Create, manage, and track client invoices"
     >
-      <InvoiceList initialInvoices={invoices} clients={clients} projects={projects} />
+      <Suspense fallback={<div className="text-neutral-400 py-10 text-center">Loading invoices...</div>}>
+        <InvoiceList initialInvoices={invoices} clients={clients} projects={projects} />
+      </Suspense>
     </AppLayout>
   )
 }

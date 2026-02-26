@@ -20,6 +20,9 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
   const [selectedLog, setSelectedLog] = useState<any>(null)
   const [logToDelete, setLogToDelete] = useState<any>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  
+  const [currentPage, setCurrentPage] = useState(1)
+  const ITEMS_PER_PAGE = 10
 
   const handleEdit = (log: any) => {
     setSelectedLog(log)
@@ -54,6 +57,13 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
   }
 
   const isAdminOrEditor = user.role === 'admin' || user.role === 'editor'
+
+  // Pagination Logic
+  const totalPages = Math.ceil(initialLogs.length / ITEMS_PER_PAGE)
+  const paginatedLogs = initialLogs.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  )
 
   return (
     <div className="space-y-6">
@@ -113,7 +123,7 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
                   </td>
                 </tr>
               ) : (
-                initialLogs.map((log) => {
+                paginatedLogs.map((log) => {
                   const canEdit = isAdminOrEditor || log.user?._ref === user.id || log.user?._id === user.id
                   return (
                     <tr key={log._id} className="hover:bg-neutral-800/50 transition-colors">
@@ -175,6 +185,30 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
           </table>
         </div>
       </div>
+
+      {totalPages > 1 && (
+        <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl mt-4">
+          <p className="text-sm text-neutral-400">
+            Showing {((currentPage - 1) * ITEMS_PER_PAGE) + 1} to {Math.min(currentPage * ITEMS_PER_PAGE, initialLogs.length)} of {initialLogs.length} results
+          </p>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors text-white"
+            >
+              Previous
+            </button>
+            <button 
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors text-white"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -70,6 +70,17 @@ export function Dashboard({
     return true
   })
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const PAGE_SIZE = 10
+  const totalPages = Math.ceil(filteredTransactions.length / PAGE_SIZE)
+  const paginatedTransactions = filteredTransactions.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  )
+
+  // Reset to page 1 when filters change
+  useEffect(() => { setCurrentPage(1) }, [filters])
+
   return (
     <div className="space-y-8">
       {/* Wallet Balances */}
@@ -104,9 +115,32 @@ export function Dashboard({
               </Link>
           </div>
           <Ledger 
-            transactions={filteredTransactions} 
+            transactions={paginatedTransactions} 
             onEdit={handleEdit}
           />
+          {totalPages > 1 && (
+            <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl">
+              <p className="text-sm text-neutral-400">
+                Showing {((currentPage - 1) * PAGE_SIZE) + 1}–{Math.min(currentPage * PAGE_SIZE, filteredTransactions.length)} of {filteredTransactions.length}
+              </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
         </div>
         <div ref={formRef}>
           <div className="sticky top-8">
