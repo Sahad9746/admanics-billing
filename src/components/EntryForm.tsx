@@ -106,7 +106,7 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
   }
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl">
       <h2 className="text-xl font-bold text-white mb-6">
         {initialData ? 'Edit Transaction' : 'New Entry'}
       </h2>
