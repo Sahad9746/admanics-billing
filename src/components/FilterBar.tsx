@@ -65,6 +65,7 @@ export function FilterBar({ filters, setFilters, transactions = [] }: FilterBarP
         <option value="all">All Types</option>
         <option value="income">Income</option>
         <option value="expense">Expense</option>
+        <option value="credit">Credit</option>
       </select>
 
       {/* Category Filter */}
@@ -90,16 +91,19 @@ export function FilterBar({ filters, setFilters, transactions = [] }: FilterBarP
         aria-label="Filter by Date"
       />
 
-      {/* Clear Button */}
-      {hasActiveFilters && (
-        <button
-          onClick={clearFilters}
-          className="flex items-center gap-1 text-sm text-red-400 hover:text-red-300 transition-colors"
-        >
-          <X className="w-4 h-4" />
-          Clear
-        </button>
-      )}
+      {/* Clear Button - always visible */}
+      <button
+        onClick={clearFilters}
+        className={`flex items-center gap-1 text-sm px-3 py-2 rounded-lg border transition-colors shrink-0 ${
+          hasActiveFilters
+            ? 'text-red-400 border-red-500/30 bg-red-500/10 hover:bg-red-500/20'
+            : 'text-neutral-600 border-neutral-800 bg-neutral-950 cursor-default'
+        }`}
+        disabled={!hasActiveFilters}
+      >
+        <X className="w-4 h-4" />
+        Clear
+      </button>
     </div>
   )
 }

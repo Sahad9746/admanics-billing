@@ -2,8 +2,9 @@
 
 import { useState, useRef, useEffect } from "react"
 import { Transaction } from "@/types"
-import { Stats } from "@/components/Stats"
+
 import { Chart } from "@/components/Chart"
+import { Stats } from "@/components/Stats"
 import { Ledger } from "@/components/Ledger"
 import { EntryForm } from "@/components/EntryForm"
 import { CurrencyToggle } from "@/components/CurrencyToggle"
@@ -100,9 +101,9 @@ export function Dashboard({
           <FilterBar filters={filters} setFilters={setFilters} transactions={initialTransactions} />
       </section>
 
-      {/* Stats - Shows totals based on filtered data */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-         <Stats transactions={filteredTransactions} />
+      {/* Stats */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <Stats transactions={filteredTransactions} />
       </section>
 
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
