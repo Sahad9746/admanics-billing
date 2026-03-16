@@ -36,11 +36,6 @@ export default defineType({
       type: 'number',
     }),
     defineField({
-      name: 'type',
-      title: 'Type',
-      type: 'string',
-    }),
-    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
