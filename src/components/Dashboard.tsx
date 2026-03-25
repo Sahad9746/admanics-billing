@@ -16,7 +16,7 @@ import Link from "next/link"
 interface DashboardProps {
   initialTransactions: Transaction[]
   wallets: any[]
-  user: { name: string; email: string; role: string; permissions?: { transactions: 'viewer' | 'editor' | 'admin' } }
+  user: { name: string; email: string; role: string; permissions?: Record<string, string> }
 }
 
 export function Dashboard({ initialTransactions, wallets, user }: DashboardProps) {
