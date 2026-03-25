@@ -11,7 +11,7 @@ import toast from "react-hot-toast"
 import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 
-export function InvoiceList({ initialInvoices, clients, projects }: { initialInvoices: any[], clients: any[], projects: any[] }) {
+export function InvoiceList({ initialInvoices, clients, projects, userRole = 'viewer' }: { initialInvoices: any[], clients: any[], projects: any[], userRole?: string }) {
   const { currency, exchangeRate } = useCurrency()
   const searchParams = useSearchParams()
   const urlClientFilter = searchParams.get('client')
@@ -89,13 +89,15 @@ export function InvoiceList({ initialInvoices, clients, projects }: { initialInv
             <option value="overdue">Overdue</option>
           </select>
         </div>
-        <Link
-          href="/invoices/create"
-          className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center"
-        >
-          <Plus className="w-4 h-4" />
-          Create Invoice
-        </Link>
+        {userRole !== 'viewer' && (
+          <Link
+            href="/invoices/create"
+            className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 shrink-0 w-full sm:w-auto justify-center"
+          >
+            <Plus className="w-4 h-4" />
+            Create Invoice
+          </Link>
+        )}
       </div>
 
       {invoiceToDelete && (
@@ -156,13 +158,15 @@ export function InvoiceList({ initialInvoices, clients, projects }: { initialInv
                         >
                             <Download className="w-4 h-4" />
                         </Link>
-                        <button
-                          onClick={() => setInvoiceToDelete(invoice)}
-                          disabled={deletingId === invoice._id}
-                          className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
-                        >
-                          {deletingId === invoice._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
-                        </button>
+                        {userRole === 'admin' && (
+                          <button
+                            onClick={() => setInvoiceToDelete(invoice)}
+                            disabled={deletingId === invoice._id}
+                            className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                          >
+                            {deletingId === invoice._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
+                          </button>
+                        )}
                     </td>
                   </tr>
                 ))

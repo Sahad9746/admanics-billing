@@ -21,10 +21,14 @@ async function getData(): Promise<Transaction[]> {
   }
 }
 
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth.config"
+
 export default async function TransactionsPage() {
+  const session = await getServerSession(authOptions)
   const transactions = await getData()
   
   return (
-    <TransactionsHistory initialTransactions={transactions} />
+    <TransactionsHistory initialTransactions={transactions} userRole={session?.user?.permissions?.transactions || session?.user?.role} />
   )
 }

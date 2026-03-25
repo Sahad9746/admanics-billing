@@ -9,7 +9,7 @@ import { format } from "date-fns"
 import { deleteClient } from "@/app/actions"
 import toast from "react-hot-toast"
 
-export function ClientsList({ initialClients }: { initialClients: any[] }) {
+export function ClientsList({ initialClients, userRole = 'viewer' }: { initialClients: any[], userRole?: string }) {
   const [isAdding, setIsAdding] = useState(false)
   const [editingClient, setEditingClient] = useState<any>(null)
   const [clientToDelete, setClientToDelete] = useState<any>(null)
@@ -31,13 +31,15 @@ export function ClientsList({ initialClients }: { initialClients: any[] }) {
   return (
     <div className="space-y-6">
       <div className="flex justify-end">
-        <button
-          onClick={() => setIsAdding(true)}
-          className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          Add Client
-        </button>
+        {userRole !== 'viewer' && (
+          <button
+            onClick={() => setIsAdding(true)}
+            className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            Add Client
+          </button>
+        )}
       </div>
 
       {isAdding && (
@@ -122,21 +124,25 @@ export function ClientsList({ initialClients }: { initialClients: any[] }) {
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
                       </Link>
-                      <button
-                        onClick={() => setEditingClient(client)}
-                        className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
-                        title="Edit Client"
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => setClientToDelete(client)}
-                        disabled={deletingId === client._id}
-                        className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
-                        title="Delete Client"
-                      >
-                        {deletingId === client._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
-                      </button>
+                      {userRole !== 'viewer' && (
+                        <button
+                          onClick={() => setEditingClient(client)}
+                          className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
+                          title="Edit Client"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                      )}
+                      {userRole === 'admin' && (
+                        <button
+                          onClick={() => setClientToDelete(client)}
+                          disabled={deletingId === client._id}
+                          className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                          title="Delete Client"
+                        >
+                          {deletingId === client._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))

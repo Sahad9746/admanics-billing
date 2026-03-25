@@ -14,7 +14,7 @@ import { EntryForm } from "@/components/EntryForm"
 import { ConfirmationModal } from "@/components/ConfirmationModal"
 import toast from "react-hot-toast"
 
-export default function TransactionDetail({ transaction }: { transaction: Transaction }) {
+export default function TransactionDetail({ transaction, userRole = 'viewer' }: { transaction: Transaction, userRole?: string }) {
   const { currency, exchangeRate } = useCurrency()
   const router = useRouter()
   const [isDeleting, setIsDeleting] = useState(false)
@@ -143,21 +143,25 @@ export default function TransactionDetail({ transaction }: { transaction: Transa
             </Link>
             
             <div className="flex items-center gap-3">
-                <button
-                    onClick={() => setIsEditing(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg transition-colors font-medium"
-                >
-                    <Pencil className="w-4 h-4" />
-                    Edit
-                </button>
-                <button
-                    onClick={() => setShowDeleteModal(true)}
-                    disabled={isDeleting}
-                    className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                    <Trash2 className="w-4 h-4" />
-                    Delete
-                </button>
+                {userRole !== 'viewer' && (
+                  <button
+                      onClick={() => setIsEditing(true)}
+                      className="flex items-center gap-2 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg transition-colors font-medium"
+                  >
+                      <Pencil className="w-4 h-4" />
+                      Edit
+                  </button>
+                )}
+                {userRole === 'admin' && (
+                  <button
+                      onClick={() => setShowDeleteModal(true)}
+                      disabled={isDeleting}
+                      className="flex items-center gap-2 px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 rounded-lg transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                      <Trash2 className="w-4 h-4" />
+                      Delete
+                  </button>
+                )}
             </div>
         </div>
 

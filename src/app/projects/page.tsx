@@ -25,7 +25,7 @@ export default async function ProjectsPage() {
       title="Projects" 
       description="Track and manage client projects and budgets"
     >
-      <ProjectsList initialProjects={projects} clients={clients} />
+      <ProjectsList initialProjects={projects} clients={clients} userRole={session.user.permissions?.projects || session.user.role} />
     </AppLayout>
   )
 }

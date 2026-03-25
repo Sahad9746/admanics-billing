@@ -43,7 +43,7 @@ export default async function ClientDetailPage({ params }: { params: { id: strin
           <ArrowLeft className="w-4 h-4" /> Back to Clients List
         </Link>
       </div>
-      <ClientDashboard data={data} />
+      <ClientDashboard data={data} user={session.user} />
     </AppLayout>
   )
 }

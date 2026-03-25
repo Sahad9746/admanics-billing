@@ -22,7 +22,7 @@ export default async function ClientsPage() {
       title="Clients" 
       description="Manage your clients and their contact information"
     >
-      <ClientsList initialClients={clients} />
+      <ClientsList initialClients={clients} userRole={session.user.permissions?.clients || session.user.role} />
     </AppLayout>
   )
 }

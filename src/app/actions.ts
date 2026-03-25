@@ -16,15 +16,14 @@ async function getCurrentUser() {
   return session.user
 }
 
-// Helper function to check permissions
-function checkPermission(userRole: string, requiredPermissions: string[]) {
+function checkPermission(user: any, moduleName: string, requiredPermissions: string[]) {
+  const effectiveRole = String(user.permissions?.[moduleName] || user.role || 'none').toLowerCase()
   const rolePermissions: Record<string, string[]> = {
     admin: ['view', 'create', 'edit', 'delete'],
     editor: ['view', 'create', 'edit'],
     viewer: ['view'],
   }
-  
-  const permissions = rolePermissions[userRole] || []
+  const permissions = rolePermissions[effectiveRole] || []
   return requiredPermissions.every(p => permissions.includes(p))
 }
 
@@ -70,7 +69,7 @@ export async function addTransaction(formData: FormData) {
   try {
     const user = await getCurrentUser()
     
-    if (!checkPermission(user.role, ['create'])) {
+    if (!checkPermission(user, 'transactions', ['create'])) {
       return { success: false, error: 'You do not have permission to create transactions' }
     }
 
@@ -147,7 +146,7 @@ export async function deleteTransaction(id: string) {
   try {
     const user = await getCurrentUser()
     
-    if (!checkPermission(user.role, ['delete'])) {
+    if (!checkPermission(user, 'transactions', ['delete'])) {
       return { success: false, error: 'You do not have permission to delete transactions' }
     }
 
@@ -167,8 +166,8 @@ export async function editTransaction(id: string, formData: FormData) {
   try {
     const user = await getCurrentUser()
     
-    if (!checkPermission(user.role, ['edit'])) {
-      return { success: false, error: 'You do not have permission to edit transactions' }
+    if (!checkPermission(user, 'transactions', ['edit'])) {
+      return { success: false, error: 'You do not have permission to update transactions' }
     }
 
     const title = formData.get('title') as string
@@ -256,7 +255,7 @@ export async function deleteTransactions(ids: string[]) {
   try {
     const user = await getCurrentUser()
     
-    if (!checkPermission(user.role, ['delete'])) {
+    if (!checkPermission(user, 'transactions', ['delete'])) {
       return { success: false, error: 'You do not have permission to delete transactions' }
     }
 
@@ -302,7 +301,7 @@ export async function getWallets() {
 export async function addWallet(formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['create'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'clients', ['create'])) return { success: false, error: 'Unauthorized' }
 
     const name = formData.get('name') as string
     const type = formData.get('type') as string
@@ -327,7 +326,7 @@ export async function addWallet(formData: FormData) {
 export async function editWallet(id: string, formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['edit'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'clients', ['edit'])) return { success: false, error: 'Unauthorized' }
 
     const name = formData.get('name') as string
     const type = formData.get('type') as string
@@ -351,7 +350,7 @@ export async function editWallet(id: string, formData: FormData) {
 export async function deleteWallet(id: string) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['delete'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'clients', ['delete'])) return { success: false, error: 'Unauthorized' }
 
     // Optional: check if wallet has transactions before deleting
     await client.delete(id)
@@ -379,7 +378,7 @@ export async function getClients() {
 export async function addClient(formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['create'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'projects', ['create'])) return { success: false, error: 'Unauthorized' }
 
     const name = formData.get('name') as string
     const contactPerson = formData.get('contactPerson') as string
@@ -416,7 +415,7 @@ export async function addClient(formData: FormData) {
 export async function editClient(id: string, formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['edit'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'projects', ['edit'])) return { success: false, error: 'Unauthorized' }
 
     const name = formData.get('name') as string
     const contactPerson = formData.get('contactPerson') as string
@@ -443,7 +442,7 @@ export async function editClient(id: string, formData: FormData) {
 export async function deleteClient(id: string) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['delete'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'projects', ['delete'])) return { success: false, error: 'Unauthorized' }
 
     await client.delete(id)
     
@@ -472,7 +471,7 @@ export async function getProjects() {
 export async function addProject(formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['create'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'invoices', ['create'])) return { success: false, error: 'Unauthorized' }
 
     const name = formData.get('name') as string
     const clientId = formData.get('clientId') as string
@@ -501,7 +500,7 @@ export async function addProject(formData: FormData) {
 export async function editProject(id: string, formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['edit'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'invoices', ['edit'])) return { success: false, error: 'Unauthorized' }
 
     const name = formData.get('name') as string
     const clientId = formData.get('clientId') as string
@@ -529,7 +528,7 @@ export async function editProject(id: string, formData: FormData) {
 export async function deleteProject(id: string) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['delete'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'invoices', ['delete'])) return { success: false, error: 'Unauthorized' }
 
     await client.delete(id)
     
@@ -559,7 +558,7 @@ export async function getInvoices() {
 export async function addInvoice(formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['create'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'finance', ['create'])) return { success: false, error: 'Unauthorized' }
 
     const invoiceNumber = formData.get('invoiceNumber') as string
     const clientId = formData.get('clientId') as string
@@ -596,7 +595,7 @@ export async function addInvoice(formData: FormData) {
 export async function editInvoice(id: string, formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['edit'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'finance', ['edit'])) return { success: false, error: 'Unauthorized' }
 
     const invoiceNumber = formData.get('invoiceNumber') as string
     const clientId = formData.get('clientId') as string
@@ -632,7 +631,7 @@ export async function editInvoice(id: string, formData: FormData) {
 export async function deleteInvoice(id: string) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['delete'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'finance', ['delete'])) return { success: false, error: 'Unauthorized' }
 
     await client.delete(id)
     
@@ -648,7 +647,7 @@ export async function deleteInvoice(id: string) {
 export async function performTransfer(formData: FormData) {
   try {
     const user = await getCurrentUser()
-    if (!checkPermission(user.role, ['create'])) return { success: false, error: 'Unauthorized' }
+    if (!checkPermission(user, 'worklogs', ['create'])) return { success: false, error: 'Unauthorized' }
 
     const fromWalletId = formData.get('fromWalletId') as string
     const toWalletId = formData.get('toWalletId') as string
@@ -687,7 +686,7 @@ export async function getWorkLogs() {
     const user = await getCurrentUser()
     let query = ''
     
-    if (checkPermission(user.role, ['edit', 'delete'])) {
+    if (checkPermission(user, 'worklogs', ['edit', 'delete'])) {
       // Admin/Editor sees all
       query = `*[_type == "dailyWorkLog"] | order(date desc) {
         ...,
@@ -775,7 +774,7 @@ export async function editWorkLog(id: string, formData: FormData) {
     if (!log) return { success: false, error: 'Work log not found' }
     
     // Admins can edit any, users can edit their own
-    if (!checkPermission(user.role, ['edit']) && log.user?._ref !== user.id) {
+    if (!checkPermission(user, 'worklogs', ['edit']) && log.user?._ref !== user.id) {
       return { success: false, error: 'Unauthorized to edit this work log' }
     }
 
@@ -819,7 +818,7 @@ export async function deleteWorkLog(id: string) {
     if (!log) return { success: false, error: 'Work log not found' }
     
     // Admins can delete any, users can delete their own
-    if (!checkPermission(user.role, ['delete']) && log.user?._ref !== user.id) {
+    if (!checkPermission(user, 'worklogs', ['delete']) && log.user?._ref !== user.id) {
       return { success: false, error: 'Unauthorized to delete this work log' }
     }
 
@@ -837,7 +836,7 @@ export async function deleteWorkLog(id: string) {
 export async function getClientDashboardData(clientId: string) {
   try {
     const user = await getCurrentUser()
-    const isAdminOrEditor = checkPermission(user.role, ['edit'])
+    const isAdminOrEditor = checkPermission(user, 'worklogs', ['edit'])
 
     // Fetch client details
     const clientData = await client.fetch(`*[_type == "client" && _id == $clientId][0]`, { clientId })
@@ -954,5 +953,38 @@ export async function getClientDashboardData(clientId: string) {
   } catch (error) {
     console.error("Failed to fetch client dashboard data:", error)
     return null
+  }
+}
+
+export async function getAllUsers() {
+  try {
+    const user = await getCurrentUser()
+    if (user.role?.toLowerCase() !== 'admin') {
+      return []
+    }
+    const users = await client.fetch(`*[_type == "user"] | order(createdAt desc) { _id, name, email, role, permissions, createdAt }`)
+    return users
+  } catch (error) {
+    console.error("Failed to fetch users:", error)
+    return []
+  }
+}
+
+export async function updateUserPermissions(userId: string, role: string, permissions: any) {
+  try {
+    const user = await getCurrentUser()
+    if (user.role?.toLowerCase() !== 'admin') {
+      return { success: false, error: 'Unauthorized to manage permissions' }
+    }
+    
+    await client.patch(userId)
+      .set({ role, permissions })
+      .commit()
+      
+    revalidatePath('/settings')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to update user permissions:", error)
+    return { success: false, error: 'Failed to update user permissions' }
   }
 }

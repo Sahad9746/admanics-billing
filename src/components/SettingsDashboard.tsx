@@ -4,6 +4,7 @@ import { useState } from "react"
 import { User, Bell, Shield, Wallet, Paintbrush, Loader2, Save } from "lucide-react"
 import toast from "react-hot-toast"
 import { CurrencyToggle } from "@/components/CurrencyToggle"
+import { UserManagement } from "@/components/UserManagement"
 
 export function SettingsDashboard({ user }: { user: { name: string; email: string; role: string } }) {
   const [activeTab, setActiveTab] = useState('profile')
@@ -55,6 +56,19 @@ export function SettingsDashboard({ user }: { user: { name: string; email: strin
            <Shield className="w-5 h-5" />
            <span className="font-medium">Security</span>
          </button>
+         {user.role?.toLowerCase() === 'admin' && (
+           <button
+              onClick={() => setActiveTab('team')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left ${
+                activeTab === 'team' 
+                  ? 'bg-blue-600/10 text-blue-400 border border-blue-500/20' 
+                  : 'text-neutral-400 hover:text-white hover:bg-neutral-800 border border-transparent'
+              }`}
+           >
+             <Shield className="w-5 h-5 text-indigo-400" />
+             <span className="font-medium">Team & Access</span>
+           </button>
+         )}
       </div>
 
       {/* Main Content Area */}
@@ -182,6 +196,10 @@ export function SettingsDashboard({ user }: { user: { name: string; email: strin
                     </div>
                 </div>
              </div>
+         )}
+
+         {activeTab === 'team' && user.role?.toLowerCase() === 'admin' && (
+             <UserManagement />
          )}
       </div>
     </div>

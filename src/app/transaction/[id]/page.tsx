@@ -21,7 +21,11 @@ async function getTransaction(id: string): Promise<Transaction | null> {
   }
 }
 
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth.config"
+
 export default async function TransactionPage({ params }: { params: Promise<{ id: string }> }) {
+  const session = await getServerSession(authOptions)
   const { id } = await params
   const transaction = await getTransaction(id)
 
@@ -29,5 +33,5 @@ export default async function TransactionPage({ params }: { params: Promise<{ id
     notFound()
   }
 
-  return <TransactionDetail transaction={transaction} />
+  return <TransactionDetail transaction={transaction} userRole={session?.user?.permissions?.transactions || session?.user?.role} />
 }

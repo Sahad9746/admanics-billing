@@ -72,13 +72,15 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
            <h1 className="text-2xl font-bold text-white mb-2">Daily Update Dashboard</h1>
            <p className="text-neutral-400">Manage and oversee team updates.</p>
         </div>
-        <button
-          onClick={handleCreate}
-          className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          New Work Log
-        </button>
+        {user.role !== 'viewer' && (
+          <button
+            onClick={handleCreate}
+            className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            New Work Log
+          </button>
+        )}
       </div>
 
       <WorkLogModal 

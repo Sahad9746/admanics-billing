@@ -13,15 +13,14 @@ import { FilterBar, Filters } from "@/components/FilterBar"
 import { isSameDay, parseISO, format } from "date-fns"
 import Link from "next/link"
 
-export function Dashboard({ 
-  initialTransactions,
-  wallets,
-  user 
-}: { 
+interface DashboardProps {
   initialTransactions: Transaction[]
   wallets: any[]
-  user: { name: string; email: string; role: string }
-}) {
+  user: { name: string; email: string; role: string; permissions?: { transactions: 'viewer' | 'editor' | 'admin' } }
+}
+
+export function Dashboard({ initialTransactions, wallets, user }: DashboardProps) {
+  const txRole = user.permissions?.transactions || user.role || 'viewer'
   const [filters, setFilters] = useState<Filters>({
     search: '',
     type: 'all',
@@ -117,7 +116,7 @@ export function Dashboard({
           </div>
           <Ledger 
             transactions={paginatedTransactions} 
-            onEdit={handleEdit}
+            onEdit={txRole !== 'viewer' ? handleEdit : undefined}
           />
           {totalPages > 1 && (
             <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl">
@@ -145,18 +144,22 @@ export function Dashboard({
         </div>
         <div ref={formRef}>
           <div className="sticky top-8">
-               <EntryForm 
-                  key={editingTransaction?._id || 'new'}
-                  initialData={editingTransaction || undefined} 
-                  onSuccess={() => setEditingTransaction(null)}
-               />
-               {editingTransaction && (
-                  <button 
-                    onClick={() => setEditingTransaction(null)}
-                    className="w-full mt-4 bg-neutral-800 text-white font-medium py-2 rounded-xl hover:bg-neutral-700 transition"
-                  >
-                    Cancel Edit
-                  </button>
+               {txRole !== 'viewer' && (
+                 <>
+                   <EntryForm 
+                      key={editingTransaction?._id || 'new'}
+                      initialData={editingTransaction || undefined} 
+                      onSuccess={() => setEditingTransaction(null)}
+                   />
+                   {editingTransaction && (
+                      <button 
+                        onClick={() => setEditingTransaction(null)}
+                        className="w-full mt-4 bg-neutral-800 text-white font-medium py-2 rounded-xl hover:bg-neutral-700 transition"
+                      >
+                        Cancel Edit
+                      </button>
+                   )}
+                 </>
                )}
           </div>
         </div>

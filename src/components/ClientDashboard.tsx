@@ -18,10 +18,12 @@ interface ClientDashboardProps {
     workLogs: any[]
     allTransactions?: any[]
   }
+  user: { name: string, email: string, role: string, permissions?: any }
 }
 
-export function ClientDashboard({ data }: ClientDashboardProps) {
+export function ClientDashboard({ data, user }: ClientDashboardProps) {
   const { currency, exchangeRate } = useCurrency()
+  const invRole = user.permissions?.invoices || user.role || 'viewer'
   const { client, invoices, totalFees, totalIncome, totalExpenses, totalAdSpend, workLogs, allTransactions } = data
 
   const [txPage, setTxPage] = useState(1)
@@ -143,7 +145,9 @@ export function ClientDashboard({ data }: ClientDashboardProps) {
         <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden flex flex-col">
           <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
              <h2 className="text-lg font-bold text-white">Recent Invoices</h2>
-             <Link href="/invoices/create" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">Create New</Link>
+             {invRole !== 'viewer' && (
+               <Link href="/invoices/create" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">Create New</Link>
+             )}
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-neutral-300">

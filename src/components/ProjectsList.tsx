@@ -10,7 +10,7 @@ import { formatCurrency } from "@/lib/utils"
 import { deleteProject } from "@/app/actions"
 import toast from "react-hot-toast"
 
-export function ProjectsList({ initialProjects, clients }: { initialProjects: any[], clients: any[] }) {
+export function ProjectsList({ initialProjects, clients, userRole = 'viewer' }: { initialProjects: any[], clients: any[], userRole?: string }) {
   const [isAdding, setIsAdding] = useState(false)
   const [editingProject, setEditingProject] = useState<any>(null)
   const [projectToDelete, setProjectToDelete] = useState<any>(null)
@@ -34,13 +34,15 @@ export function ProjectsList({ initialProjects, clients }: { initialProjects: an
   return (
     <div className="space-y-6">
       <div className="flex justify-end">
-        <button
-          onClick={() => setIsAdding(true)}
-          className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          Create Project
-        </button>
+        {userRole !== 'viewer' && (
+          <button
+            onClick={() => setIsAdding(true)}
+            className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            Create Project
+          </button>
+        )}
       </div>
 
       {isAdding && (
@@ -113,19 +115,23 @@ export function ProjectsList({ initialProjects, clients }: { initialProjects: an
                       {format(new Date(project.createdAt), 'MMM d, yyyy')}
                     </td>
                     <td className="px-6 py-4 text-right flex justify-end gap-2">
-                      <button
-                        onClick={() => setEditingProject(project)}
-                        className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => setProjectToDelete(project)}
-                        disabled={deletingId === project._id}
-                        className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
-                      >
-                        {deletingId === project._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
-                      </button>
+                      {userRole !== 'viewer' && (
+                        <button
+                          onClick={() => setEditingProject(project)}
+                          className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                      )}
+                      {userRole === 'admin' && (
+                        <button
+                          onClick={() => setProjectToDelete(project)}
+                          disabled={deletingId === project._id}
+                          className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                        >
+                          {deletingId === project._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))

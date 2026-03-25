@@ -23,6 +23,7 @@ interface TransactionsHistoryProps {
   backLink?: string
   hideGlobalActions?: boolean
   initialFilters?: Partial<Filters>
+  userRole?: string
 }
 
 export function TransactionsHistory({ 
@@ -31,7 +32,8 @@ export function TransactionsHistory({
   subtitle = "Full history of income and expenses",
   backLink = "/",
   hideGlobalActions = false,
-  initialFilters
+  initialFilters,
+  userRole = 'viewer'
 }: TransactionsHistoryProps) {
   const router = useRouter()
   const [selectedIds, setSelectedIds] = useState<string[]>([])
@@ -164,7 +166,7 @@ export function TransactionsHistory({
                 </div>
             </div>
             <div className="flex items-center gap-4 self-end md:self-auto">
-                {selectedIds.length > 0 && (
+                {userRole === 'admin' && selectedIds.length > 0 && (
                     <button
                         onClick={() => setShowDeleteModal(true)}
                         disabled={isDeleting}
@@ -174,13 +176,15 @@ export function TransactionsHistory({
                         Delete ({selectedIds.length})
                     </button>
                 )}
-                <button
-                    onClick={() => setIsCreating(true)}
-                    className="bg-white text-black hover:bg-neutral-200 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2"
-                >
-                    <Plus className="w-4 h-4" />
-                    New Transaction
-                </button>
+                {userRole !== 'viewer' && (
+                  <button
+                      onClick={() => setIsCreating(true)}
+                      className="bg-white text-black hover:bg-neutral-200 font-semibold py-2 px-4 rounded-lg transition-colors flex items-center gap-2"
+                  >
+                      <Plus className="w-4 h-4" />
+                      New Transaction
+                  </button>
+                )}
                 {!hideGlobalActions && (
                   <>
                     <div className="h-8 w-px bg-neutral-800 mx-2 hidden md:block"></div>
@@ -201,10 +205,10 @@ export function TransactionsHistory({
         <section>
             <Ledger 
                 transactions={paginatedTransactions} 
-                selectable
+                selectable={userRole === 'admin'}
                 selectedIds={selectedIds}
                 onSelect={setSelectedIds}
-                onEdit={handleEdit}
+                onEdit={userRole !== 'viewer' ? handleEdit : undefined}
             />
             {totalPages > 1 && (
                 <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl mt-4">

@@ -22,7 +22,7 @@ export default async function FinancePage() {
       title="Finance & Wallets" 
       description="Manage accounts, cash balances, and fund transfers"
     >
-      <WalletList initialWallets={wallets} />
+      <WalletList initialWallets={wallets} userRole={session.user.permissions?.finance || session.user.role} />
     </AppLayout>
   )
 }

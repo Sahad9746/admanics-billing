@@ -28,7 +28,7 @@ export default async function InvoicesPage() {
       description="Create, manage, and track client invoices"
     >
       <Suspense fallback={<div className="text-neutral-400 py-10 text-center">Loading invoices...</div>}>
-        <InvoiceList initialInvoices={invoices} clients={clients} projects={projects} />
+        <InvoiceList initialInvoices={invoices} clients={clients} projects={projects} userRole={session.user.permissions?.invoices || session.user.role} />
       </Suspense>
     </AppLayout>
   )

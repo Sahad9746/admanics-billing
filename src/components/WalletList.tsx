@@ -7,7 +7,7 @@ import { DeleteModal } from "@/components/DeleteModal"
 import { deleteWallet } from "@/app/actions"
 import toast from "react-hot-toast"
 
-export function WalletList({ initialWallets }: { initialWallets: any[] }) {
+export function WalletList({ initialWallets, userRole = 'viewer' }: { initialWallets: any[], userRole?: string }) {
   const [isAdding, setIsAdding] = useState(false)
   const [editingWallet, setEditingWallet] = useState<any>(null)
   const [walletToDelete, setWalletToDelete] = useState<any>(null)
@@ -29,13 +29,15 @@ export function WalletList({ initialWallets }: { initialWallets: any[] }) {
   return (
     <div className="space-y-6">
       <div className="flex justify-end gap-4">
-        <button
-          onClick={() => setIsAdding(true)}
-          className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-        >
-          <Plus className="w-4 h-4" />
-          Add Wallet
-        </button>
+        {userRole !== 'viewer' && (
+          <button
+            onClick={() => setIsAdding(true)}
+            className="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            Add Wallet
+          </button>
+        )}
       </div>
 
       {isAdding && (
@@ -74,19 +76,23 @@ export function WalletList({ initialWallets }: { initialWallets: any[] }) {
               <div className="flex items-center justify-between mb-2">
                  <h3 className="text-neutral-300 font-medium">{wallet.name}</h3>
                  <div className="flex items-center gap-2">
-                   <button
-                     onClick={() => setEditingWallet(wallet)}
-                     className="p-1.5 text-neutral-500 hover:text-white transition-colors bg-neutral-900 rounded-md"
-                   >
-                     <Edit2 className="w-3.5 h-3.5" />
-                   </button>
-                   <button
-                     onClick={() => setWalletToDelete(wallet)}
-                     disabled={deletingId === wallet._id}
-                     className="p-1.5 text-neutral-500 hover:text-red-400 transition-colors bg-neutral-900 rounded-md"
-                   >
-                     {deletingId === wallet._id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
-                   </button>
+                   {userRole !== 'viewer' && (
+                     <button
+                       onClick={() => setEditingWallet(wallet)}
+                       className="p-1.5 text-neutral-500 hover:text-white transition-colors bg-neutral-900 rounded-md"
+                     >
+                       <Edit2 className="w-3.5 h-3.5" />
+                     </button>
+                   )}
+                   {userRole === 'admin' && (
+                     <button
+                       onClick={() => setWalletToDelete(wallet)}
+                       disabled={deletingId === wallet._id}
+                       className="p-1.5 text-neutral-500 hover:text-red-400 transition-colors bg-neutral-900 rounded-md"
+                     >
+                       {deletingId === wallet._id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
+                     </button>
+                   )}
                  </div>
               </div>
               <span className="text-xs font-semibold px-2 py-1 rounded bg-neutral-800 text-neutral-400 capitalize inline-block mb-4">
