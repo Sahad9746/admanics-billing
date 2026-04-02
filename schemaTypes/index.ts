@@ -6,5 +6,6 @@ import wallet from './wallet'
 import invoice from './invoice'
 import transfer from './transfer'
 import dailyWorkLog from './dailyWorkLog'
+import metaAdsReport from './metaAdsReport'
 
-export const schemaTypes = [transaction, user, client, project, wallet, invoice, transfer, dailyWorkLog]
+export const schemaTypes = [transaction, user, client, project, wallet, invoice, transfer, dailyWorkLog, metaAdsReport]

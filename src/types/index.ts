@@ -31,3 +31,27 @@ export interface Transaction {
   deletedBy?: User
   deletedAt?: string
 }
+
+export interface MetaAdsReport {
+  _id: string
+  companyName: string
+  periodStart: string
+  periodEnd: string
+  adAccountName: string
+  adAccountId: string
+  totalCampaigns: number
+  totalLeadsGenerated: number
+  totalCampaignSpend: number
+  averageCpl: number
+  fundingReceipts: {
+    _key: string
+    receiptDate: string
+    paymentMethod: string
+    amountFunded: number
+    note?: string
+  }[]
+  preparedByName: string
+  preparedByTitle: string
+  receiptsNote: string
+  createdAt: string
+}

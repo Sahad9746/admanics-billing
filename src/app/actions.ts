@@ -988,3 +988,38 @@ export async function updateUserPermissions(userId: string, role: string, permis
     return { success: false, error: 'Failed to update user permissions' }
   }
 }
+
+// --- Meta Ads Report Actions ---
+export async function createMetaAdsReport(formData: any) {
+  try {
+    const user = await getCurrentUser()
+    if (!user) return { success: false, error: 'Unauthorized' }
+
+    await client.create({
+      _type: 'metaAdsReport',
+      ...formData,
+      createdAt: new Date().toISOString(),
+    })
+    
+    revalidatePath('/meta-ads-reports')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to create Meta Ads report:", error)
+    return { success: false, error: 'Failed to create Meta Ads report' }
+  }
+}
+
+export async function deleteMetaAdsReport(id: string) {
+  try {
+    const user = await getCurrentUser()
+    if (!user) return { success: false, error: 'Unauthorized' }
+
+    await client.delete(id)
+    
+    revalidatePath('/meta-ads-reports')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to delete Meta Ads report:", error)
+    return { success: false, error: 'Failed to delete Meta Ads report' }
+  }
+}
