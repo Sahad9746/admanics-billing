@@ -16,8 +16,9 @@ async function getReport(id: string): Promise<MetaAdsReport | null> {
   }
 }
 
-export default async function PrintReportPage({ params }: { params: { id: string } }) {
-  const report = await getReport(params.id)
+export default async function PrintReportPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const report = await getReport(id)
 
   if (!report) {
     notFound()

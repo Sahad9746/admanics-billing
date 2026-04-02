@@ -2,42 +2,65 @@
 
 import { MetaAdsReport } from "@/types"
 import { format } from "date-fns"
-import { useEffect } from "react"
-import { Printer } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Printer, Loader2, Download } from "lucide-react"
 
 export function PrintableMetaAdsReport({ report }: { report: MetaAdsReport }) {
-  useEffect(() => {
-    // Add print styles dynamically to hide the print button
-    const style = document.createElement('style')
-    style.innerHTML = `
-      @media print {
-        #print-button {
-          display: none !important;
-        }
-        @page {
-          margin: 20mm;
-        }
-      }
-    `
-    document.head.appendChild(style)
-    return () => {
-      document.head.removeChild(style)
+  const [downloading, setDownloading] = useState(false)
+
+  const handleDownloadPDF = async () => {
+    setDownloading(true)
+    try {
+      const html2canvas = (await import("html2canvas-pro")).default
+      const { jsPDF } = await import("jspdf")
+
+      const element = document.getElementById('report-content')
+      if (!element) return
+
+      // Temporarily hide the button during snapshot
+      const btn = document.getElementById('print-button')
+      if (btn) btn.style.display = 'none'
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        scrollY: -window.scrollY // Fixes issues if the page is scrolled down
+      })
+      
+      if (btn) btn.style.display = 'flex'
+      
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF('p', 'mm', 'a4')
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+      pdf.save(`Meta_Ads_Report_${report.companyName.replace(/[^a-zA-Z0-9]/g, '_')}_${format(new Date(report.periodStart), 'MMM_yyyy')}.pdf`)
+    } catch (error) {
+      console.error("Error generating PDF:", error)
+    } finally {
+      setDownloading(false)
     }
-  }, [])
+  }
 
   const totalFunded = report.fundingReceipts?.reduce((sum, r) => sum + Number(r.amountFunded || 0), 0) || 0
 
   return (
-    <div className="max-w-[800px] mx-auto p-8 bg-white text-black min-h-[297mm] relative font-sans border-0 sm:border border-gray-200 lg:shadow-md">
+    <div id="report-content" className="max-w-[800px] mx-auto p-8 bg-white text-black min-h-[297mm] relative font-sans border-0 sm:border border-gray-200 lg:shadow-md">
       <button 
         id="print-button"
-        onClick={() => window.print()}
-        className="fixed top-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 print:hidden z-50 flex items-center justify-center gap-2 pr-4"
+        onClick={handleDownloadPDF}
+        disabled={downloading}
+        className="fixed top-4 right-4 bg-blue-600 text-white px-4 py-2.5 rounded-lg shadow-lg hover:bg-blue-700 disabled:opacity-50 z-[100] flex items-center justify-center gap-2 font-medium transition-colors"
       >
-        <Printer className="w-5 h-5" /> <span>Print Report</span>
+        {downloading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />} 
+        <span>{downloading ? 'Generating PDF...' : 'Download PDF'}</span>
       </button>
 
-      <div className="mb-8">
+      <div className="mb-8 pt-4">
         <h1 className="text-xl inline-block border-b border-black pb-0.5 font-normal tracking-wide">
           {report.companyName} Meta Ads Performance & Funding Report
         </h1>
@@ -102,7 +125,7 @@ export function PrintableMetaAdsReport({ report }: { report: MetaAdsReport }) {
                   {receipt.paymentMethod}
                 </td>
                 <td className="border border-black p-2 bg-white">
-                  {Number(receipt.amountFunded).toFixed(2)}{receipt.note ? `(${receipt.note})` : ''}
+                  {Number(receipt.amountFunded).toFixed(2)}{receipt.note ? ` (${receipt.note})` : ''}
                 </td>
               </tr>
             ))}
