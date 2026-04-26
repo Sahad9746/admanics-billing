@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { Plus, Printer, Trash2, Loader2 } from "lucide-react"
+import { Plus, Printer, Trash2, Loader2, Pencil } from "lucide-react"
 import { MetaAdsReport } from "@/types"
 import { DeleteModal } from "@/components/DeleteModal"
 import { format } from "date-fns"
@@ -85,10 +85,17 @@ export function MetaAdsReportsDashboard({ reports: initialReports }: { reports: 
                       {format(new Date(report.createdAt), 'MMM d, yyyy')}
                     </td>
                     <td className="px-6 py-4 text-right flex justify-end gap-2">
+                      <Link
+                        href={`/meta-ads-reports/${report._id}/edit`}
+                        className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg flex items-center justify-center"
+                        title="Edit Report"
+                      >
+                        <Pencil className="w-4 h-4" />
+                      </Link>
                       <button
                         onClick={() => handlePrint(report._id)}
                         className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg flex items-center justify-center"
-                        title="Print PDF"
+                        title="Download PDF"
                       >
                         <Printer className="w-4 h-4" />
                       </button>
@@ -96,6 +103,7 @@ export function MetaAdsReportsDashboard({ reports: initialReports }: { reports: 
                         onClick={() => setReportToDelete(report)}
                         disabled={deletingId === report._id}
                         className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                        title="Delete Report"
                       >
                         {deletingId === report._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
                       </button>

@@ -1023,3 +1023,19 @@ export async function deleteMetaAdsReport(id: string) {
     return { success: false, error: 'Failed to delete Meta Ads report' }
   }
 }
+
+export async function updateMetaAdsReport(id: string, data: any) {
+  try {
+    const user = await getCurrentUser()
+    if (!user) return { success: false, error: 'Unauthorized' }
+
+    await client.patch(id).set(data).commit()
+    
+    revalidatePath('/meta-ads-reports')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to update Meta Ads report:", error)
+    return { success: false, error: 'Failed to update Meta Ads report' }
+  }
+}
+
