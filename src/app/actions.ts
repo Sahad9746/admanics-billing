@@ -758,7 +758,7 @@ export async function addWorkLog(formData: FormData) {
       user: { _type: 'reference', _ref: user.id }
     })
     
-    revalidatePath('/dashboard/daily-update')
+    // revalidatePath('/dashboard/daily-update')
     return { success: true }
   } catch (error) {
     console.error("Failed to create work log:", error)
@@ -802,7 +802,7 @@ export async function editWorkLog(id: string, formData: FormData) {
       synced: false, // Reset synced status so it pushes the update to Google Sheets
     }).commit()
     
-    revalidatePath('/dashboard/daily-update')
+    // revalidatePath('/dashboard/daily-update')
     return { success: true }
   } catch (error) {
     console.error("Failed to edit work log:", error)
@@ -824,7 +824,7 @@ export async function deleteWorkLog(id: string) {
 
     await client.delete(id)
     
-    revalidatePath('/dashboard/daily-update')
+    // revalidatePath('/dashboard/daily-update')
     return { success: true }
   } catch (error) {
     console.error("Failed to delete work log:", error)

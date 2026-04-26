@@ -37,7 +37,6 @@ export function Sidebar() {
         { name: 'Meta Ads', href: '/meta-ads-reports' }
       ]
     },
-    { name: 'Daily Update', href: '/dashboard/daily-update', icon: ClipboardList },
     { name: 'Settings', href: '/settings', icon: Settings },
   ]
 
