@@ -56,5 +56,15 @@ export default defineType({
         { name: 'worklogs', title: 'Daily Work Logs', type: 'string', initialValue: 'none', options: { list: ['admin', 'editor', 'viewer', 'none'] } },
       ],
     }),
+    defineField({
+      name: 'resetToken',
+      title: 'Reset Token',
+      type: 'string',
+    }),
+    defineField({
+      name: 'resetTokenExpires',
+      title: 'Reset Token Expires',
+      type: 'datetime',
+    }),
   ],
 })

@@ -4,10 +4,12 @@ import { getToken } from 'next-auth/jwt'
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow access to login, register, studio, API routes, and public assets
+  // Allow access to public pages and API routes
   if (
     pathname === '/login' ||
     pathname === '/register' ||
+    pathname === '/forgot-password' ||
+    pathname === '/reset-password' ||
     pathname.startsWith('/studio') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||

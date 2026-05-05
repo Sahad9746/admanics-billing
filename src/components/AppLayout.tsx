@@ -15,7 +15,7 @@ export function AppLayout({ children, user, title, description }: AppLayoutProps
   return (
     <div className="min-h-screen bg-neutral-950 text-white flex overflow-x-hidden">
       {/* Sidebar (Desktop) */}
-      <Sidebar />
+      <Sidebar role={user.role} />
 
       <div className="flex-1 md:ml-64 flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden">
         <header className="sticky top-0 z-10 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">

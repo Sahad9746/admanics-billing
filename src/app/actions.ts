@@ -1039,3 +1039,221 @@ export async function updateMetaAdsReport(id: string, data: any) {
   }
 }
 
+// --- Payroll & Salary Actions ---
+export async function getEmployees() {
+  try {
+    const user = await getCurrentUser()
+    if (user.role?.toLowerCase() !== 'admin') return []
+    
+    return await client.fetch(`*[_type == "employeeProfile"]{
+      _id,
+      name,
+      email,
+      baseSalary,
+      designation,
+      status
+    }`)
+  } catch (error) {
+    console.error("Failed to fetch employees:", error)
+    return []
+  }
+}
+
+export async function createEmployeeProfile(formData: FormData) {
+  try {
+    const currentUser = await getCurrentUser()
+    if (currentUser.role?.toLowerCase() !== 'admin') return { success: false, error: 'Unauthorized' }
+
+    const name = formData.get('name') as string
+    const email = formData.get('email') as string
+    const designation = formData.get('designation') as string
+    const baseSalary = parseFloat(formData.get('baseSalary') as string)
+    
+    await client.create({
+      _type: 'employeeProfile',
+      name,
+      email,
+      designation,
+      baseSalary,
+      status: 'active'
+    })
+    
+    revalidatePath('/payroll')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to create employee profile:", error)
+    return { success: false, error: 'Failed to create employee profile' }
+  }
+}
+
+export async function markAdvanceSettled(advanceId: string) {
+  try {
+    const currentUser = await getCurrentUser()
+    if (currentUser.role?.toLowerCase() !== 'admin') return { success: false, error: 'Unauthorized' }
+
+    await client.patch(advanceId).set({
+      status: 'deducted',
+      deductedInMonth: 'Manual Settlement'
+    }).commit()
+
+    revalidatePath('/payroll')
+    revalidatePath('/payroll/advances')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to mark advance as settled:", error)
+    return { success: false, error: 'Failed to settle advance' }
+  }
+}
+
+export async function updateEmployeeProfile(employeeId: string, formData: FormData) {
+  try {
+    const currentUser = await getCurrentUser()
+    if (currentUser.role?.toLowerCase() !== 'admin') return { success: false, error: 'Unauthorized' }
+
+    const name = formData.get('name') as string
+    const email = formData.get('email') as string
+    const designation = formData.get('designation') as string
+    const baseSalary = parseFloat(formData.get('baseSalary') as string)
+    const status = formData.get('status') as string
+
+    if (!name || !designation || isNaN(baseSalary)) {
+      return { success: false, error: 'Name, Designation and Base Salary are required' }
+    }
+
+    await client.patch(employeeId).set({
+      name,
+      email: email || undefined,
+      designation,
+      baseSalary,
+      status: status || 'active'
+    }).commit()
+
+    revalidatePath('/payroll')
+    revalidatePath(`/payroll/employee/${employeeId}`)
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to update employee profile:", error)
+    return { success: false, error: 'Failed to update employee profile' }
+  }
+}
+
+export async function deleteEmployeeProfile(employeeId: string) {
+  try {
+    const currentUser = await getCurrentUser()
+    if (currentUser.role?.toLowerCase() !== 'admin') return { success: false, error: 'Unauthorized' }
+
+    await client.delete(employeeId)
+    revalidatePath('/payroll')
+    return { success: true }
+  } catch (error: any) {
+    console.error("Failed to delete employee profile:", error)
+    if (error.message?.includes('reference')) {
+      return { success: false, error: 'Cannot delete employee with existing payroll records. Please set their status to Inactive instead.' }
+    }
+    return { success: false, error: 'Failed to delete employee profile' }
+  }
+}
+
+export async function getAdvancePayments() {
+  try {
+    const user = await getCurrentUser()
+    if (user.role?.toLowerCase() !== 'admin') return []
+    
+    return await client.fetch(`*[_type == "advancePayment"] | order(date desc){
+      _id,
+      amount,
+      date,
+      reason,
+      status,
+      deductedInMonth,
+      employee->{
+        _id,
+        name,
+        email
+      }
+    }`)
+  } catch (error) {
+    console.error("Failed to fetch advances:", error)
+    return []
+  }
+}
+
+export async function issueAdvance(formData: FormData) {
+  try {
+    const currentUser = await getCurrentUser()
+    if (currentUser.role?.toLowerCase() !== 'admin') return { success: false, error: 'Unauthorized' }
+
+    const employeeId = formData.get('employeeId') as string
+    const amount = parseFloat(formData.get('amount') as string)
+    const reason = formData.get('reason') as string
+    const date = formData.get('date') as string || new Date().toISOString()
+    
+    await client.create({
+      _type: 'advancePayment',
+      employee: { _type: 'reference', _ref: employeeId },
+      amount,
+      reason,
+      date,
+      status: 'pending'
+    })
+    
+    revalidatePath('/payroll/advances')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to issue advance:", error)
+    return { success: false, error: 'Failed to issue advance' }
+  }
+}
+
+export async function processPayroll(monthYear: string, payrollData: any[]) {
+  try {
+    const currentUser = await getCurrentUser()
+    if (currentUser.role?.toLowerCase() !== 'admin') return { success: false, error: 'Unauthorized' }
+
+    // Pre-flight check: ensure no duplicate records for this month
+    for (const record of payrollData) {
+      const existing = await client.fetch(`*[_type == "salaryRecord" && employee._ref == $empId && monthYear == $month][0]`, {
+        empId: record.employeeId,
+        month: monthYear
+      })
+      if (existing) {
+        return { success: false, error: `Payroll already processed for ${record.name} in ${monthYear}` }
+      }
+    }
+
+    // Loop through each employee's payroll data and create a salary record
+    for (const record of payrollData) {
+      // 1. Create Salary Record
+      await client.create({
+        _type: 'salaryRecord',
+        employee: { _type: 'reference', _ref: record.employeeId },
+        monthYear,
+        baseSalary: record.baseSalary,
+        bonus: record.bonus || 0,
+        totalDeductions: record.deductions,
+        netSalary: record.netSalary,
+        status: 'paid', // Mark as paid immediately for now
+        advanceDeductions: record.advanceIds.map((id: string) => ({
+          _type: 'reference',
+          _ref: id
+        }))
+      })
+
+      // 2. Mark Advances as Deducted
+      if (record.advanceIds && record.advanceIds.length > 0) {
+        for (const advanceId of record.advanceIds) {
+          await client.patch(advanceId).set({
+            status: 'deducted',
+            deductedInMonth: monthYear
+          }).commit()
+        }
+      }
+    }
+    
+    revalidatePath('/payroll')
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to process payroll:", error)
+    return { success: false, error: 'Failed to process payroll' }
+  }
+}

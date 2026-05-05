@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { 
   Home, 
   Users, 
@@ -14,14 +14,30 @@ import {
   ClipboardList,
   Megaphone,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Banknote
 } from "lucide-react"
 
-export function Sidebar() {
+export function Sidebar({ role }: { role?: string }) {
   const pathname = usePathname()
 
+  const isReportsActive = pathname.startsWith('/reports') || pathname.startsWith('/meta-ads-reports')
+  const isPayrollActive = pathname.startsWith('/payroll')
+
   // Track expanded state for sections that have subItems
-  const [expandedSection, setExpandedSection] = useState<string | null>('Reports')
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    'Reports': isReportsActive,
+    'Payroll': isPayrollActive
+  })
+
+  // Auto-expand the active section when navigating
+  useEffect(() => {
+    setExpandedSections(prev => ({
+      ...prev,
+      ...(isReportsActive && { 'Reports': true }),
+      ...(isPayrollActive && { 'Payroll': true })
+    }))
+  }, [isReportsActive, isPayrollActive])
 
   const links = [
     { name: 'Dashboard', href: '/', icon: Home },
@@ -33,15 +49,28 @@ export function Sidebar() {
       name: 'Reports', 
       icon: PieChart, 
       subItems: [
-        { name: 'Financial', href: '/reports' },
+        { name: 'Financial', href: '/reports', exact: true },
         { name: 'Meta Ads', href: '/meta-ads-reports' }
       ]
     },
+    ...(role?.toLowerCase() === 'admin' ? [{
+      name: 'Payroll',
+      icon: Banknote,
+      subItems: [
+        { name: 'Dashboard', href: '/payroll', exact: true },
+        { name: 'Process', href: '/payroll/process' },
+        { name: 'Advances', href: '/payroll/advances' },
+        { name: 'Reports', href: '/payroll/report' }
+      ]
+    }] : []),
     { name: 'Settings', href: '/settings', icon: Settings },
   ]
 
   const toggleSection = (name: string) => {
-    setExpandedSection(prev => prev === name ? null : name)
+    setExpandedSections(prev => ({
+      ...prev,
+      [name]: !prev[name]
+    }))
   }
 
   return (
@@ -54,7 +83,7 @@ export function Sidebar() {
           const Icon = link.icon
 
           if (link.subItems) {
-            const isExpanded = expandedSection === link.name
+            const isExpanded = expandedSections[link.name]
             const hasActiveSub = link.subItems.some(sub => pathname === sub.href || pathname.startsWith(sub.href + '/'))
             
             return (
@@ -77,7 +106,10 @@ export function Sidebar() {
                 {isExpanded && (
                   <div className="pl-11 pr-2 space-y-1 mt-1">
                     {link.subItems.map(subItem => {
-                      const isSubActive = pathname === subItem.href || pathname.startsWith(subItem.href + '/')
+                      const isSubActive = subItem.exact 
+                        ? pathname === subItem.href 
+                        : pathname === subItem.href || pathname.startsWith(subItem.href + '/')
+                      
                       return (
                         <Link
                           key={subItem.name}
