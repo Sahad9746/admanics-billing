@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth.config"
 import { EmployeeEditClient } from "./EmployeeEditClient"
 
+
 export default async function EmployeeDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params
   const session = await getServerSession(authOptions)
@@ -28,7 +29,7 @@ export default async function EmployeeDetailPage({ params }: { params: Promise<{
 
   const totalPaidAdvances = advances.filter((a: any) => a.status === 'deducted').reduce((sum: number, a: any) => sum + (a.amount || 0), 0)
   const pendingAdvancesAmount = advances.filter((a: any) => a.status === 'pending').reduce((sum: number, a: any) => sum + (a.amount || 0), 0)
-  
+
   return (
     <AppLayout user={user} title="Employee Details" description="View salary and advance history">
       <div className="w-full space-y-6">
@@ -60,9 +61,8 @@ export default async function EmployeeDetailPage({ params }: { params: Promise<{
               <div className="w-px h-12 bg-neutral-800 mx-2"></div>
               <div className="text-right">
                 <p className="text-sm text-neutral-400">Status</p>
-                <span className={`px-2.5 py-1 rounded-full text-xs font-medium inline-block capitalize mt-1 ${
-                  employee.status === 'active' ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'
-                }`}>
+                <span className={`px-2.5 py-1 rounded-full text-xs font-medium inline-block capitalize mt-1 ${employee.status === 'active' ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500'
+                  }`}>
                   {employee.status || 'Active'}
                 </span>
               </div>
@@ -143,9 +143,8 @@ export default async function EmployeeDetailPage({ params }: { params: Promise<{
                       </div>
                       <div className="text-right">
                         <p className="font-bold text-white mb-1">₹{advance.amount?.toLocaleString()}</p>
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium inline-block capitalize ${
-                          advance.status === 'pending' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' : 'bg-green-500/10 text-green-500 border border-green-500/20'
-                        }`}>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium inline-block capitalize ${advance.status === 'pending' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' : 'bg-green-500/10 text-green-500 border border-green-500/20'
+                          }`}>
                           {advance.status === 'pending' ? 'Pending' : `Deducted ${advance.deductedInMonth ? `(${advance.deductedInMonth})` : ''}`}
                         </span>
                       </div>
