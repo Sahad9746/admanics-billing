@@ -1,9 +1,9 @@
 'use client'
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { InvoiceTemplate } from "@/components/InvoiceTemplate"
 import { format } from "date-fns"
-import { ArrowLeft, Printer, Download } from "lucide-react"
+import { ArrowLeft, Printer, Download, ZoomIn, ZoomOut } from "lucide-react"
 import Link from "next/link"
 import { useReactToPrint } from "react-to-print"
 import { downloadPDF } from "@/lib/invoiceUtils"
@@ -11,6 +11,23 @@ import { downloadPDF } from "@/lib/invoiceUtils"
 export function InvoicePreview({ invoice }: { invoice: any }) {
   const printRef = useRef<HTMLDivElement>(null)
   const [downloading, setDownloading] = useState(false)
+  const [scale, setScale] = useState(0.8)
+  const previewRef = useRef<HTMLDivElement>(null)
+  const [previewHeight, setPreviewHeight] = useState(1122.5)
+
+  useEffect(() => {
+    if (previewRef.current) {
+      const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          setPreviewHeight(entry.target.scrollHeight)
+        }
+      })
+      resizeObserver.observe(previewRef.current)
+      return () => resizeObserver.disconnect()
+    }
+  }, [invoice])
+
+  const hasSeparateGst = invoice.hasSeparateGst || false
 
   // Format data for the template
   const templateData = {
@@ -18,18 +35,36 @@ export function InvoicePreview({ invoice }: { invoice: any }) {
     date: format(new Date(invoice.date), 'dd/MM/yyyy'),
     clientName: invoice.client?.name || 'CLIENT NAME',
     clientAddress: `BILL TO:\n${invoice.client?.contactPerson || ''}\n${invoice.client?.email || ''}\n${invoice.client?.phone || ''}`,
-    items: (invoice.items || []).map((item: any) => ({
-      ...item,
-      amount: (item.quantity || 1) * (item.rate || 0)
-    })),
-    gstPercentage: invoice.items?.find((i: any) => i.description?.includes('GST'))?.description?.match(/\d+/)?.[0] 
-        ? Number(invoice.items.find((i: any) => i.description?.includes('GST'))?.description?.match(/\d+/)?.[0]) 
-        : 0
+    hasSeparateGst,
+    gstPercentage: 0,
+    items: [] as any[]
   }
 
-  // Filter out the GST item from the items array because the template re-calculates it mathematically
-  const filteredItems = templateData.items.filter((i: any) => !i.description.includes('GST'))
-  templateData.items = filteredItems
+  if (hasSeparateGst) {
+    templateData.items = (invoice.items || []).map((item: any) => ({
+      description: item.description,
+      amount: (item.quantity || 1) * (item.rate || 0),
+      gstPercentage: item.gstPercentage || 0,
+      gstAmount: item.gstAmount || 0
+    }))
+  } else {
+    // Legacy / Global GST mode
+    const rawItems = (invoice.items || []).map((item: any) => ({
+      description: item.description,
+      amount: (item.quantity || 1) * (item.rate || 0),
+      gstPercentage: 0
+    }))
+
+    const globalGstPct = invoice.gstPercentage || (invoice.items?.find((i: any) => i.description?.includes('GST'))?.description?.match(/\d+/)?.[0] 
+        ? Number(invoice.items.find((i: any) => i.description?.includes('GST'))?.description?.match(/\d+/)?.[0]) 
+        : 0)
+
+    // Filter out the GST item from the items array because the template re-calculates it mathematically
+    const filteredItems = rawItems.filter((i: any) => !i.description.includes('GST'))
+    
+    templateData.gstPercentage = globalGstPct
+    templateData.items = filteredItems
+  }
 
   const handlePrint = useReactToPrint({
     contentRef: printRef,
@@ -76,21 +111,73 @@ export function InvoicePreview({ invoice }: { invoice: any }) {
       </div>
 
       {/* Preview Container */}
-      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 md:p-8 flex justify-center shadow-2xl relative overflow-hidden print:bg-white print:p-0 print:shadow-none print:border-none min-h-[500px]">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 md:p-8 flex flex-col items-center shadow-2xl relative overflow-hidden print:bg-white print:p-0 print:shadow-none print:border-none min-h-[500px]">
         
-        <div className="scale-[0.55] sm:scale-[0.65] md:scale-75 lg:scale-90 xl:scale-[0.95] origin-top transition-transform h-auto sm:h-[800px] mb-[-200px] sm:mb-0">
-          {/* We wrap it in a div that react-to-print targets, ensuring no transform interference */}
-          <div ref={printRef} className="print:w-[210mm] print:h-[297mm]">
-             <InvoiceTemplate data={templateData} />
-             
-             {/* Global hide styles for react-to-print to ignore the rest of the app */}
-             <style type="text/css" media="print">
-               {`
-                 body * { visibility: hidden; }
-                 #invoice-preview, #invoice-preview * { visibility: visible; }
-                 #invoice-preview { position: absolute; left: 0; top: 0; }
-               `}
-             </style>
+        {/* Controls Bar at the Top */}
+        <div className="w-full flex items-center justify-between mb-6 z-10 print:hidden">
+          <div className="flex items-center gap-1.5 bg-neutral-950/80 backdrop-blur-md border border-neutral-800 px-2.5 py-1.5 rounded-lg shadow-lg">
+            <button 
+              onClick={() => setScale(prev => Math.max(0.3, prev - 0.05))}
+              className="text-neutral-400 hover:text-white p-1 transition-colors rounded hover:bg-neutral-800"
+              title="Zoom Out"
+            >
+              <ZoomOut className="w-4 h-4" />
+            </button>
+            <span className="text-xs font-semibold text-neutral-300 w-12 text-center select-none">
+              {Math.round(scale * 100)}%
+            </span>
+            <button 
+              onClick={() => setScale(prev => Math.min(1.5, prev + 0.05))}
+              className="text-neutral-400 hover:text-white p-1 transition-colors rounded hover:bg-neutral-800"
+              title="Zoom In"
+            >
+              <ZoomIn className="w-4 h-4" />
+            </button>
+            <div className="w-px h-4 bg-neutral-800 mx-1"></div>
+            <button 
+              onClick={() => setScale(0.8)}
+              className="text-neutral-400 hover:text-white text-xs font-semibold px-2 py-0.5 rounded transition-colors hover:bg-neutral-800"
+              title="Reset Zoom"
+            >
+              Reset
+            </button>
+          </div>
+
+          <div className="bg-blue-500/20 text-blue-400 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wider uppercase border border-blue-500/30">
+            Document Preview
+          </div>
+        </div>
+
+        <div 
+          style={{ 
+            width: `${793.7 * scale}px`, 
+            height: `${previewHeight * scale}px`,
+            transition: 'width 0.15s ease-out, height 0.15s ease-out' 
+          }}
+          className="flex justify-center items-start overflow-hidden origin-top print:w-auto print:h-auto"
+        >
+          <div 
+            ref={previewRef}
+            style={{ 
+              transform: `scale(${scale})`, 
+              transformOrigin: 'top left',
+              width: '793.7px',
+            }}
+            className="print:transform-none print:w-auto print:h-auto"
+          >
+            {/* We wrap it in a div that react-to-print targets, ensuring no transform interference */}
+            <div ref={printRef} className="print:w-[210mm] print:h-[297mm] w-full h-full">
+               <InvoiceTemplate data={templateData} />
+               
+               {/* Global hide styles for react-to-print to ignore the rest of the app */}
+               <style type="text/css" media="print">
+                 {`
+                   body * { visibility: hidden; }
+                   #invoice-preview, #invoice-preview * { visibility: visible; }
+                   #invoice-preview { position: absolute; left: 0; top: 0; }
+                 `}
+               </style>
+            </div>
           </div>
         </div>
         

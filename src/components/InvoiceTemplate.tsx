@@ -9,17 +9,37 @@ interface InvoiceTemplateProps {
     date: string
     clientName: string
     clientAddress: string
-    gstPercentage: number
-    items: { description: string; amount: number }[]
+    gstPercentage?: number
+    hasSeparateGst?: boolean
+    items: { 
+      description: string; 
+      amount: number; 
+      gstPercentage?: number; 
+    }[]
   }
 }
 
 export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
   ({ data }, ref) => {
+    const hasSeparateGst = data.hasSeparateGst || false
     
-    const subTotal = data.items.reduce((sum, item) => sum + item.amount, 0)
-    const gstAmount = Math.round(subTotal * (data.gstPercentage / 100))
-    const totalAmount = subTotal + gstAmount
+    let subTotal = 0
+    let totalGstAmount = 0
+    let totalAmount = 0
+
+    if (hasSeparateGst) {
+      subTotal = data.items.reduce((sum, item) => sum + item.amount, 0)
+      totalGstAmount = data.items.reduce((sum, item) => {
+        const itemGstPct = item.gstPercentage || 0
+        return sum + Math.round(item.amount * (itemGstPct / 100))
+      }, 0)
+      totalAmount = subTotal + totalGstAmount
+    } else {
+      subTotal = data.items.reduce((sum, item) => sum + item.amount, 0)
+      const globalGstPct = data.gstPercentage || 0
+      totalGstAmount = Math.round(subTotal * (globalGstPct / 100))
+      totalAmount = subTotal + totalGstAmount
+    }
 
     return (
       <div 
@@ -77,60 +97,146 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
         <div className="mb-20">
             <table className="w-full border-collapse border border-black">
                 <thead>
-                   <tr className="border-b border-black">
-                       <th className="border-r border-black font-bold p-2 text-center w-16">SL</th>
-                       <th className="border-r border-black font-bold p-2 text-center">Description</th>
-                       <th className="font-bold p-2 text-center w-40">Amount</th>
-                   </tr>
+                   {hasSeparateGst ? (
+                     <tr className="border-b border-black">
+                         <th className="border-r border-black font-bold p-2 text-center w-12">SL</th>
+                         <th className="border-r border-black font-bold p-2 text-center">Description</th>
+                         <th className="border-r border-black font-bold p-2 text-center w-28">Base Amt</th>
+                         <th className="border-r border-black font-bold p-2 text-center w-16">GST %</th>
+                         <th className="border-r border-black font-bold p-2 text-center w-24">GST Amt</th>
+                         <th className="font-bold p-2 text-center w-28">Total</th>
+                     </tr>
+                   ) : (
+                     <tr className="border-b border-black">
+                         <th className="border-r border-black font-bold p-2 text-center w-16">SL</th>
+                         <th className="border-r border-black font-bold p-2 text-center">Description</th>
+                         <th className="font-bold p-2 text-center w-40">Amount</th>
+                     </tr>
+                   )}
                 </thead>
                 <tbody>
-                   {/* We pad the items to ensure the table reaches down mimicking the exact design space */}
-                   {[...data.items, ...Array(Math.max(0, 5 - data.items.length)).fill(null)].map((item, index) => (
-                      <tr key={index} className="h-10">
-                          <td className="border-r border-black border-b border-transparent p-2 text-center align-top relative">
-                              {item ? index + 1 : ''}
-                          </td>
-                          <td className="border-r border-black border-b border-transparent p-2 text-center align-top relative z-20">
-                              {item ? item.description : ''}
-                          </td>
-                          <td className="border-b border-transparent p-2 text-center align-top relative z-20">
-                              {item ? item.amount.toLocaleString('en-IN') : ''}
-                          </td>
-                      </tr>
-                   ))}
+                    {[...data.items, ...Array(Math.max(0, 5 - data.items.length)).fill(null)].map((item, index) => {
+                      if (hasSeparateGst) {
+                         const itemGstPct = item?.gstPercentage || 0
+                         const itemGstAmt = item ? Math.round(item.amount * (itemGstPct / 100)) : 0
+                         const itemTotal = item ? item.amount + itemGstAmt : 0
+                         
+                         return (
+                            <tr key={index} className="h-10">
+                                <td className="border-r border-black p-2 text-center align-top relative">
+                                    {item ? index + 1 : ''}
+                                </td>
+                                <td className="border-r border-black p-2 text-center align-top relative z-20">
+                                    {item ? item.description : ''}
+                                </td>
+                                <td className="border-r border-black p-2 text-center align-top relative z-20">
+                                    {item ? item.amount.toLocaleString('en-IN') : ''}
+                                </td>
+                                <td className="border-r border-black p-2 text-center align-top relative z-20">
+                                    {item ? `${itemGstPct}%` : ''}
+                                </td>
+                                <td className="border-r border-black p-2 text-center align-top relative z-20">
+                                    {item ? itemGstAmt.toLocaleString('en-IN') : ''}
+                                </td>
+                                <td className="p-2 text-center align-top relative z-20">
+                                    {item ? itemTotal.toLocaleString('en-IN') : ''}
+                                </td>
+                            </tr>
+                         )
+                      } else {
+                         return (
+                            <tr key={index} className="h-10">
+                                <td className="border-r border-black p-2 text-center align-top relative">
+                                    {item ? index + 1 : ''}
+                                </td>
+                                <td className="border-r border-black p-2 text-center align-top relative z-20">
+                                    {item ? item.description : ''}
+                                </td>
+                                <td className="p-2 text-center align-top relative z-20">
+                                    {item ? item.amount.toLocaleString('en-IN') : ''}
+                                </td>
+                            </tr>
+                         )
+                      }
+                   })}
+                   
                    {/* Bottom Spacer Row to match the tall table in the reference */}
-                   <tr className={`h-[${data.gstPercentage > 0 ? '170px' : '250px'}] border-b border-black`}>
-                       <td className="border-r border-black"></td>
-                       <td className="border-r border-black"></td>
-                       <td></td>
-                   </tr>
-                   {/* Subtotal & GST Rows (if applicable) */}
-                   {data.gstPercentage > 0 && (
+                    {hasSeparateGst ? (
+                      <tr className="border-b border-black" style={{ height: `${Math.max(20, 170 - Math.max(0, data.items.length - 5) * 40)}px` }}>
+                          <td className="border-r border-black"></td>
+                          <td className="border-r border-black"></td>
+                          <td className="border-r border-black"></td>
+                          <td className="border-r border-black"></td>
+                          <td className="border-r border-black"></td>
+                          <td></td>
+                      </tr>
+                    ) : (
+                      <tr className="border-b border-black" style={{ height: `${Math.max(20, ((data.gstPercentage || 0) > 0 ? 170 : 250) - Math.max(0, data.items.length - 5) * 40)}px` }}>
+                          <td className="border-r border-black"></td>
+                          <td className="border-r border-black"></td>
+                          <td></td>
+                      </tr>
+                    )}
+
+                   {/* Subtotal & GST Rows */}
+                   {hasSeparateGst ? (
                      <>
                        <tr className="bg-[#eaf5f6]/20 border-b border-black">
-                           <td colSpan={2} className="border-r border-black font-bold p-2 text-right">Subtotal</td>
+                           <td colSpan={5} className="border-r border-black font-bold p-2 text-right">Subtotal</td>
                            <td className="p-2 text-center text-lg font-medium relative z-20">
                                {subTotal.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
                            </td>
                        </tr>
                        <tr className="bg-[#eaf5f6]/20 border-b border-black">
-                           <td colSpan={2} className="border-r border-black font-bold p-2 text-right">Add: GST ({data.gstPercentage}%)</td>
+                           <td colSpan={5} className="border-r border-black font-bold p-2 text-right">Add: Total GST</td>
                            <td className="p-2 text-center text-lg font-medium relative z-20">
-                               {gstAmount.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
+                               {totalGstAmount.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
                            </td>
                        </tr>
                      </>
+                   ) : (
+                     <>
+                       {(data.gstPercentage || 0) > 0 && (
+                         <>
+                           <tr className="bg-[#eaf5f6]/20 border-b border-black">
+                               <td colSpan={2} className="border-r border-black font-bold p-2 text-right">Subtotal</td>
+                               <td className="p-2 text-center text-lg font-medium relative z-20">
+                                   {subTotal.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
+                               </td>
+                           </tr>
+                           <tr className="bg-[#eaf5f6]/20 border-b border-black">
+                               <td colSpan={2} className="border-r border-black font-bold p-2 text-right">Add: GST ({data.gstPercentage}%)</td>
+                               <td className="p-2 text-center text-lg font-medium relative z-20">
+                                   {totalGstAmount.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
+                               </td>
+                           </tr>
+                         </>
+                       )}
+                     </>
                    )}
+
                    {/* Total Row */}
-                   <tr className="bg-[#eaf5f6]/30">
-                       <td className="border-r border-black font-bold p-2">Total</td>
-                       <td className="border-r border-black p-2 text-center text-lg z-20 relative">
-                           {totalAmount > 0 ? numberToWords(totalAmount) : ''}
-                       </td>
-                       <td className="p-2 text-center text-lg font-medium z-20 relative">
-                           {totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
-                       </td>
-                   </tr>
+                   {hasSeparateGst ? (
+                     <tr className="bg-[#eaf5f6]/30">
+                         <td className="border-r border-black font-bold p-2">Total</td>
+                         <td colSpan={4} className="border-r border-black p-2 text-center text-lg z-20 relative">
+                             {totalAmount > 0 ? numberToWords(totalAmount) : ''}
+                         </td>
+                         <td className="p-2 text-center text-lg font-medium z-20 relative">
+                             {totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
+                         </td>
+                     </tr>
+                   ) : (
+                     <tr className="bg-[#eaf5f6]/30">
+                         <td className="border-r border-black font-bold p-2">Total</td>
+                         <td className="border-r border-black p-2 text-center text-lg z-20 relative">
+                             {totalAmount > 0 ? numberToWords(totalAmount) : ''}
+                         </td>
+                         <td className="p-2 text-center text-lg font-medium z-20 relative">
+                             {totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 0 })}
+                         </td>
+                     </tr>
+                   )}
                 </tbody>
             </table>
         </div>

@@ -51,7 +51,42 @@ export async function downloadPDF(elementId: string, filename: string) {
   if (!element) return
 
   try {
-    const canvas = await html2canvas(element, { scale: 2, useCORS: true })
+    const canvas = await html2canvas(element, { 
+      scale: 2.5, // High resolution print scale
+      useCORS: true,
+      logging: false,
+      onclone: (clonedDoc) => {
+        // Reset body margins to ensure coordinate system starts at absolute 0
+        clonedDoc.body.style.margin = '0'
+        clonedDoc.body.style.padding = '0'
+        
+        const clonedElement = clonedDoc.getElementById(elementId)
+        if (clonedElement) {
+          clonedElement.style.transform = 'none'
+          clonedElement.style.position = 'absolute'
+          clonedElement.style.left = '0'
+          clonedElement.style.top = '0'
+          clonedElement.style.margin = '0'
+          clonedElement.style.width = '210mm'
+          clonedElement.style.boxShadow = 'none'
+          clonedElement.style.borderRadius = '0'
+          
+          // Traverse up and remove transforms and hidden overflow to prevent cropping
+          let parent = clonedElement.parentElement
+          while (parent && parent !== clonedDoc.body) {
+            parent.style.transform = 'none'
+            parent.style.overflow = 'visible'
+            parent.style.width = 'auto'
+            parent.style.height = 'auto'
+            parent.style.maxHeight = 'none'
+            parent.style.margin = '0'
+            parent.style.padding = '0'
+            parent = parent.parentElement
+          }
+        }
+      }
+    })
+    
     const imgData = canvas.toDataURL('image/png')
     
     const pdf = new jsPDF({
@@ -60,10 +95,25 @@ export async function downloadPDF(elementId: string, filename: string) {
       format: 'a4'
     })
 
-    const pdfWidth = pdf.internal.pageSize.getWidth()
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width
+    const imgWidth = pdf.internal.pageSize.getWidth()
+    const pageHeight = pdf.internal.pageSize.getHeight()
+    const imgHeight = (canvas.height * imgWidth) / canvas.width
 
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
+    let heightLeft = imgHeight
+    let position = 0
+
+    // First page
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+    heightLeft -= pageHeight
+
+    // Handle subsequent pages if content overflows A4 height
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight
+      pdf.addPage()
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+      heightLeft -= pageHeight
+    }
+
     pdf.save(filename)
   } catch (error) {
     console.error('Failed to generate PDF', error)

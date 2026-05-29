@@ -569,6 +569,8 @@ export async function addInvoice(formData: FormData) {
     const notes = formData.get('notes') as string
     const itemsString = formData.get('items') as string
     const items = itemsString ? JSON.parse(itemsString) : []
+    const hasSeparateGst = formData.get('hasSeparateGst') === 'true'
+    const gstPercentage = parseFloat(formData.get('gstPercentage') as string) || 0
 
     await client.create({
       _type: 'invoice',
@@ -581,6 +583,8 @@ export async function addInvoice(formData: FormData) {
       status: 'draft',
       notes,
       items,
+      hasSeparateGst,
+      gstPercentage,
       createdAt: new Date().toISOString(),
     })
     
@@ -607,6 +611,8 @@ export async function editInvoice(id: string, formData: FormData) {
     const status = formData.get('status') as string || 'draft'
     const itemsString = formData.get('items') as string
     const items = itemsString ? JSON.parse(itemsString) : []
+    const hasSeparateGst = formData.get('hasSeparateGst') === 'true'
+    const gstPercentage = parseFloat(formData.get('gstPercentage') as string) || 0
 
     await client.patch(id).set({
       invoiceNumber,
@@ -618,6 +624,8 @@ export async function editInvoice(id: string, formData: FormData) {
       status,
       notes,
       items,
+      hasSeparateGst,
+      gstPercentage,
     }).commit()
     
     revalidatePath('/invoices')

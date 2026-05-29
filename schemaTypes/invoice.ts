@@ -59,6 +59,8 @@ export default defineType({
             { name: 'quantity', type: 'number', title: 'Quantity', initialValue: 1 },
             { name: 'unitPrice', type: 'number', title: 'Unit Price' },
             { name: 'amount', type: 'number', title: 'Amount' },
+            { name: 'gstPercentage', type: 'number', title: 'GST Percentage', initialValue: 0 },
+            { name: 'gstAmount', type: 'number', title: 'GST Amount', initialValue: 0 },
           ],
         },
       ],
@@ -67,6 +69,18 @@ export default defineType({
       name: 'amount',
       title: 'Total Amount',
       type: 'number',
+    }),
+    defineField({
+      name: 'hasSeparateGst',
+      title: 'Has Separate GST',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'gstPercentage',
+      title: 'Global GST Percentage',
+      type: 'number',
+      initialValue: 0,
     }),
     defineField({
       name: 'notes',
