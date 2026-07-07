@@ -56,13 +56,15 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
              </h1>
           </div>
           <div className="flex flex-col items-start text-left">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.png"
-              alt="Admaniacs Logo"
-              style={{ width: 130, height: 48, objectFit: 'contain', objectPosition: 'left' }}
-              className="mb-6"
-            />
+            <div className="flex items-center gap-3 mb-6">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.png"
+                alt="Admaniacs Logo"
+                style={{ width: 44, height: 44, objectFit: 'contain' }}
+              />
+              <span className="text-3xl font-bold text-slate-800 tracking-tight">Admaniacs</span>
+            </div>
             
             <div className="text-sm space-y-1 text-slate-700">
               <p>A/C Number: 4649540675</p>
