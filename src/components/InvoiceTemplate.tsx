@@ -56,11 +56,13 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
              </h1>
           </div>
           <div className="text-right flex flex-col items-end">
-            {/* Logo placeholder - using text to mimic the Admaniacs logo visually */}
-            <div className="flex items-center gap-2 mb-6">
-               <div className="text-4xl text-blue-500 font-bold italic tracking-tighter">A</div>
-               <div className="text-2xl text-gray-500 font-medium">Admaniacs</div>
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="Admaniacs Logo"
+              style={{ width: 130, height: 48, objectFit: 'contain' }}
+              className="mb-6"
+            />
             
             <div className="text-left text-sm space-y-1">
               <p>A/C Number: 4649540675</p>
