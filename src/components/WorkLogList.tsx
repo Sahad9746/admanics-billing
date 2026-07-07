@@ -52,7 +52,7 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
       case 'Completed': return 'bg-green-500/10 text-green-400'
       case 'In Progress': return 'bg-blue-500/10 text-blue-400'
       case 'Blocked': return 'bg-red-500/10 text-red-400'
-      default: return 'bg-neutral-800 text-neutral-400'
+      default: return 'bg-gray-100 text-gray-500'
     }
   }
 
@@ -69,8 +69,8 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-           <h1 className="text-2xl font-bold text-white mb-2">Daily Update Dashboard</h1>
-           <p className="text-neutral-400">Manage and oversee team updates.</p>
+           <h1 className="text-2xl font-bold text-gray-900 mb-2">Daily Update Dashboard</h1>
+           <p className="text-gray-500">Manage and oversee team updates.</p>
         </div>
         {user.role !== 'viewer' && (
           <button
@@ -102,10 +102,10 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
         />
       )}
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-neutral-300">
-            <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+          <table className="w-full text-left text-sm text-gray-700">
+            <thead className="bg-gray-50/50 text-gray-500 uppercase font-medium">
               <tr>
                 <th className="px-6 py-4">Date</th>
                 {isAdminOrEditor && <th className="px-6 py-4">Employee</th>}
@@ -117,10 +117,10 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
                 <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-800">
+            <tbody className="divide-y divide-gray-200">
               {initialLogs.length === 0 ? (
                 <tr>
-                  <td colSpan={isAdminOrEditor ? 8 : 7} className="px-6 py-8 text-center text-neutral-500">
+                  <td colSpan={isAdminOrEditor ? 8 : 7} className="px-6 py-8 text-center text-gray-500">
                     No work logs found.
                   </td>
                 </tr>
@@ -128,20 +128,20 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
                 paginatedLogs.map((log) => {
                   const canEdit = isAdminOrEditor || log.user?._ref === user.id || log.user?._id === user.id
                   return (
-                    <tr key={log._id} className="hover:bg-neutral-800/50 transition-colors">
+                    <tr key={log._id} className="hover:bg-gray-100/50 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                           {log.date ? format(new Date(log.date), 'MMM d, yyyy') : '-'}
                       </td>
                       {isAdminOrEditor && (
-                         <td className="px-6 py-4 font-medium text-white">{log.employeeName}</td>
+                         <td className="px-6 py-4 font-medium text-gray-900">{log.employeeName}</td>
                       )}
                       <td className="px-6 py-4">
-                          <div className="font-medium text-white">{log.project}</div>
+                          <div className="font-medium text-gray-900">{log.project}</div>
                       </td>
                       <td className="px-6 py-4 max-w-[250px] truncate" title={log.taskSummary}>
                           {log.taskSummary}
                       </td>
-                      <td className="px-6 py-4 font-bold text-white">
+                      <td className="px-6 py-4 font-bold text-gray-900">
                           {log.hoursWorked}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -162,7 +162,7 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
                              <>
                                <button
                                  onClick={() => handleEdit(log)}
-                                 className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
+                                 className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition-colors bg-gray-50 border border-gray-200 rounded-lg"
                                  title="Edit Log"
                                >
                                  <Edit className="w-4 h-4" />
@@ -170,7 +170,7 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
                                <button
                                  onClick={() => setLogToDelete(log)}
                                  disabled={deletingId === log._id}
-                                 className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                                 className="p-2 text-gray-500 hover:text-red-600 hover:bg-gray-200 transition-colors bg-gray-50 border border-gray-200 flex items-center justify-center rounded-lg"
                                  title="Delete Log"
                                >
                                  {deletingId === log._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
@@ -189,22 +189,22 @@ export function WorkLogList({ initialLogs, clientsWithProjects, user, preselecte
       </div>
 
       {totalPages > 1 && (
-        <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl mt-4">
-          <p className="text-sm text-neutral-400">
+        <div className="flex justify-between items-center bg-white border border-gray-200 shadow-sm p-4 rounded-xl mt-4">
+          <p className="text-sm text-gray-500">
             Showing {((currentPage - 1) * ITEMS_PER_PAGE) + 1} to {Math.min(currentPage * ITEMS_PER_PAGE, initialLogs.length)} of {initialLogs.length} results
           </p>
           <div className="flex gap-2">
             <button 
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors text-white"
+              className="px-4 py-2 border border-gray-200 shadow-sm rounded-lg text-sm font-medium bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors"
             >
               Previous
             </button>
             <button 
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors text-white"
+              className="px-4 py-2 border border-gray-200 shadow-sm rounded-lg text-sm font-medium bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors"
             >
               Next
             </button>

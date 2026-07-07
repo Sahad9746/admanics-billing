@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Eye, EyeOff } from 'lucide-react'
 import toast from 'react-hot-toast'
 
@@ -38,17 +39,24 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-black flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-neutral-900 rounded-2xl border border-neutral-800 p-8 shadow-2xl">
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl border border-gray-200 p-8 shadow-xl">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold shadow-lg shadow-blue-900/20">AF</div>
-          <h1 className="text-2xl font-bold text-white">Admanics Finance</h1>
-          <p className="text-neutral-400 mt-2 text-sm">Sign in to your account</p>
+          <div className="flex justify-center mb-5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="Admaniacs Logo"
+              style={{ width: 72, height: 72, objectFit: 'contain' }}
+            />
+          </div>
+          <h1 className="text-2xl font-bold text-slate-900">Admaniacs Finance</h1>
+          <p className="text-slate-400 mt-1 text-sm">Sign in to your account</p>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-400 mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-slate-600 mb-2">
               Email
             </label>
             <input
@@ -56,19 +64,21 @@ export default function LoginPage() {
               id="email"
               name="email"
               required
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-3 text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+              className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+              style={{ '--tw-ring-color': '#0D5740' } as React.CSSProperties}
               placeholder="your@email.com"
             />
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label htmlFor="password" className="block text-sm font-medium text-neutral-400">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-600">
                 Password
               </label>
-              <Link 
-                href="/forgot-password" 
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              <Link
+                href="/forgot-password"
+                className="text-sm transition-colors"
+                style={{ color: '#0D5740' }}
               >
                 Forgot password?
               </Link>
@@ -79,13 +89,13 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 required
-                className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-3 pr-12 text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-3 pr-12 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all"
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-300 transition-colors focus:outline-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -95,16 +105,19 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 group disabled:opacity-50"
+            className="w-full text-white font-medium py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 group disabled:opacity-50"
+            style={{ backgroundColor: '#0D5740' }}
+            onMouseOver={e => (e.currentTarget.style.backgroundColor = '#0a4532')}
+            onMouseOut={e => (e.currentTarget.style.backgroundColor = '#0D5740')}
           >
             {loading ? 'Signing in...' : 'Sign In'}
             {!loading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-neutral-400 text-sm">
-          Don't have an account?{' '}
-          <Link href="/register" className="text-blue-400 hover:text-blue-300 font-medium">
+        <p className="mt-6 text-center text-slate-400 text-sm">
+          Don&apos;t have an account?{' '}
+          <Link href="/register" className="font-medium transition-colors" style={{ color: '#0D5740' }}>
             Create one
           </Link>
         </p>

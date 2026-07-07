@@ -35,67 +35,67 @@ export function ClientForm({ initialData, onSuccess, onCancel }: ClientFormProps
   }
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl w-full max-w-md relative">
+    <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 shadow-xl w-full max-w-md relative">
       <button 
         onClick={onCancel}
-        className="absolute top-4 right-4 text-neutral-500 hover:text-white transition-colors"
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
       >
         <X className="w-5 h-5" />
       </button>
-      <h2 className="text-xl font-bold text-white mb-6">{initialData ? 'Edit Client' : 'Add New Client'}</h2>
+      <h2 className="text-xl font-bold text-gray-900 mb-6">{initialData ? 'Edit Client' : 'Add New Client'}</h2>
       
       <form action={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-neutral-400 mb-1.5">Company Name</label>
+          <label className="block text-sm font-medium text-gray-500 mb-1.5">Company Name</label>
           <input
             name="name"
             required
             defaultValue={initialData?.name}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
             placeholder="e.g., Acme Corp"
           />
         </div>
 
         <div>
-           <label className="block text-sm font-medium text-neutral-400 mb-1.5">Contact Person</label>
+           <label className="block text-sm font-medium text-gray-500 mb-1.5">Contact Person</label>
            <input
              name="contactPerson"
              required
              defaultValue={initialData?.contactPerson}
-             className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600"
+             className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
              placeholder="e.g., John Doe"
            />
         </div>
 
         <div>
-           <label className="block text-sm font-medium text-neutral-400 mb-1.5">Email</label>
+           <label className="block text-sm font-medium text-gray-500 mb-1.5">Email</label>
            <input
              name="email"
              type="email"
              defaultValue={initialData?.email}
-             className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600"
+             className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
              placeholder="john@example.com"
            />
         </div>
 
         <div>
-           <label className="block text-sm font-medium text-neutral-400 mb-1.5">Phone</label>
+           <label className="block text-sm font-medium text-gray-500 mb-1.5">Phone</label>
            <input
              name="phone"
              type="tel"
              defaultValue={initialData?.phone}
-             className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600"
+             className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
              placeholder="+1 234 567 890"
            />
         </div>
         
         {initialData && (
           <div>
-             <label className="block text-sm font-medium text-neutral-400 mb-1.5">Status</label>
+             <label className="block text-sm font-medium text-gray-500 mb-1.5">Status</label>
              <select
                name="status"
                defaultValue={initialData.status || 'active'}
-               className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+               className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
              >
                <option value="active">Active</option>
                <option value="inactive">Inactive</option>

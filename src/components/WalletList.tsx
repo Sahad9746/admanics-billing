@@ -71,15 +71,15 @@ export function WalletList({ initialWallets, userRole = 'viewer' }: { initialWal
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {initialWallets.map((wallet: any) => (
-          <div key={wallet._id} className="bg-gradient-to-br from-neutral-900 to-neutral-950 p-6 rounded-xl border border-neutral-800 flex flex-col justify-between h-40">
+          <div key={wallet._id} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between h-40">
             <div>
               <div className="flex items-center justify-between mb-2">
-                 <h3 className="text-neutral-300 font-medium">{wallet.name}</h3>
+                 <h3 className="text-gray-900 font-semibold">{wallet.name}</h3>
                  <div className="flex items-center gap-2">
                    {userRole !== 'viewer' && (
                      <button
                        onClick={() => setEditingWallet(wallet)}
-                       className="p-1.5 text-neutral-500 hover:text-white transition-colors bg-neutral-900 rounded-md"
+                       className="p-1.5 text-gray-500 hover:text-gray-700 transition-colors bg-gray-50 hover:bg-gray-100 rounded-md border border-gray-200"
                      >
                        <Edit2 className="w-3.5 h-3.5" />
                      </button>
@@ -88,26 +88,26 @@ export function WalletList({ initialWallets, userRole = 'viewer' }: { initialWal
                      <button
                        onClick={() => setWalletToDelete(wallet)}
                        disabled={deletingId === wallet._id}
-                       className="p-1.5 text-neutral-500 hover:text-red-400 transition-colors bg-neutral-900 rounded-md"
+                       className="p-1.5 text-gray-500 hover:text-red-600 transition-colors bg-gray-50 hover:bg-gray-100 rounded-md border border-gray-200"
                      >
                        {deletingId === wallet._id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
                      </button>
                    )}
                  </div>
               </div>
-              <span className="text-xs font-semibold px-2 py-1 rounded bg-neutral-800 text-neutral-400 capitalize inline-block mb-4">
+              <span className="text-xs font-semibold px-2 py-1 rounded bg-gray-100 text-gray-500 capitalize inline-block mb-4">
                   {wallet.type.replace('_', ' ')}
               </span>
             </div>
             <div>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-2xl font-bold text-gray-900">
                 {new Intl.NumberFormat('en-IN', { style: 'currency', currency: wallet.currency }).format(wallet.balance)}
               </p>
             </div>
           </div>
         ))}
         {initialWallets.length === 0 && (
-            <div className="col-span-full text-center py-12 text-neutral-500">
+            <div className="col-span-full text-center py-12 text-gray-500">
                 No wallets found. Create one to start tracking balances.
             </div>
         )}

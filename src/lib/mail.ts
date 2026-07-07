@@ -14,13 +14,13 @@ export async function sendPasswordResetEmail(email: string, token: string) {
   const resetLink = `${process.env.NEXTAUTH_URL}/reset-password?token=${token}`
 
   const mailOptions = {
-    from: process.env.SMTP_FROM || '"Admanics Finance" <noreply@admanics.com>',
+    from: process.env.SMTP_FROM || '"Admaniacs Finance" <noreply@admaniacs.io>',
     to: email,
     subject: 'Password Reset Request',
     html: `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #2563eb;">Password Reset Request</h2>
-        <p>You requested a password reset for your Admanics Finance account. Click the button below to reset your password. This link will expire in 1 hour.</p>
+        <p>You requested a password reset for your Admaniacs Finance account. Click the button below to reset your password. This link will expire in 1 hour.</p>
         <div style="margin: 30px 0;">
           <a href="${resetLink}" style="background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold;">Reset Password</a>
         </div>

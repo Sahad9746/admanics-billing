@@ -2,12 +2,12 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth.config"
 import { redirect } from "next/navigation"
 import { AppLayout } from "@/components/AppLayout"
-import { client } from "@/lib/sanity"
-import { InvoicePreview } from "@/components/InvoicePreview"
+import { getClients, getProjects, getInvoiceById } from "@/app/actions"
+import { InvoiceBuilder } from "@/components/InvoiceBuilder"
 
 export const dynamic = 'force-dynamic'
 
-export default async function InvoicePreviewPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditInvoicePage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions)
   
   if (!session) {
@@ -16,14 +16,11 @@ export default async function InvoicePreviewPage({ params }: { params: Promise<{
 
   const { id } = await params
 
-  // Fetch the specific invoice and populate references
-  const invoice = await client.fetch(`
-    *[_type == "invoice" && _id == $id][0] {
-      ...,
-      client->{_id, name, contactPerson, email, phone},
-      project->{_id, name}
-    }
-  `, { id })
+  const [clients, projects, invoice] = await Promise.all([
+    getClients(),
+    getProjects(),
+    getInvoiceById(id)
+  ])
 
   if (!invoice) {
     return (
@@ -38,11 +35,11 @@ export default async function InvoicePreviewPage({ params }: { params: Promise<{
   return (
     <AppLayout 
       user={session.user} 
-      title={`Preview: ${invoice.invoiceNumber}`}
-      description="View and download invoice as PDF"
+      title={`Edit Invoice: ${invoice.invoiceNumber}`}
+      description="Edit invoice details and preview"
     >
-      <div className="-mt-6">
-        <InvoicePreview invoice={invoice} />
+      <div className="-mt-4">
+        <InvoiceBuilder clients={clients} projects={projects} initialInvoice={invoice} />
       </div>
     </AppLayout>
   )

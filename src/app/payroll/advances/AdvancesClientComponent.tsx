@@ -41,9 +41,9 @@ export function AdvancesClientComponent({ employees, advances }: { employees: an
   }
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden flex flex-col">
-      <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
-         <h2 className="text-lg font-bold text-white">Advance Payments Log</h2>
+    <div className="bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden flex flex-col">
+      <div className="p-6 border-b border-gray-200 shadow-sm flex justify-between items-center">
+         <h2 className="text-lg font-bold text-gray-900">Advance Payments Log</h2>
          <button 
            onClick={() => setIsIssuing(true)}
            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
@@ -53,13 +53,13 @@ export function AdvancesClientComponent({ employees, advances }: { employees: an
       </div>
 
       {isIssuing && (
-        <div className="p-6 border-b border-neutral-800 bg-neutral-950/50">
+        <div className="p-6 border-b border-gray-200 shadow-sm bg-gray-50/50">
           <form onSubmit={handleIssueAdvance} className="space-y-4 max-w-xl">
-            <h3 className="text-md font-medium text-white mb-4">Issue New Advance</h3>
+            <h3 className="text-md font-medium text-gray-900 mb-4">Issue New Advance</h3>
             
             <div>
-              <label className="block text-sm font-medium text-neutral-400 mb-1">Employee</label>
-              <select name="employeeId" required className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <label className="block text-sm font-medium text-gray-500 mb-1">Employee</label>
+              <select name="employeeId" required className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option value="">Select Employee...</option>
                 {employees.map(emp => (
                   <option key={emp._id} value={emp._id}>{emp.name} ({emp.designation})</option>
@@ -68,13 +68,13 @@ export function AdvancesClientComponent({ employees, advances }: { employees: an
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-neutral-400 mb-1">Amount (₹)</label>
-              <input type="number" name="amount" required min="1" className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label className="block text-sm font-medium text-gray-500 mb-1">Amount (₹)</label>
+              <input type="number" name="amount" required min="1" className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-neutral-400 mb-1">Reason (Optional)</label>
-              <input type="text" name="reason" className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label className="block text-sm font-medium text-gray-500 mb-1">Reason (Optional)</label>
+              <input type="text" name="reason" className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
             <div className="flex gap-3 pt-2">
@@ -88,7 +88,7 @@ export function AdvancesClientComponent({ employees, advances }: { employees: an
               <button 
                 type="button" 
                 onClick={() => setIsIssuing(false)}
-                className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg text-sm font-medium transition-colors"
+                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
               >
                 Cancel
               </button>
@@ -98,8 +98,8 @@ export function AdvancesClientComponent({ employees, advances }: { employees: an
       )}
 
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm text-neutral-300">
-          <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+        <table className="w-full text-left text-sm text-gray-700">
+          <thead className="bg-gray-50/50 text-gray-500 uppercase font-medium">
             <tr>
               <th className="px-6 py-4">Date</th>
               <th className="px-6 py-4">Employee</th>
@@ -108,14 +108,14 @@ export function AdvancesClientComponent({ employees, advances }: { employees: an
               <th className="px-6 py-4">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-800">
+          <tbody className="divide-y divide-gray-200">
             {advances.map((advance) => (
-              <tr key={advance._id} className="hover:bg-neutral-800/50 transition-colors">
+              <tr key={advance._id} className="hover:bg-gray-100/50 transition-colors">
                 <td className="px-6 py-4 whitespace-nowrap">
                   {advance.date ? format(new Date(advance.date), 'MMM d, yyyy') : '-'}
                 </td>
-                <td className="px-6 py-4 font-medium text-white">{advance.employee?.name}</td>
-                <td className="px-6 py-4 font-bold text-white">₹{advance.amount?.toLocaleString()}</td>
+                <td className="px-6 py-4 font-medium text-gray-900">{advance.employee?.name}</td>
+                <td className="px-6 py-4 font-bold text-gray-900">₹{advance.amount?.toLocaleString()}</td>
                 <td className="px-6 py-4">{advance.reason || '-'}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
@@ -140,7 +140,7 @@ export function AdvancesClientComponent({ employees, advances }: { employees: an
             ))}
             {advances.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-6 py-8 text-center text-neutral-500">No advance payments recorded.</td>
+                <td colSpan={5} className="px-6 py-8 text-center text-gray-500">No advance payments recorded.</td>
               </tr>
             )}
           </tbody>

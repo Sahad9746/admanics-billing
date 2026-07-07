@@ -77,21 +77,21 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
   const totalRevenue = totalIncome + totalCredits
 
   const cardBase = 'w-full h-full p-5 rounded-xl border flex flex-col justify-between'
-  const hint = <span className="text-[10px] text-neutral-600 absolute bottom-2 right-3 flex items-center gap-1"><RotateCcw className="w-2.5 h-2.5" /> tap to flip</span>
+  const hint = <span className="text-[10px] text-gray-400 absolute bottom-2 right-3 flex items-center gap-1"><RotateCcw className="w-2.5 h-2.5" /> tap to flip</span>
 
   return (
     <>
       {/* Net Balance */}
       <FlipCard
         front={
-          <div className={`${cardBase} bg-neutral-900 border-green-500/20 relative`}>
+          <div className={`${cardBase} bg-white border-green-500/20 relative`}>
             {hint}
             <div className="flex items-start gap-3">
               <div className="p-2.5 rounded-lg bg-green-500/10 shrink-0">
                 <ArrowRightLeft className="w-5 h-5 text-green-400" />
               </div>
               <div>
-                <p className="text-neutral-400 text-xs font-medium uppercase tracking-wider">Net Balance</p>
+                <p className="text-gray-500 text-xs font-medium uppercase tracking-wider">Net Balance</p>
                 <p className={`text-2xl font-bold mt-1 ${netBalance >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                   {formatCurrency(netBalance, currency, exchangeRate)}
                 </p>
@@ -103,8 +103,8 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
           <div className={`${cardBase} bg-green-950/40 border-green-500/30 relative`}>
             {hint}
             <p className="text-green-300 text-xs font-semibold uppercase tracking-wider">Total Revenue In</p>
-            <p className="text-2xl font-bold text-white">{formatCurrency(totalRevenue, currency, exchangeRate)}</p>
-            <p className="text-xs text-neutral-400">All income + client credits combined</p>
+            <p className="text-2xl font-bold text-gray-900">{formatCurrency(totalRevenue, currency, exchangeRate)}</p>
+            <p className="text-xs text-gray-500">All income + client credits combined</p>
           </div>
         }
       />
@@ -112,14 +112,14 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
       {/* Service Fee Income */}
       <FlipCard
         front={
-          <div className={`${cardBase} bg-neutral-900 border-emerald-500/20 relative`}>
+          <div className={`${cardBase} bg-white border-emerald-500/20 relative`}>
             {hint}
             <div className="flex items-start gap-3">
               <div className="p-2.5 rounded-lg bg-emerald-500/10 shrink-0">
                 <TrendingUp className="w-5 h-5 text-emerald-400" />
               </div>
               <div>
-                <p className="text-neutral-400 text-xs font-medium uppercase tracking-wider">Service Fee Income</p>
+                <p className="text-gray-500 text-xs font-medium uppercase tracking-wider">Service Fee Income</p>
                 <p className="text-2xl font-bold mt-1 text-emerald-400">
                   {formatCurrency(totalIncome, currency, exchangeRate)}
                 </p>
@@ -134,7 +134,7 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
             <p className={`text-2xl font-bold ${companyFund >= 0 ? 'text-white' : 'text-red-400'}`}>
               {formatCurrency(companyFund, currency, exchangeRate)}
             </p>
-            <p className="text-xs text-neutral-400">Fees collected minus operating costs</p>
+            <p className="text-xs text-gray-500">Fees collected minus operating costs</p>
           </div>
         }
       />
@@ -142,14 +142,14 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
       {/* Client Credits */}
       <FlipCard
         front={
-          <div className={`${cardBase} bg-neutral-900 border-blue-500/20 relative`}>
+          <div className={`${cardBase} bg-white border-blue-500/20 relative`}>
             {hint}
             <div className="flex items-start gap-3">
               <div className="p-2.5 rounded-lg bg-blue-500/10 shrink-0">
                 <Wallet className="w-5 h-5 text-blue-400" />
               </div>
               <div>
-                <p className="text-neutral-400 text-xs font-medium uppercase tracking-wider">Client Credits</p>
+                <p className="text-gray-500 text-xs font-medium uppercase tracking-wider">Client Credits</p>
                 <p className="text-2xl font-bold mt-1 text-blue-400">
                   {formatCurrency(totalCredits, currency, exchangeRate)}
                 </p>
@@ -168,11 +168,11 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-neutral-500 text-xs">Transactions</p>
+                <p className="text-gray-500 text-xs">Transactions</p>
                 <p className="text-2xl font-bold text-blue-300">{creditCount}</p>
               </div>
             </div>
-            <p className="text-xs text-neutral-400">Credits received minus ad spend used</p>
+            <p className="text-xs text-gray-500">Credits received minus ad spend used</p>
           </div>
         }
       />
@@ -180,14 +180,14 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
       {/* Total Expenses */}
       <FlipCard
         front={
-          <div className={`${cardBase} bg-neutral-900 border-red-500/20 relative`}>
+          <div className={`${cardBase} bg-white border-red-500/20 relative`}>
             {hint}
             <div className="flex items-start gap-3">
               <div className="p-2.5 rounded-lg bg-red-500/10 shrink-0">
                 <TrendingDown className="w-5 h-5 text-red-400" />
               </div>
               <div>
-                <p className="text-neutral-400 text-xs font-medium uppercase tracking-wider">Total Expenses</p>
+                <p className="text-gray-500 text-xs font-medium uppercase tracking-wider">Total Expenses</p>
                 <p className="text-2xl font-bold mt-1 text-red-400">
                   {formatCurrency(totalExpenses, currency, exchangeRate)}
                 </p>
@@ -199,8 +199,8 @@ export function Stats({ transactions }: { transactions: Transaction[] }) {
           <div className={`${cardBase} bg-red-950/40 border-red-500/30 relative`}>
             {hint}
             <p className="text-red-300 text-xs font-semibold uppercase tracking-wider">Ad Spend</p>
-            <p className="text-2xl font-bold text-white">{formatCurrency(adSpend, currency, exchangeRate)}</p>
-            <p className="text-xs text-neutral-400">
+            <p className="text-2xl font-bold text-gray-900">{formatCurrency(adSpend, currency, exchangeRate)}</p>
+            <p className="text-xs text-gray-500">
               Operating: {formatCurrency(totalExpenses - adSpend, currency, exchangeRate)}
             </p>
           </div>

@@ -116,7 +116,7 @@ export function TransactionsHistory({
   }
 
   return (
-    <main className="min-h-screen bg-neutral-950 text-white p-6 md:p-12 font-sans relative">
+    <main className="min-h-screen bg-gray-50 text-gray-900 p-6 md:p-12 font-sans relative">
       {/* Create / Edit Modal */}
       {isCreating && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
@@ -126,7 +126,7 @@ export function TransactionsHistory({
                     setIsCreating(false)
                     setEditingTransaction(null)
                 }}
-                className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors"
+                className="absolute -top-12 right-0 text-gray-400 hover:text-white transition-colors"
             >
                 <X className="w-8 h-8" />
             </button>
@@ -157,12 +157,12 @@ export function TransactionsHistory({
       <div className="max-w-7xl mx-auto space-y-8">
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-                <Link href={backLink} className="p-2 -ml-2 text-neutral-400 hover:text-white transition-colors">
+                <Link href={backLink} className="p-2 -ml-2 text-gray-500 hover:text-gray-700 transition-colors">
                     <ArrowLeft className="w-5 h-5" />
                 </Link>
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">{title}</h1>
-                    <p className="text-neutral-400 mt-1">{subtitle}</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">{title}</h1>
+                    <p className="text-gray-500 mt-1">{subtitle}</p>
                 </div>
             </div>
             <div className="flex items-center gap-4 self-end md:self-auto">
@@ -187,7 +187,7 @@ export function TransactionsHistory({
                 )}
                 {!hideGlobalActions && (
                   <>
-                    <div className="h-8 w-px bg-neutral-800 mx-2 hidden md:block"></div>
+                    <div className="h-8 w-px bg-gray-100 mx-2 hidden md:block"></div>
                     <CurrencyToggle />
                     <LogoutButton />
                     <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold shadow-lg shadow-blue-900/20">AF</div>
@@ -211,22 +211,22 @@ export function TransactionsHistory({
                 onEdit={userRole !== 'viewer' ? handleEdit : undefined}
             />
             {totalPages > 1 && (
-                <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl mt-4">
-                    <p className="text-sm text-neutral-400">
+                <div className="flex justify-between items-center bg-white border border-gray-200 shadow-sm p-4 rounded-xl mt-4">
+                    <p className="text-sm text-gray-500">
                         Showing {((currentPage - 1) * ITEMS_PER_PAGE) + 1} to {Math.min(currentPage * ITEMS_PER_PAGE, filteredTransactions.length)} of {filteredTransactions.length} results
                     </p>
                     <div className="flex gap-2">
                         <button 
                             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                             disabled={currentPage === 1}
-                            className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors"
+                            className="px-4 py-2 border border-gray-200 shadow-sm rounded-lg text-sm font-medium bg-gray-50 disabled:opacity-50 hover:bg-gray-100 transition-colors"
                         >
                             Previous
                         </button>
                         <button 
                             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                             disabled={currentPage === totalPages}
-                            className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-50 hover:bg-neutral-800 transition-colors"
+                            className="px-4 py-2 border border-gray-200 shadow-sm rounded-lg text-sm font-medium bg-gray-50 disabled:opacity-50 hover:bg-gray-100 transition-colors"
                         >
                             Next
                         </button>

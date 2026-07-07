@@ -1,0 +1,3129 @@
+{
+  "client": [
+    {
+      "_createdAt": "2026-06-29T09:59:14Z",
+      "_id": "OY3nzMSAJPSsPCiwgS2N5c",
+      "_rev": "OY3nzMSAJPSsPCiwgS2N1A",
+      "_type": "client",
+      "_updatedAt": "2026-06-29T09:59:14Z",
+      "contactPerson": "SRINIDHI",
+      "createdAt": "2026-06-29T09:59:14.891Z",
+      "email": "Srinithi@iquecap.com",
+      "name": "IQUE CAP (TN)",
+      "phone": "7539977428",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-06-03T12:24:37Z",
+      "_id": "QRr189PZE95PnTZGve8Vqq",
+      "_rev": "QRr189PZE95PnTZGve8Voc",
+      "_type": "client",
+      "_updatedAt": "2026-06-03T12:24:37Z",
+      "contactPerson": "Shashank Raj",
+      "createdAt": "2026-06-03T12:24:37.557Z",
+      "email": "shashankraj@iquecap.com",
+      "name": "Ique Cap Delhi",
+      "phone": "9035354620",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-02-25T22:12:17Z",
+      "_id": "SHuTKoNEhWs0sxTeVJ9O82",
+      "_rev": "SHuTKoNEhWs0sxTeVJ9O2q",
+      "_type": "client",
+      "_updatedAt": "2026-02-25T22:12:17Z",
+      "contactPerson": "Vivek iuqe-cap",
+      "createdAt": "2026-02-25T22:12:17.272Z",
+      "email": "vivekiquecap@gmail.com",
+      "name": "IQUE-CAP-venter",
+      "phone": "80950 42445",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-02-19T19:54:17Z",
+      "_id": "U20l9Q2o7fBOHVEhtlck5P",
+      "_rev": "SHuTKoNEhWs0sxTeVImPfk",
+      "_system": {
+        "base": {
+          "id": "U20l9Q2o7fBOHVEhtlck5P",
+          "rev": "U20l9Q2o7fBOHVEhtlck0M"
+        }
+      },
+      "_type": "client",
+      "_updatedAt": "2026-02-25T21:12:02Z",
+      "contactPerson": "Ebinu IUQE-CAP",
+      "createdAt": "2026-02-19T19:54:17.241Z",
+      "email": "ebinu@iquecap.com",
+      "googleSheetId": "1D8kxnBZ8z-qQwfjP1Qnd1BxCNrjEb7zLC-ByrI91qaA",
+      "name": "IQUE-CAP (Bangalore)",
+      "phone": "7012298972",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-02-19T19:56:28Z",
+      "_id": "U20l9Q2o7fBOHVEhtldM1x",
+      "_rev": "3jHMl6HaGDkL65uHWcOZ65",
+      "_system": {
+        "base": {
+          "id": "U20l9Q2o7fBOHVEhtldM1x",
+          "rev": "U20l9Q2o7fBOHVEhtldLwu"
+        }
+      },
+      "_type": "client",
+      "_updatedAt": "2026-03-25T09:29:08Z",
+      "contactPerson": "Aslam",
+      "createdAt": "2026-02-19T19:56:28.669Z",
+      "email": "",
+      "googleSheetId": "12-0yDE5SMSBAZTt_MJpXwPmNDdCi14d8lfEwuIRxx6Y",
+      "name": "Kilukka",
+      "phone": " 90484 47814",
+      "status": "inactive"
+    },
+    {
+      "_createdAt": "2026-06-11T07:16:23Z",
+      "_id": "Yw3w4CCYBRxZhNxdb8nmyy",
+      "_rev": "Yw3w4CCYBRxZhNxdb8nmtp",
+      "_type": "client",
+      "_updatedAt": "2026-06-11T07:16:23Z",
+      "contactPerson": "startup",
+      "createdAt": "2026-06-11T07:16:23.480Z",
+      "email": "startup-park@gmail.com",
+      "name": "startup park",
+      "phone": "",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-06-09T12:36:45Z",
+      "_id": "gpZ6AgGvNoSlls6MlFjC0o",
+      "_rev": "gpZ6AgGvNoSlls6MlFjBwG",
+      "_type": "client",
+      "_updatedAt": "2026-06-09T12:36:45Z",
+      "contactPerson": "Ique",
+      "createdAt": "2026-06-09T12:36:45.154Z",
+      "email": "Ique@gmail.com",
+      "name": "Ique Cap",
+      "phone": "80950 42445",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-04-10T06:12:56Z",
+      "_id": "nsYcNZVqXqwlbflXQJmKok",
+      "_rev": "nsYcNZVqXqwlbflXQJmKl9",
+      "_type": "client",
+      "_updatedAt": "2026-04-10T06:12:56Z",
+      "contactPerson": "Vivek",
+      "createdAt": "2026-04-10T06:12:56.903Z",
+      "email": "vivekvl@iquecap.com",
+      "name": "Kerala ique cap",
+      "phone": "+91 80950 42445",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-02-25T21:09:21Z",
+      "_id": "rQ2Tti1cJ5GYiTqb3F7ovL",
+      "_rev": "rQ2Tti1cJ5GYiTqb3F7ouW",
+      "_type": "client",
+      "_updatedAt": "2026-02-25T21:09:21Z",
+      "contactPerson": "Vivek iuqe-cap",
+      "createdAt": "2026-02-25T21:09:21.320Z",
+      "email": "vivekiquecap@gmail.com",
+      "name": "IQUE-CAP (Maharashtra)",
+      "phone": "80950 42445",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-03-06T12:41:04Z",
+      "_id": "s4zQ4gLO9FDug2F45S1CYR",
+      "_rev": "7pJz886RhncmjqCGszx4y1",
+      "_type": "client",
+      "_updatedAt": "2026-06-03T10:36:04Z",
+      "contactPerson": "Ebinu IUQE-CAP",
+      "createdAt": "2026-03-06T12:41:04.287Z",
+      "email": "ebinu@iquecap.com",
+      "name": "IQUE-CAP (Telangana & Andhra pradesh )",
+      "phone": "7012298972",
+      "status": "inactive"
+    },
+    {
+      "_createdAt": "2026-05-25T22:06:30Z",
+      "_id": "tb4RXAPEEaFwivZy0UsoT3",
+      "_rev": "ehUJAlikD6Y4hzjRXKe72F",
+      "_type": "client",
+      "_updatedAt": "2026-05-25T22:07:29Z",
+      "contactPerson": "Ashik",
+      "createdAt": "2026-05-25T22:06:30.825Z",
+      "email": "ashick@admanics",
+      "name": "Tata Motors Commercial Vehicle Dealer - Abreco Motors Pvt Ltd",
+      "phone": "80950 42445",
+      "status": "active"
+    }
+  ],
+  "invoice": [
+    {
+      "_createdAt": "2026-06-29T10:01:53Z",
+      "_id": "0fZq7gr7eA26bfqkmgb37C",
+      "_rev": "0fZq7gr7eA26bfqkmgb35X",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-29T10:01:53Z",
+      "amount": 5000,
+      "client": {
+        "_ref": "OY3nzMSAJPSsPCiwgS2N5c",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-29T10:01:53.486Z",
+      "date": "2026-06-29T00:00:00.000Z",
+      "dueDate": "2026-07-14T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-6093",
+      "items": [
+        {
+          "description": "Advance payment of service",
+          "quantity": 1,
+          "rate": 5000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-04-24T04:24:33Z",
+      "_id": "1aZLB3tJjjN4cV5m0ibIQu",
+      "_rev": "1aZLB3tJjjN4cV5m0ibIPA",
+      "_type": "invoice",
+      "_updatedAt": "2026-04-24T04:24:33Z",
+      "amount": 7000,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-04-24T04:24:33.262Z",
+      "date": "2026-04-24T00:00:00.000Z",
+      "dueDate": "2026-05-09T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-4056",
+      "items": [
+        {
+          "description": "production  charge",
+          "quantity": 1,
+          "rate": 7000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-04-27T07:44:19Z",
+      "_id": "1aZLB3tJjjN4cV5m0qCXIa",
+      "_rev": "1aZLB3tJjjN4cV5m0qCXGq",
+      "_type": "invoice",
+      "_updatedAt": "2026-04-27T07:44:19Z",
+      "amount": 35400,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-04-27T07:44:19.370Z",
+      "date": "2026-04-27T00:00:00.000Z",
+      "dueDate": "2026-05-12T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-6716",
+      "items": [
+        {
+          "description": "Meta Ad Amount",
+          "quantity": 1,
+          "rate": 30000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 5400
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-04-01T07:21:55Z",
+      "_id": "23Fmez6Rm6yG0Q0aSiwqUR",
+      "_rev": "23Fmez6Rm6yG0Q0aSiwqPR",
+      "_type": "invoice",
+      "_updatedAt": "2026-04-01T07:21:55Z",
+      "amount": 29500,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-04-01T07:21:55.475Z",
+      "date": "2026-04-01T00:00:00.000Z",
+      "dueDate": "2026-04-16T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-4093",
+      "items": [
+        {
+          "description": "AD AMOUNT",
+          "quantity": 1,
+          "rate": 25000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 4500
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-08T05:39:33Z",
+      "_id": "2RcHGihadYaRqorXE63M5L",
+      "_rev": "2RcHGihadYaRqorXE63M0C",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-08T05:39:33Z",
+      "amount": 53100,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-08T05:39:33.002Z",
+      "date": "2026-06-08T00:00:00.000Z",
+      "dueDate": "2026-06-23T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-9847",
+      "items": [
+        {
+          "description": "Payment of Meta Ad",
+          "gstAmount": 8100,
+          "gstPercentage": 18,
+          "quantity": 1,
+          "rate": 45000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-08T05:40:15Z",
+      "_id": "2RcHGihadYaRqorXE63Qyu",
+      "_rev": "2RcHGihadYaRqorXE63Qtl",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-08T05:40:15Z",
+      "amount": 33000,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-08T05:40:15.345Z",
+      "date": "2026-06-08T00:00:00.000Z",
+      "dueDate": "2026-06-23T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-9040",
+      "items": [
+        {
+          "description": "Payment of Meta Ad",
+          "gstAmount": 3000,
+          "gstPercentage": 10,
+          "quantity": 1,
+          "rate": 30000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-11T07:33:05Z",
+      "_id": "2zNaGNVM3Q3blaWcAXn3cL",
+      "_rev": "2zNaGNVM3Q3blaWcAXn3Zy",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-11T07:33:05Z",
+      "amount": 82600,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-11T07:33:05.059Z",
+      "date": "2026-03-11T00:00:00.000Z",
+      "dueDate": "2026-03-26T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-6664",
+      "items": [
+        {
+          "description": "Payment for Ad spend",
+          "quantity": 1,
+          "rate": 70000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 12600
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-25T09:37:22Z",
+      "_id": "3jHMl6HaGDkL65uHWcSNhq",
+      "_rev": "3jHMl6HaGDkL65uHWcSNeb",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-25T09:37:22Z",
+      "amount": 24780,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-25T09:37:22.410Z",
+      "date": "2026-03-25T00:00:00.000Z",
+      "dueDate": "2026-04-09T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-7437",
+      "items": [
+        {
+          "description": "Meta-Ad Amount",
+          "quantity": 1,
+          "rate": 21000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 3780
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-25T09:38:29Z",
+      "_id": "3jHMl6HaGDkL65uHWcSiSt",
+      "_rev": "3jHMl6HaGDkL65uHWcSiPe",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-25T09:38:29Z",
+      "amount": 24780,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-25T09:38:28.940Z",
+      "date": "2026-03-25T00:00:00.000Z",
+      "dueDate": "2026-04-09T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-7565",
+      "items": [
+        {
+          "description": "Meta - Ad Amount",
+          "quantity": 1,
+          "rate": 21000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 3780
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-27T08:09:50Z",
+      "_id": "4oR6KQ1dsFekeAyMPNH5s5",
+      "_rev": "4oR6KQ1dsFekeAyMPNH5n6",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-27T08:09:50Z",
+      "amount": 11800,
+      "client": {
+        "_ref": "tb4RXAPEEaFwivZy0UsoT3",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-27T08:09:50.028Z",
+      "date": "2026-05-26T00:00:00.000Z",
+      "dueDate": "2026-06-10T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-1995",
+      "items": [
+        {
+          "description": "Payment of Meta Ad's",
+          "quantity": 1,
+          "rate": 10000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 1800
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-06T12:38:14Z",
+      "_id": "5yikWs4MCbSvuuwBk0d2n4",
+      "_rev": "5yikWs4MCbSvuuwBk0d2iC",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-06T12:38:14Z",
+      "amount": 59000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-06T12:38:14.736Z",
+      "date": "2026-03-06T00:00:00.000Z",
+      "dueDate": "2026-03-21T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-7275",
+      "items": [
+        {
+          "description": "payment of meta Ad amount ",
+          "quantity": 1,
+          "rate": 50000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 9000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-09T10:50:38Z",
+      "_id": "6Il54GPzeKVGG9b4lk3GgP",
+      "_rev": "6Il54GPzeKVGG9b4lk3Gfg",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-09T10:50:38Z",
+      "amount": 41300,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-09T10:50:38.451Z",
+      "date": "2026-05-09T00:00:00.000Z",
+      "dueDate": "2026-05-24T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-7129",
+      "items": [
+        {
+          "description": "payment of Meta Ad",
+          "quantity": 1,
+          "rate": 35000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 6300
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-03T10:17:46Z",
+      "_id": "7pJz886RhncmjqCGszr5mj",
+      "_rev": "7pJz886RhncmjqCGszr5j3",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-03T10:17:46Z",
+      "amount": 40400,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-03T10:17:46.137Z",
+      "date": "2026-06-03T00:00:00.000Z",
+      "dueDate": "2026-06-18T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-2816",
+      "items": [
+        {
+          "description": "payment of service",
+          "gstAmount": 5400,
+          "gstPercentage": 18,
+          "quantity": 1,
+          "rate": 30000
+        },
+        {
+          "description": "Payment for Automation",
+          "gstAmount": 0,
+          "gstPercentage": 0,
+          "quantity": 1,
+          "rate": 5000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-13T14:19:09Z",
+      "_id": "CBRby2PhwndvPYFgNTtWO6",
+      "_rev": "CBRby2PhwndvPYFgNTtWLf",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-13T14:19:09Z",
+      "amount": 47200,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-13T14:19:09.750Z",
+      "date": "2026-05-13T00:00:00.000Z",
+      "dueDate": "2026-05-28T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-8482",
+      "items": [
+        {
+          "description": "payment of Meta Ad",
+          "quantity": 1,
+          "rate": 40000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 7200
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-02-27T13:00:39Z",
+      "_id": "Fyr4jHz0x14qAlvAFMkMsS",
+      "_rev": "Fyr4jHz0x14qAlvAFMkMnW",
+      "_type": "invoice",
+      "_updatedAt": "2026-02-27T13:00:39Z",
+      "amount": 14000,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-27T13:00:39.101Z",
+      "date": "2026-02-27T00:00:00.000Z",
+      "dueDate": "2026-03-14T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-8045",
+      "items": [
+        {
+          "description": "payment for content (Video)",
+          "quantity": 1,
+          "rate": 14000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-02T10:39:49Z",
+      "_id": "Fyr4jHz0x14qAlvAFhd9sM",
+      "_rev": "Fyr4jHz0x14qAlvAFhd9nQ",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-02T10:39:49Z",
+      "amount": 25000,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-02T10:39:49.587Z",
+      "date": "2026-03-02T00:00:00.000Z",
+      "dueDate": "2026-03-17T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-4673",
+      "items": [
+        {
+          "description": "payment of service",
+          "quantity": 1,
+          "rate": 25000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-02T10:51:04Z",
+      "_id": "Fyr4jHz0x14qAlvAFhla0C",
+      "_rev": "Fyr4jHz0x14qAlvAFhlZvG",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-02T10:51:04Z",
+      "amount": 55000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-02T10:51:03.978Z",
+      "date": "2026-03-02T00:00:00.000Z",
+      "dueDate": "2026-03-17T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-3402",
+      "items": [
+        {
+          "description": "Marketing service amount",
+          "quantity": 1,
+          "rate": 25000
+        },
+        {
+          "description": "ORM service amount",
+          "quantity": 1,
+          "rate": 30000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-27T09:59:20Z",
+      "_id": "JbXOU063Ts9Y5eRH5eYI6p",
+      "_rev": "JbXOU063Ts9Y5eRH5eYI26",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-27T09:59:20Z",
+      "amount": 7000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-27T09:59:19.878Z",
+      "date": "2026-06-27T00:00:00.000Z",
+      "dueDate": "2026-07-12T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-8654",
+      "items": [
+        {
+          "description": "Automation and subcription charge",
+          "quantity": 1,
+          "rate": 7000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-29T06:57:59Z",
+      "_id": "JbXOU063Ts9Y5eRH5nhrzL",
+      "_rev": "JbXOU063Ts9Y5eRH5nhruc",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-29T06:57:59Z",
+      "amount": 29500,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-29T06:57:58.990Z",
+      "date": "2026-06-29T00:00:00.000Z",
+      "dueDate": "2026-07-14T00:00:00.000Z",
+      "gstPercentage": 18,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-3260",
+      "items": [
+        {
+          "description": "AD AMOUNT",
+          "quantity": 1,
+          "rate": 25000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 4500
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-29T10:03:26Z",
+      "_id": "OY3nzMSAJPSsPCiwgS3ijk",
+      "_rev": "OY3nzMSAJPSsPCiwgS3ifI",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-29T10:03:26Z",
+      "amount": 8260,
+      "client": {
+        "_ref": "OY3nzMSAJPSsPCiwgS2N5c",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-29T10:03:26.433Z",
+      "date": "2026-06-29T00:00:00.000Z",
+      "dueDate": "2026-07-14T00:00:00.000Z",
+      "gstPercentage": 18,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-6661",
+      "items": [
+        {
+          "description": "meta ad amount",
+          "quantity": 1,
+          "rate": 7000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 1260
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-15T10:13:39Z",
+      "_id": "QIbTiukOLK0KckCuo0xT7K",
+      "_rev": "QIbTiukOLK0KckCuo0xT3z",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-15T10:13:39Z",
+      "amount": 90000,
+      "client": {
+        "_ref": "gpZ6AgGvNoSlls6MlFjC0o",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-15T10:13:39.488Z",
+      "date": "2026-06-15T00:00:00.000Z",
+      "dueDate": "2026-06-30T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-2564",
+      "items": [
+        {
+          "description": "Payment of (ORM) service",
+          "gstAmount": 0,
+          "gstPercentage": 0,
+          "quantity": 1,
+          "rate": 90000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-02T15:20:38Z",
+      "_id": "QRr189PZE95PnTZGvaqpPo",
+      "_rev": "QRr189PZE95PnTZGvaqpNa",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-02T15:20:38Z",
+      "amount": 25000,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-02T15:20:38.430Z",
+      "date": "2026-06-02T00:00:00.000Z",
+      "dueDate": "2026-06-17T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-4057",
+      "items": [
+        {
+          "description": "Advance payment of service",
+          "quantity": 1,
+          "rate": 25000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-02T15:21:22Z",
+      "_id": "QRr189PZE95PnTZGvaqrX8",
+      "_rev": "QRr189PZE95PnTZGvaqrUu",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-02T15:21:22Z",
+      "amount": 11800,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-02T15:21:22.443Z",
+      "date": "2026-06-02T00:00:00.000Z",
+      "dueDate": "2026-06-17T00:00:00.000Z",
+      "gstPercentage": 18,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-1765",
+      "items": [
+        {
+          "description": "Payment of Meta Ad's",
+          "quantity": 1,
+          "rate": 10000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 1800
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-30T08:32:11Z",
+      "_id": "RHzW6U9tVPbWngYZrcjKFL",
+      "_rev": "RHzW6U9tVPbWngYZrcjKAv",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-30T08:32:11Z",
+      "amount": 142040,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-30T08:32:11.631Z",
+      "date": "2026-06-30T00:00:00.000Z",
+      "dueDate": "2026-07-15T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-4591",
+      "items": [
+        {
+          "description": "Ad Amount",
+          "quantity": 1,
+          "rate": 92040
+        },
+        {
+          "description": "Service Amount",
+          "quantity": 1,
+          "rate": 50000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-18T08:43:35Z",
+      "_id": "RXaEis6GwtqqeghmdLYkxo",
+      "_rev": "RXaEis6GwtqqeghmdLYkwv",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-18T08:43:35Z",
+      "amount": 70800,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-18T08:43:35.456Z",
+      "date": "2026-06-18T00:00:00.000Z",
+      "dueDate": "2026-07-03T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-7331",
+      "items": [
+        {
+          "description": "Payment of Meta Ad",
+          "gstAmount": 10800,
+          "gstPercentage": 18,
+          "quantity": 1,
+          "rate": 60000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-18T13:11:28Z",
+      "_id": "RXaEis6GwtqqeghmdLpuKq",
+      "_rev": "RXaEis6GwtqqeghmdLpuJx",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-18T13:11:28Z",
+      "amount": 33040,
+      "client": {
+        "_ref": "tb4RXAPEEaFwivZy0UsoT3",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-18T13:11:28.385Z",
+      "date": "2026-06-18T00:00:00.000Z",
+      "dueDate": "2026-07-03T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-4065",
+      "items": [
+        {
+          "description": "Payment of Meta Ad",
+          "gstAmount": 5040,
+          "gstPercentage": 18,
+          "quantity": 1,
+          "rate": 28000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-02-26T08:16:12Z",
+      "_id": "SHuTKoNEhWs0sxTeVNGieO",
+      "_rev": "SHuTKoNEhWs0sxTeVNGiZC",
+      "_type": "invoice",
+      "_updatedAt": "2026-02-26T08:16:12Z",
+      "amount": 6000,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-26T08:16:12.662Z",
+      "date": "2026-02-26T00:00:00.000Z",
+      "dueDate": "2026-03-13T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-9999",
+      "items": [
+        {
+          "description": " payment of content video service",
+          "quantity": 1,
+          "rate": 6000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-04T05:06:16Z",
+      "_id": "Th1l3dVnv0fwonZ5F6D3KF",
+      "_rev": "Th1l3dVnv0fwonZ5F6D3Gh",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-04T05:06:16Z",
+      "amount": 47200,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-04T05:06:16.095Z",
+      "date": "2026-05-04T00:00:00.000Z",
+      "dueDate": "2026-05-19T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-8763",
+      "items": [
+        {
+          "description": "Payment for Ad Amount",
+          "quantity": 1,
+          "rate": 40000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 7200
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-17T10:10:08Z",
+      "_id": "USNO93787lBW8k0HydmHYz",
+      "_rev": "USNO93787lBW8k0HydmHX1",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-17T10:10:08Z",
+      "amount": 15000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-17T10:10:08.222Z",
+      "date": "2026-03-17T00:00:00.000Z",
+      "dueDate": "2026-04-01T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-8026",
+      "items": [
+        {
+          "description": "Media Production  Amount",
+          "quantity": 1,
+          "rate": 15000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-17T10:11:01Z",
+      "_id": "USNO93787lBW8k0HydmajV",
+      "_rev": "USNO93787lBW8k0HydmahX",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-17T10:11:01Z",
+      "amount": 20000,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-17T10:11:01.466Z",
+      "date": "2026-03-17T00:00:00.000Z",
+      "dueDate": "2026-04-01T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-7797",
+      "items": [
+        {
+          "description": "Media Production Media",
+          "quantity": 1,
+          "rate": 20000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-04T05:06:48Z",
+      "_id": "V6WdGwEx3QkAsVnORkWyfa",
+      "_rev": "V6WdGwEx3QkAsVnORkWyej",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-04T05:06:48Z",
+      "amount": 50000,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-04T05:06:48.598Z",
+      "date": "2026-05-04T00:00:00.000Z",
+      "dueDate": "2026-05-19T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-5748",
+      "items": [
+        {
+          "description": "Payment of Service",
+          "quantity": 1,
+          "rate": 50000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-30T13:02:32Z",
+      "_id": "YHxFZw4AXEhAhVotwj8Fpj",
+      "_rev": "YHxFZw4AXEhAhVotwj8Fo3",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-30T13:02:32Z",
+      "amount": 50000,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-30T13:02:32.461Z",
+      "date": "2026-04-01T00:00:00.000Z",
+      "dueDate": "2026-04-14T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-8605",
+      "items": [
+        {
+          "description": "SERVICE AMOUNT",
+          "quantity": 1,
+          "rate": 50000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-11T07:17:47Z",
+      "_id": "Yw3w4CCYBRxZhNxdb8nsXh",
+      "_rev": "Yw3w4CCYBRxZhNxdb8nsSY",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-11T07:17:47Z",
+      "amount": 130089,
+      "client": {
+        "_ref": "Yw3w4CCYBRxZhNxdb8nmyy",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-11T07:17:47.346Z",
+      "date": "2026-06-11T00:00:00.000Z",
+      "dueDate": "2026-06-26T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-4783",
+      "items": [
+        {
+          "description": "Expense",
+          "gstAmount": 0,
+          "gstPercentage": 0,
+          "quantity": 1,
+          "rate": 130089
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-18T08:44:33Z",
+      "_id": "c7D10UIoL2h5Xn5KW6ij7Y",
+      "_rev": "c7D10UIoL2h5Xn5KW6ij4k",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-18T08:44:33Z",
+      "amount": 59000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-18T08:44:32.986Z",
+      "date": "2026-06-18T00:00:00.000Z",
+      "dueDate": "2026-07-03T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-4244",
+      "items": [
+        {
+          "description": "Payment of Meta Ad",
+          "gstAmount": 9000,
+          "gstPercentage": 18,
+          "quantity": 1,
+          "rate": 50000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-27T08:20:10Z",
+      "_id": "cfq9Lla9KnBpxi28yLUVCr",
+      "_rev": "cfq9Lla9KnBpxi28yLUV8p",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-27T08:20:10Z",
+      "amount": 1500,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-27T08:20:10.358Z",
+      "date": "2026-05-27T00:00:00.000Z",
+      "dueDate": "2026-06-11T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-7786",
+      "items": [
+        {
+          "description": "Payment of creator charge",
+          "quantity": 1,
+          "rate": 1500
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-07-02T05:18:46Z",
+      "_id": "dJ4ZpMyfIFtQ0D7lyorL5D",
+      "_rev": "dJ4ZpMyfIFtQ0D7lyorL3f",
+      "_type": "invoice",
+      "_updatedAt": "2026-07-02T05:18:46Z",
+      "amount": 50000,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-07-02T05:18:46.664Z",
+      "date": "2026-07-02T00:00:00.000Z",
+      "dueDate": "2026-07-17T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-9806",
+      "items": [
+        {
+          "description": "Service Amount",
+          "quantity": 1,
+          "rate": 50000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-07-02T06:49:24Z",
+      "_id": "dJ4ZpMyfIFtQ0D7lyp0aNz",
+      "_rev": "dJ4ZpMyfIFtQ0D7lyp0aMR",
+      "_type": "invoice",
+      "_updatedAt": "2026-07-02T06:49:24Z",
+      "amount": 377600,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-07-02T06:49:24.582Z",
+      "date": "2026-07-02T00:00:00.000Z",
+      "dueDate": "2026-07-17T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-7482",
+      "items": [
+        {
+          "description": "Ad Amount",
+          "quantity": 1,
+          "rate": 318600
+        },
+        {
+          "description": "Service Amount",
+          "quantity": 1,
+          "rate": 50000
+        },
+        {
+          "description": "Automation Charges",
+          "quantity": 1,
+          "rate": 9000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-25T05:46:59Z",
+      "_id": "ehUJAlikD6Y4hzjRXJLcBL",
+      "_rev": "ehUJAlikD6Y4hzjRXJLc9u",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-25T05:46:59Z",
+      "amount": 35400,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-25T05:46:58.911Z",
+      "date": "2026-05-23T00:00:00.000Z",
+      "dueDate": "2026-06-07T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-2705",
+      "items": [
+        {
+          "description": "Advance payment of service",
+          "quantity": 1,
+          "rate": 30000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 5400
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-19T12:43:29Z",
+      "_id": "gk2zGj7hP00KsQ2TyCB8mB",
+      "_rev": "gk2zGj7hP00KsQ2TyCB8jK",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-19T12:43:29Z",
+      "amount": 5000,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-19T12:43:29.433Z",
+      "date": "2026-05-19T00:00:00.000Z",
+      "dueDate": "2026-06-03T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-1332",
+      "items": [
+        {
+          "description": "Payment ofUGC Video  (1)",
+          "quantity": 1,
+          "rate": 5000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-20T09:29:39Z",
+      "_id": "gk2zGj7hP00KsQ2TyHXjEK",
+      "_rev": "gk2zGj7hP00KsQ2TyHXjBT",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-20T09:29:39Z",
+      "amount": 47200,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-20T09:29:39.492Z",
+      "date": "2026-05-20T00:00:00.000Z",
+      "dueDate": "2026-06-04T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-7090",
+      "items": [
+        {
+          "description": "Advance payment of service",
+          "quantity": 1,
+          "rate": 40000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 7200
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-05T12:02:37Z",
+      "_id": "h7BuANLfQq977Y2qc6kVjJ",
+      "_rev": "h7BuANLfQq977Y2qc6kVhy",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-05T12:02:37Z",
+      "amount": 14160,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-05T12:02:37.755Z",
+      "date": "2026-03-05T00:00:00.000Z",
+      "dueDate": "2026-03-20T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-6804",
+      "items": [
+        {
+          "description": "Automation service amount",
+          "quantity": 1,
+          "rate": 12000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 2160
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-05T12:05:10Z",
+      "_id": "h7BuANLfQq977Y2qc6l157",
+      "_rev": "h7BuANLfQq977Y2qc6l13m",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-05T12:05:10Z",
+      "amount": 6500,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-05T12:05:09.989Z",
+      "date": "2026-03-05T00:00:00.000Z",
+      "dueDate": "2026-03-20T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-8239",
+      "items": [
+        {
+          "description": "Motion graphics ",
+          "quantity": 1,
+          "rate": 6500
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-04-16T10:11:09Z",
+      "_id": "iOvifNJOn8K24O083I8sJU",
+      "_rev": "iOvifNJOn8K24O083I8sFB",
+      "_type": "invoice",
+      "_updatedAt": "2026-04-16T10:11:09Z",
+      "amount": 49560,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-04-16T10:11:09.244Z",
+      "date": "2026-04-16T00:00:00.000Z",
+      "dueDate": "2026-05-01T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-9249",
+      "items": [
+        {
+          "description": "Ad amount",
+          "quantity": 1,
+          "rate": 42000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 7560
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-04-10T07:09:58Z",
+      "_id": "nsYcNZVqXqwlbflXQJwS6f",
+      "_rev": "nsYcNZVqXqwlbflXQJwS34",
+      "_type": "invoice",
+      "_updatedAt": "2026-04-10T07:09:58Z",
+      "amount": 40320,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-04-10T07:09:57.065Z",
+      "date": "2026-04-10T00:00:00.000Z",
+      "dueDate": "2026-04-25T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-8971",
+      "items": [
+        {
+          "description": "Ad  amount",
+          "quantity": 1,
+          "rate": 28320
+        },
+        {
+          "description": "Automation   Amount",
+          "quantity": 1,
+          "rate": 12000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-14T06:02:12Z",
+      "_id": "rjUlnNRPecJpvtSZ0KCgRo",
+      "_rev": "rjUlnNRPecJpvtSZ0KCgNY",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-14T06:02:12Z",
+      "amount": 42090,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-14T06:02:12.014Z",
+      "date": "2026-03-14T00:00:00.000Z",
+      "dueDate": "2026-03-29T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-2929",
+      "items": [
+        {
+          "description": "Automation ",
+          "quantity": 1,
+          "rate": 12000
+        },
+        {
+          "description": "Ad Amount",
+          "quantity": 1,
+          "rate": 30090
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-05T12:01:27Z",
+      "_id": "s4zQ4gLO9FDug2F45Pfwzm",
+      "_rev": "s4zQ4gLO9FDug2F45Pfwyf",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-05T12:01:27Z",
+      "amount": 14160,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-05T12:01:26.913Z",
+      "date": "2026-03-05T00:00:00.000Z",
+      "dueDate": "2026-03-20T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-1847",
+      "items": [
+        {
+          "description": "Automation service amount",
+          "quantity": 1,
+          "rate": 12000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 2160
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-03-06T06:17:23Z",
+      "_id": "s4zQ4gLO9FDug2F45RYbo7",
+      "_rev": "s4zQ4gLO9FDug2F45RYbn0",
+      "_type": "invoice",
+      "_updatedAt": "2026-03-06T06:17:23Z",
+      "amount": 20000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-06T06:17:23.092Z",
+      "date": "2026-03-06T00:00:00.000Z",
+      "dueDate": "2026-03-21T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-3367",
+      "items": [
+        {
+          "description": "payment of service (Andhra pradesh and Telangana)",
+          "quantity": 1,
+          "rate": 20000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-04-29T10:46:35Z",
+      "_id": "tAv7UvinOfv6iLraKC731w",
+      "_rev": "tAv7UvinOfv6iLraKC72z6",
+      "_type": "invoice",
+      "_updatedAt": "2026-04-29T10:46:35Z",
+      "amount": 110000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-04-29T10:46:35.147Z",
+      "date": "2026-04-29T00:00:00.000Z",
+      "dueDate": "2026-05-14T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-5681",
+      "items": [
+        {
+          "description": "Payment of Service Amount",
+          "quantity": 1,
+          "rate": 50000
+        },
+        {
+          "description": "Payment of ORM Service Amount",
+          "quantity": 1,
+          "rate": 60000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-01T05:05:53Z",
+      "_id": "tVLyzLxq54snL75s6DX9NO",
+      "_rev": "tVLyzLxq54snL75s6DX9Lm",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-01T05:05:53Z",
+      "amount": 50000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-01T05:05:53.833Z",
+      "date": "2026-05-31T00:00:00.000Z",
+      "dueDate": "2026-06-15T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-7429",
+      "items": [
+        {
+          "description": "payment of service",
+          "quantity": 1,
+          "rate": 50000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-01T05:08:24Z",
+      "_id": "tVLyzLxq54snL75s6DXCec",
+      "_rev": "tVLyzLxq54snL75s6DXCd0",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-01T05:08:24Z",
+      "amount": 50000,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-01T05:08:23.978Z",
+      "date": "2026-06-01T00:00:00.000Z",
+      "dueDate": "2026-06-16T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": false,
+      "invoiceNumber": "INV-2026-7296",
+      "items": [
+        {
+          "description": "Payment of service",
+          "quantity": 1,
+          "rate": 50000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-25T22:04:44Z",
+      "_id": "tb4RXAPEEaFwivZy0UsS1v",
+      "_rev": "tb4RXAPEEaFwivZy0UsRxt",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-25T22:04:44Z",
+      "amount": 5000,
+      "client": {
+        "_ref": "nsYcNZVqXqwlbflXQJmKok",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-25T22:04:44.529Z",
+      "date": "2026-05-25T00:00:00.000Z",
+      "dueDate": "2026-06-09T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-3043",
+      "items": [
+        {
+          "description": "Payment of Automation Subscription",
+          "quantity": 1,
+          "rate": 5000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-05-19T12:42:49Z",
+      "_id": "vVJHTv5dA4KgaIEYft4Dj4",
+      "_rev": "vVJHTv5dA4KgaIEYft4Dg3",
+      "_type": "invoice",
+      "_updatedAt": "2026-05-19T12:42:49Z",
+      "amount": 10000,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-05-19T12:42:49.634Z",
+      "date": "2026-05-19T00:00:00.000Z",
+      "dueDate": "2026-06-03T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-5696",
+      "items": [
+        {
+          "description": "Payment of UGC Videos (2)",
+          "quantity": 1,
+          "rate": 10000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-06-03T12:26:17Z",
+      "_id": "yw6rr7aUs8rVSlUhiyiNDO",
+      "_rev": "yw6rr7aUs8rVSlUhiyiNCh",
+      "_type": "invoice",
+      "_updatedAt": "2026-06-03T12:26:17Z",
+      "amount": 40400,
+      "client": {
+        "_ref": "QRr189PZE95PnTZGve8Vqq",
+        "_type": "reference"
+      },
+      "createdAt": "2026-06-03T12:26:17.825Z",
+      "date": "2026-06-03T00:00:00.000Z",
+      "dueDate": "2026-06-18T00:00:00.000Z",
+      "gstPercentage": 0,
+      "hasSeparateGst": true,
+      "invoiceNumber": "INV-2026-1231",
+      "items": [
+        {
+          "description": "Payment of Meta Ad",
+          "gstAmount": 5400,
+          "gstPercentage": 18,
+          "quantity": 1,
+          "rate": 30000
+        },
+        {
+          "description": "Payment of Automation",
+          "gstAmount": 0,
+          "gstPercentage": 0,
+          "quantity": 1,
+          "rate": 5000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    },
+    {
+      "_createdAt": "2026-02-28T10:48:20Z",
+      "_id": "z2WmY2SNII0pxLJYIsgGCz",
+      "_rev": "z2WmY2SNII0pxLJYIsgG90",
+      "_type": "invoice",
+      "_updatedAt": "2026-02-28T10:48:20Z",
+      "amount": 59000,
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-28T10:48:20.585Z",
+      "date": "2026-02-28T00:00:00.000Z",
+      "dueDate": "2026-03-15T00:00:00.000Z",
+      "invoiceNumber": "INV-2026-1642",
+      "items": [
+        {
+          "description": "Ad amount ",
+          "quantity": 1,
+          "rate": 50000
+        },
+        {
+          "description": "GST (18%)",
+          "quantity": 1,
+          "rate": 9000
+        }
+      ],
+      "notes": null,
+      "status": "draft"
+    }
+  ],
+  "transaction": [
+    {
+      "_createdAt": "2026-03-12T07:56:33Z",
+      "_id": "ATPlxTHamnhSxmcP0AZqZE",
+      "_rev": "ATPlxTHamnhSxmcP0AZqWE",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T07:56:33Z",
+      "amount": 63100,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-12T07:56:33.129Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-28T00:00:00.000Z",
+      "description": "",
+      "title": "Ad Report in maharashtra",
+      "type": "expense",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIRska",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-12T10:12:47Z",
+      "_id": "ATPlxTHamnhSxmcP0B5KPE",
+      "_rev": "ATPlxTHamnhSxmcP0B5KME",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T10:12:47Z",
+      "amount": 37000,
+      "category": "Salary",
+      "createdAt": "2026-03-12T10:12:47.852Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-03-05T00:00:00.000Z",
+      "description": "Salary (Feb-2026)",
+      "title": "Salary-Ashik Rahman (Feb-2026)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-12T10:14:13Z",
+      "_id": "ATPlxTHamnhSxmcP0B5eXE",
+      "_rev": "ATPlxTHamnhSxmcP0B5eUE",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T10:14:13Z",
+      "amount": 21000,
+      "category": "Salary",
+      "createdAt": "2026-03-12T10:14:13.255Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-03-05T00:00:00.000Z",
+      "description": "Salary  (Feb-2026)",
+      "title": "Salary - Subah Hameed Savad (Feb-2026)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-12T10:25:28Z",
+      "_id": "ATPlxTHamnhSxmcP0B9HUE",
+      "_rev": "ATPlxTHamnhSxmcP0B9HRE",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T10:25:28Z",
+      "amount": 17100,
+      "category": "Service Fee",
+      "createdAt": "2026-03-12T10:25:28.513Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-03-12T00:00:00.000Z",
+      "description": "",
+      "title": "meta ad (gst)",
+      "type": "income",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-14T08:53:13Z",
+      "_id": "ATPlxTHamnhSxmcP0M9tVE",
+      "_rev": "ATPlxTHamnhSxmcP0M9tSE",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-14T08:53:13Z",
+      "amount": 2000,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtldM1x",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-14T08:53:13.300Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-03-03T00:00:00.000Z",
+      "description": "",
+      "project": {
+        "_ref": "C8zJRBVpIT07qEPwcjHtjz",
+        "_type": "reference"
+      },
+      "title": "meta ad's",
+      "type": "expense",
+      "wallet": {
+        "_ref": "UfS5Vu3i9lHRfTgTyS4DGo",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-18T10:00:14Z",
+      "_id": "Adwf3lGn7itK2pD5ASDram",
+      "_rev": "rQ2Tti1cJ5GYiTqb3F8mT5",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T21:27:40Z",
+      "amount": 3000,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtldM1x",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-18T10:00:14.341Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-16T00:00:00.000Z",
+      "description": "Meta ads",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-25T21:27:39.926Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT(KILUKKA FARMS)",
+      "type": "credit",
+      "wallet": {
+        "_ref": "UfS5Vu3i9lHRfTgTyS4DGo",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-19T11:34:06Z",
+      "_id": "C8zJRBVpIT07qEPwcLRxql",
+      "_rev": "ATPlxTHamnhSxmcP0B9RnE",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T10:26:53Z",
+      "amount": 16100,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-19T11:34:06.767Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-19T00:00:00.000Z",
+      "description": "advertisement  ",
+      "isEdited": true,
+      "lastEditedAt": "2026-03-12T10:26:53.065Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT IQUE CAP(BLR)",
+      "type": "credit",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIygbw",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-18T09:35:34Z",
+      "_id": "L2P71pbjxXIS8Xx1ShjRgw",
+      "_rev": "SHuTKoNEhWs0sxTeVK0sD2",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-26T00:34:43Z",
+      "amount": 17700,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-18T09:35:34.048Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-02T00:00:00.000Z",
+      "description": "Meta ads",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-26T00:34:43.859Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT (IQUE CAP-MH)",
+      "type": "credit",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIRska",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-18T09:41:40Z",
+      "_id": "L2P71pbjxXIS8Xx1Shk5ne",
+      "_rev": "SHuTKoNEhWs0sxTeVIzeFk",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T21:46:49Z",
+      "amount": 4100,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-18T09:41:40.589Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-18T00:00:00.000Z",
+      "description": "Meta Ads",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-25T21:46:49.193Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT (IQUE CAP-MH)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIRska",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-18T09:44:39Z",
+      "_id": "L2P71pbjxXIS8Xx1ShkKEc",
+      "_rev": "SHuTKoNEhWs0sxTeVJ0DWE",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T21:49:00Z",
+      "amount": 1000,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-18T09:44:39.274Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-13T00:00:00.000Z",
+      "description": "Meta Ads",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-25T21:48:59.784Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT (IQUE CAP-MH)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIRska",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-18T09:46:00Z",
+      "_id": "L2P71pbjxXIS8Xx1ShkPCk",
+      "_rev": "UfS5Vu3i9lHRfTgTyS7nZH",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T21:48:30Z",
+      "amount": 1000,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-18T09:46:00.860Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-14T00:00:00.000Z",
+      "description": "Meta Ads",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-25T21:48:30.569Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT (IQUE CAP-MH)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIRska",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-18T10:00:54Z",
+      "_id": "L2P71pbjxXIS8Xx1ShlgeA",
+      "_rev": "UfS5Vu3i9lHRfTgTyS4DN9",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T21:20:05Z",
+      "amount": 1000,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtldM1x",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-18T10:00:54.904Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-18T00:00:00.000Z",
+      "description": "Meta ads",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-25T21:20:05.365Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT(KILUKKA FARMS)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "UfS5Vu3i9lHRfTgTyS4DGo",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-25T22:06:44Z",
+      "_id": "SHuTKoNEhWs0sxTeVJ7euI",
+      "_rev": "SHuTKoNEhWs0sxTeVK12lQ",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-26T00:35:19Z",
+      "amount": 25000,
+      "category": "Service Fee",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-25T22:06:44.159Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-02T00:00:00.000Z",
+      "description": "Service-advance (fee)",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-26T00:35:19.783Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "IQUE CAP (Bangalore)",
+      "type": "income",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-18T09:43:24Z",
+      "_id": "SopqYN4cCAMW9ugvpeR8hh",
+      "_rev": "SHuTKoNEhWs0sxTeVIpbMW",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T21:17:23Z",
+      "amount": 1000,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-18T09:43:24.326Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-11T00:00:00.000Z",
+      "description": "Meta Ads",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-25T21:17:22.787Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "AD AMOUNT (IQUE CAP-MH )",
+      "type": "transfer",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-25T20:16:53Z",
+      "_id": "UfS5Vu3i9lHRfTgTyRuVjx",
+      "_rev": "SHuTKoNEhWs0sxTeVK0ogu",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-26T00:34:27Z",
+      "amount": 85000,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-25T20:16:53.340Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-20T00:00:00.000Z",
+      "description": "AD AMOUNT",
+      "isEdited": true,
+      "lastEditedAt": "2026-02-26T00:34:27.026Z",
+      "lastEditedBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "title": "IQUE CAP (MH)",
+      "type": "credit",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIRska",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-25T22:03:54Z",
+      "_id": "UfS5Vu3i9lHRfTgTyS9x3W",
+      "_rev": "UfS5Vu3i9lHRfTgTyS9x1P",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T22:03:54Z",
+      "amount": 15000,
+      "category": "Service Fee",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtldM1x",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-25T22:03:53.221Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-02T00:00:00.000Z",
+      "description": "Service-advance (Fee) ",
+      "title": "Kilukka",
+      "type": "income",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-12T10:14:59Z",
+      "_id": "kG97Cp9t8SxGl29yUIJ2se",
+      "_rev": "kG97Cp9t8SxGl29yUIJ2rd",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T10:14:59Z",
+      "amount": 21000,
+      "category": "Salary",
+      "createdAt": "2026-03-12T10:14:59.745Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-03-05T00:00:00.000Z",
+      "description": "salary (Feb 2026)",
+      "title": "Salary -Sahad AT (Feb-2026)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-25T22:05:28Z",
+      "_id": "rQ2Tti1cJ5GYiTqb3FC6EU",
+      "_rev": "rQ2Tti1cJ5GYiTqb3FC6Df",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T22:05:28Z",
+      "amount": 25000,
+      "category": "Service Fee",
+      "client": {
+        "_ref": "rQ2Tti1cJ5GYiTqb3F7ovL",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-25T22:05:28.317Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-02T00:00:00.000Z",
+      "description": "Service-advance (fee)",
+      "title": "IQUE CAP (Maharashtra)",
+      "type": "income",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-25T22:14:58Z",
+      "_id": "rQ2Tti1cJ5GYiTqb3FCVif",
+      "_rev": "rQ2Tti1cJ5GYiTqb3FCVhq",
+      "_type": "transaction",
+      "_updatedAt": "2026-02-25T22:14:58Z",
+      "amount": 30000,
+      "category": "Service Fee",
+      "client": {
+        "_ref": "SHuTKoNEhWs0sxTeVJ9O82",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-25T22:14:58.259Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-02T00:00:00.000Z",
+      "description": "Service-advance (fee)",
+      "title": "IQUE-CAP-venter (ORM)",
+      "type": "income",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-12T10:24:32Z",
+      "_id": "rddFxC9weyoCmioSecJTjI",
+      "_rev": "rddFxC9weyoCmioSecJTf9",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T10:24:32Z",
+      "amount": 95000,
+      "category": "Ad Spend",
+      "createdAt": "2026-03-12T10:24:32.893Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-03-12T00:00:00.000Z",
+      "description": "meta ad's ",
+      "title": "IQUE CAP (MH)",
+      "type": "credit",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIRska",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-12T07:58:56Z",
+      "_id": "rjUlnNRPecJpvtSZ044QHM",
+      "_rev": "rjUlnNRPecJpvtSZ044QD6",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T07:58:56Z",
+      "amount": 16100,
+      "category": "Ad Spend",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-03-12T07:58:55.936Z",
+      "createdBy": {
+        "_ref": "pGP0B6LpsPdy6EBGc7WUJa",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-02-28T00:00:00.000Z",
+      "description": "",
+      "project": {
+        "_ref": "C8zJRBVpIT07qEPwcjHtjz",
+        "_type": "reference"
+      },
+      "title": "ad report in automation(BLR)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "SHuTKoNEhWs0sxTeVIygbw",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-03-12T10:11:28Z",
+      "_id": "rjUlnNRPecJpvtSZ04is4a",
+      "_rev": "rjUlnNRPecJpvtSZ04is0K",
+      "_type": "transaction",
+      "_updatedAt": "2026-03-12T10:11:28Z",
+      "amount": 14670,
+      "category": "new:Rent",
+      "createdAt": "2026-03-12T10:11:28.443Z",
+      "createdBy": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      },
+      "customFields": [],
+      "date": "2026-03-05T00:00:00.000Z",
+      "description": "",
+      "title": "Room rent (march-2026)",
+      "type": "expense",
+      "wallet": {
+        "_ref": "U20l9Q2o7fBOHVEhtlXRrM",
+        "_type": "reference"
+      }
+    }
+  ],
+  "wallet": [
+    {
+      "_createdAt": "2026-04-10T06:12:58Z",
+      "_id": "02D28AWhT0BP7IbihkiUHp",
+      "_rev": "02D28AWhT0BP7IbihkiUGZ",
+      "_type": "wallet",
+      "_updatedAt": "2026-04-10T06:12:58Z",
+      "createdAt": "2026-04-10T06:12:58.130Z",
+      "currency": "INR",
+      "name": "Kerala ique cap Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-06-09T12:36:48Z",
+      "_id": "3Nr7OsFs1Pp1AA8eE18VrM",
+      "_rev": "3Nr7OsFs1Pp1AA8eE18Vmd",
+      "_type": "wallet",
+      "_updatedAt": "2026-06-09T12:36:48Z",
+      "createdAt": "2026-06-09T12:36:48.612Z",
+      "currency": "INR",
+      "name": "Ique Cap Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-03-06T12:41:05Z",
+      "_id": "5yikWs4MCbSvuuwBk0eBLC",
+      "_rev": "5yikWs4MCbSvuuwBk0eBGK",
+      "_type": "wallet",
+      "_updatedAt": "2026-03-06T12:41:05Z",
+      "createdAt": "2026-03-06T12:41:05.830Z",
+      "currency": "INR",
+      "name": "IQUE-CAP (Telangana & Andhra pradesh ) Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-06-29T09:59:16Z",
+      "_id": "A7ntVDbOEfgal6Eah318Ox",
+      "_rev": "A7ntVDbOEfgal6Eah318Nc",
+      "_type": "wallet",
+      "_updatedAt": "2026-06-29T09:59:16Z",
+      "createdAt": "2026-06-29T09:59:16.103Z",
+      "currency": "INR",
+      "name": "IQUE CAP (TN) Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-06-11T07:16:24Z",
+      "_id": "MWA65MkiBBPJ4BE9tHala1",
+      "_rev": "MWA65MkiBBPJ4BE9tHalWV",
+      "_type": "wallet",
+      "_updatedAt": "2026-06-11T07:16:24Z",
+      "createdAt": "2026-06-11T07:16:24.622Z",
+      "currency": "INR",
+      "name": "startup park Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-06-03T12:24:36Z",
+      "_id": "QRr189PZE95PnTZGve8VNu",
+      "_rev": "QRr189PZE95PnTZGve8VLg",
+      "_type": "wallet",
+      "_updatedAt": "2026-06-03T12:24:36Z",
+      "createdAt": "2026-06-03T12:24:36.203Z",
+      "currency": "INR",
+      "name": "Ique Cap Delhi Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-02-25T20:16:52Z",
+      "_id": "SHuTKoNEhWs0sxTeVIRska",
+      "_rev": "rQ2Tti1cJ5GYiTqb3F9e11",
+      "_type": "wallet",
+      "_updatedAt": "2026-02-25T21:44:04Z",
+      "createdAt": "2026-02-25T20:16:52.196Z",
+      "currency": "INR",
+      "name": "IQUE-CAP (Maharashtra)",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-02-25T21:43:48Z",
+      "_id": "SHuTKoNEhWs0sxTeVIygbw",
+      "_rev": "rQ2Tti1cJ5GYiTqb3F9eDM",
+      "_type": "wallet",
+      "_updatedAt": "2026-02-25T21:44:10Z",
+      "createdAt": "2026-02-25T21:43:48.472Z",
+      "currency": "INR",
+      "name": "IQUE-CAP (Bangalore)",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-02-25T22:30:49Z",
+      "_id": "SHuTKoNEhWs0sxTeVJE4y2",
+      "_rev": "SHuTKoNEhWs0sxTeVJE4sq",
+      "_type": "wallet",
+      "_updatedAt": "2026-02-25T22:30:49Z",
+      "createdAt": "2026-02-25T22:30:49.568Z",
+      "currency": "INR",
+      "name": "IQUE-CAP-venter",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-02-19T19:39:04Z",
+      "_id": "U20l9Q2o7fBOHVEhtlXRrM",
+      "_rev": "SHuTKoNEhWs0sxTeVK79j2",
+      "_system": {
+        "base": {
+          "id": "U20l9Q2o7fBOHVEhtlXRrM",
+          "rev": "UfS5Vu3i9lHRfTgTyS55SK"
+        }
+      },
+      "_type": "wallet",
+      "_updatedAt": "2026-02-26T00:50:38Z",
+      "createdAt": "2026-02-19T19:39:04.736Z",
+      "currency": "INR",
+      "name": "Company Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-02-25T21:20:04Z",
+      "_id": "UfS5Vu3i9lHRfTgTyS4DGo",
+      "_rev": "rQ2Tti1cJ5GYiTqb3FMHru",
+      "_system": {
+        "base": {
+          "id": "UfS5Vu3i9lHRfTgTyS4DGo",
+          "rev": "UfS5Vu3i9lHRfTgTyS4DEh"
+        }
+      },
+      "_type": "wallet",
+      "_updatedAt": "2026-02-26T00:50:30Z",
+      "createdAt": "2026-02-25T21:20:04.518Z",
+      "currency": "INR",
+      "name": "Kilukka Farm",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-06-09T12:36:46Z",
+      "_id": "gpZ6AgGvNoSlls6MlFjCNY",
+      "_rev": "gpZ6AgGvNoSlls6MlFjCJ0",
+      "_type": "wallet",
+      "_updatedAt": "2026-06-09T12:36:46Z",
+      "createdAt": "2026-06-09T12:36:46.320Z",
+      "currency": "INR",
+      "name": "Ique Cap Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-04-10T06:13:00Z",
+      "_id": "nsYcNZVqXqwlbflXQJmLVu",
+      "_rev": "nsYcNZVqXqwlbflXQJmLSJ",
+      "_type": "wallet",
+      "_updatedAt": "2026-04-10T06:13:00Z",
+      "createdAt": "2026-04-10T06:13:00.394Z",
+      "currency": "INR",
+      "name": "Kerala ique cap Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-05-25T22:06:31Z",
+      "_id": "tb4RXAPEEaFwivZy0UsojB",
+      "_rev": "tb4RXAPEEaFwivZy0Usof9",
+      "_type": "wallet",
+      "_updatedAt": "2026-05-25T22:06:31Z",
+      "createdAt": "2026-05-25T22:06:31.715Z",
+      "currency": "INR",
+      "name": "Abreco Wallet",
+      "type": "bank"
+    },
+    {
+      "_createdAt": "2026-06-03T12:24:38Z",
+      "_id": "yw6rr7aUs8rVSlUhiyiHe0",
+      "_rev": "yw6rr7aUs8rVSlUhiyiHdJ",
+      "_type": "wallet",
+      "_updatedAt": "2026-06-03T12:24:38Z",
+      "createdAt": "2026-06-03T12:24:38.226Z",
+      "currency": "INR",
+      "name": "Ique Cap Delhi Wallet",
+      "type": "bank"
+    }
+  ],
+  "project": [
+    {
+      "_createdAt": "2026-02-21T10:13:29Z",
+      "_id": "C8zJRBVpIT07qEPwcj07wp",
+      "_rev": "U20l9Q2o7fBOHVEhu7qsWh",
+      "_type": "project",
+      "_updatedAt": "2026-02-21T11:26:53Z",
+      "budget": 17700,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-21T10:13:29.689Z",
+      "name": "meta ad",
+      "status": "active"
+    },
+    {
+      "_createdAt": "2026-02-21T11:12:21Z",
+      "_id": "C8zJRBVpIT07qEPwcjHtjz",
+      "_rev": "C8zJRBVpIT07qEPwcjHtfP",
+      "_type": "project",
+      "_updatedAt": "2026-02-21T11:12:21Z",
+      "budget": 0,
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtldM1x",
+        "_type": "reference"
+      },
+      "createdAt": "2026-02-21T11:12:21.161Z",
+      "name": "meta ads",
+      "status": "active"
+    }
+  ],
+  "user": [
+    {
+      "_createdAt": "2026-03-25T10:10:17Z",
+      "_id": "3jHMl6HaGDkL65uHWciabM",
+      "_rev": "3jHMl6HaGDkL65uHWciaY7",
+      "_type": "user",
+      "_updatedAt": "2026-03-25T10:10:17Z",
+      "createdAt": "2026-03-25T10:10:17.300Z",
+      "email": "Sahad@gamil.com",
+      "name": "SahadAT",
+      "password": "$2b$10$d3pOape3okw6monZIGigOOXiXqEjTlwSl6Zp3O7jwtg4LIVdT3mQ2",
+      "role": "viewer"
+    },
+    {
+      "_createdAt": "2026-02-10T10:45:00Z",
+      "_id": "fc16JGrQoQSNXKvNTThZfZ",
+      "_rev": "TSKknOn8SLikI12EuMTqSs",
+      "_system": {
+        "base": {
+          "id": "fc16JGrQoQSNXKvNTThZfZ",
+          "rev": "rjUlnNRPecJpvtSZ04I1rA"
+        }
+      },
+      "_type": "user",
+      "_updatedAt": "2026-05-20T09:27:37Z",
+      "createdAt": "2026-02-10T10:45:00.333Z",
+      "email": "sahad@admanics.com",
+      "name": "Sahad A T",
+      "password": "$2b$10$MbmiqoUbBf7i04Ax11hh6esIedsVwVmpnn4GdOe/NyV1x3uPSUbL6",
+      "permissions": {
+        "clients": "admin",
+        "finance": "admin",
+        "invoices": "admin",
+        "projects": "admin",
+        "transactions": "admin",
+        "worklogs": "admin"
+      },
+      "role": "admin"
+    },
+    {
+      "_createdAt": "2026-02-10T10:43:29Z",
+      "_id": "pGP0B6LpsPdy6EBGc7Q4nW",
+      "_rev": "1aZLB3tJjjN4cV5m0p4FeO",
+      "_system": {
+        "base": {
+          "id": "pGP0B6LpsPdy6EBGc7Q4nW",
+          "rev": "Anhm7nGfFRDaiWtPUUg2Wk"
+        }
+      },
+      "_type": "user",
+      "_updatedAt": "2026-04-26T18:09:22Z",
+      "createdAt": "2026-02-10T10:43:29.728Z",
+      "email": "subah@admanics.com",
+      "name": "subah",
+      "password": "$2b$10$v3AGW6veu8dmn69kMTxSQea7QLc27eqLsbM7F/TjzJqaWgdqDEQLi",
+      "permissions": {
+        "clients": "viewer",
+        "invoices": "viewer"
+      },
+      "role": "viewer"
+    },
+    {
+      "_createdAt": "2026-02-10T11:09:24Z",
+      "_id": "pGP0B6LpsPdy6EBGc7WUJa",
+      "_rev": "tAv7UvinOfv6iLraJyfKN2",
+      "_system": {
+        "base": {
+          "id": "pGP0B6LpsPdy6EBGc7WUJa",
+          "rev": "pGP0B6LpsPdy6EBGc7WUFu"
+        }
+      },
+      "_type": "user",
+      "_updatedAt": "2026-04-26T18:09:14Z",
+      "createdAt": "2026-02-10T11:09:24.214Z",
+      "email": "ashikrahman@admanics.com",
+      "name": "Ashik Rahman N",
+      "password": "$2b$10$jsBlgCWvMuzEam.1FAQHMei1bnHB2N1lvVAQgWe7kNkFigTFuLJ9K",
+      "permissions": {
+        "clients": "viewer",
+        "finance": "admin",
+        "invoices": "viewer",
+        "projects": "admin",
+        "transactions": "admin",
+        "worklogs": "admin"
+      },
+      "role": "viewer"
+    }
+  ],
+  "dailyWorkLog": [
+    {
+      "_createdAt": "2026-02-21T11:25:30Z",
+      "_id": "K3P8NuXVcYt7tuuP4JxInS",
+      "_rev": "C8zJRBVpIT07qEPwcjLHiB",
+      "_type": "dailyWorkLog",
+      "_updatedAt": "2026-02-21T11:27:30Z",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtlck5P",
+        "_type": "reference"
+      },
+      "date": "2026-02-21",
+      "employeeName": "Sahad A T",
+      "notes": "",
+      "project": "meta ad",
+      "status": "Completed",
+      "synced": true,
+      "taskSummary": "new video runing rs 3000 spented",
+      "user": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      }
+    },
+    {
+      "_createdAt": "2026-02-21T11:12:47Z",
+      "_id": "U20l9Q2o7fBOHVEhu7nTE8",
+      "_rev": "C8zJRBVpIT07qEPwcjKrPT",
+      "_type": "dailyWorkLog",
+      "_updatedAt": "2026-02-21T11:25:56Z",
+      "client": {
+        "_ref": "U20l9Q2o7fBOHVEhtldM1x",
+        "_type": "reference"
+      },
+      "date": "2026-02-21",
+      "employeeName": "Sahad A T",
+      "notes": "",
+      "project": "meta ads",
+      "status": "In Progress",
+      "synced": true,
+      "taskSummary": "new video added",
+      "user": {
+        "_ref": "fc16JGrQoQSNXKvNTThZfZ",
+        "_type": "reference"
+      }
+    }
+  ],
+  "metaAdsReport": [
+    {
+      "_createdAt": "2026-05-06T05:27:40Z",
+      "_id": "1bL8CJPu6RbgngSTvs9Dqz",
+      "_rev": "sgMvYPJwr02KPamFI2CYOi",
+      "_type": "metaAdsReport",
+      "_updatedAt": "2026-05-06T05:42:30Z",
+      "adAccountId": "1575239323688318",
+      "adAccountName": "IQUE CAP(KL)",
+      "averageCpl": 185,
+      "companyName": "ADMANICS SOLUTION",
+      "createdAt": "2026-05-06T05:27:39.983Z",
+      "fundingReceipts": [
+        {
+          "_key": "q9egu7",
+          "amountFunded": 28520,
+          "note": "Ad amount & Automation",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-10"
+        },
+        {
+          "_key": "dr49lg",
+          "amountFunded": 29406,
+          "note": "Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-20"
+        },
+        {
+          "_key": "zst7bj",
+          "amountFunded": 35400,
+          "note": "Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-27"
+        },
+        {
+          "_key": "kz11dc",
+          "amountFunded": 50000,
+          "note": "Service Charge",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-04"
+        }
+      ],
+      "periodEnd": "2026-04-30",
+      "periodStart": "2026-04-01",
+      "preparedByName": "Danish k",
+      "preparedByTitle": "Digital Marketing Analyst",
+      "receiptsNote": "Payment receipts are attached below",
+      "totalCampaignSpend": 65353.57,
+      "totalCampaigns": 4,
+      "totalLeadsGenerated": 128
+    },
+    {
+      "_createdAt": "2026-07-02T07:28:03Z",
+      "_id": "37hNSegHf4NtjSKr1jMB5M",
+      "_rev": "37hNSegHf4NtjSKr1jMB42",
+      "_type": "metaAdsReport",
+      "_updatedAt": "2026-07-02T07:28:03Z",
+      "adAccountId": "1575239323688318",
+      "adAccountName": "IQUE CAP(KL)",
+      "averageCpl": 245.7,
+      "companyName": "ADMANICS SOLUTION",
+      "createdAt": "2026-07-02T07:28:03.561Z",
+      "fundingReceipts": [
+        {
+          "_key": "edr3w",
+          "amountFunded": 50000,
+          "note": "Service Amount",
+          "paymentMethod": "Manual payment",
+          "receiptDate": "2026-06-01"
+        },
+        {
+          "_key": "8m73za",
+          "amountFunded": 33000,
+          "note": "AD amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-06-08"
+        },
+        {
+          "_key": "5kcrid",
+          "amountFunded": 70800,
+          "note": "AD Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-06-18"
+        }
+      ],
+      "periodEnd": "2026-06-30",
+      "periodStart": "2026-06-01",
+      "preparedByName": "Subah Hameed Savad ",
+      "preparedByTitle": "Digital Marketing Analyst",
+      "receiptsNote": "Payment receipts are attached below",
+      "totalCampaignSpend": 56088,
+      "totalCampaigns": 3,
+      "totalLeadsGenerated": 140
+    },
+    {
+      "_createdAt": "2026-07-01T05:54:46Z",
+      "_id": "OYzI0sYgng1AvpYcgHnwCV",
+      "_rev": "37hNSegHf4NtjSKr1jFy5Q",
+      "_type": "metaAdsReport",
+      "_updatedAt": "2026-07-02T06:18:10Z",
+      "adAccountId": "928974316312418",
+      "adAccountName": "IQUE CAP(BLR)",
+      "averageCpl": 157.48,
+      "companyName": "ADMANICS SOLUTION",
+      "createdAt": "2026-07-01T05:54:46.531Z",
+      "fundingReceipts": [
+        {
+          "_key": "6rjrvft",
+          "amountFunded": 53100,
+          "note": "Meta ad amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-06-08"
+        },
+        {
+          "_key": "8dcmfa",
+          "amountFunded": 59000,
+          "note": "Meta ad amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-06-18"
+        },
+        {
+          "_key": "q6x19m",
+          "amountFunded": 7000,
+          "note": "Automation",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-06-27"
+        },
+        {
+          "_key": "as0ix6",
+          "amountFunded": 142040,
+          "note": "Service charge & AD amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-06-30"
+        },
+        {
+          "_key": "r7pian",
+          "amountFunded": 50000,
+          "note": "Service Charge",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-31"
+        },
+        {
+          "_key": "vacq27",
+          "amountFunded": 70800,
+          "note": "AD Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-06-11"
+        }
+      ],
+      "periodEnd": "2026-07-01",
+      "periodStart": "2026-06-01",
+      "preparedByName": "Subah Hameed Savad ",
+      "preparedByTitle": "Digital Marketing Analyst",
+      "receiptsNote": "Payment receipts are attached below",
+      "totalCampaignSpend": 167394.8,
+      "totalCampaigns": 2,
+      "totalLeadsGenerated": 510
+    },
+    {
+      "_createdAt": "2026-06-01T06:20:16Z",
+      "_id": "SFPOwKvlrglQHnTBre2YvS",
+      "_rev": "SFPOwKvlrglQHnTBre2Yrh",
+      "_type": "metaAdsReport",
+      "_updatedAt": "2026-06-01T06:20:16Z",
+      "adAccountId": " 928974316312418",
+      "adAccountName": "IQUE CAP(BLR)",
+      "averageCpl": 167.92,
+      "companyName": "ADMANICS SOLUTION",
+      "createdAt": "2026-06-01T06:20:16.470Z",
+      "fundingReceipts": [
+        {
+          "_key": "s4kz49",
+          "amountFunded": 47200,
+          "note": "Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-04"
+        },
+        {
+          "_key": "ol6fbs",
+          "amountFunded": 47200,
+          "note": "Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-13"
+        },
+        {
+          "_key": "541akf",
+          "amountFunded": 10000,
+          "note": "Payment of UGC",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-19"
+        },
+        {
+          "_key": "rh831",
+          "amountFunded": 47200,
+          "note": "Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-20"
+        },
+        {
+          "_key": "wmvxh",
+          "amountFunded": 58100,
+          "note": "Ad Amount & Automation",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-29"
+        }
+      ],
+      "periodEnd": "2026-05-31",
+      "periodStart": "2026-05-01",
+      "preparedByName": "Subah Hameed Savad ",
+      "preparedByTitle": "Digital Marketing Analyst",
+      "receiptsNote": "Payment receipts are attached below",
+      "totalCampaignSpend": 140388.92,
+      "totalCampaigns": 2,
+      "totalLeadsGenerated": 586
+    },
+    {
+      "_createdAt": "2026-05-04T11:13:30Z",
+      "_id": "V6WdGwEx3QkAsVnORkpGK8",
+      "_rev": "sgMvYPJwr02KPamFI38GJ9",
+      "_type": "metaAdsReport",
+      "_updatedAt": "2026-05-06T08:56:46Z",
+      "adAccountId": " 928974316312418",
+      "adAccountName": "IQUE CAP(BLR)",
+      "averageCpl": 110.99,
+      "companyName": "ADMANICS SOLUTION",
+      "createdAt": "2026-05-04T11:13:30.124Z",
+      "fundingReceipts": [
+        {
+          "_key": "ino1b",
+          "amountFunded": 29500,
+          "note": "AD Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-01"
+        },
+        {
+          "_key": "h5vmm",
+          "amountFunded": 28320,
+          "note": "AD amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-10"
+        },
+        {
+          "_key": "q28q1",
+          "amountFunded": 12000,
+          "note": "Automation",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-10"
+        },
+        {
+          "_key": "emttzb",
+          "amountFunded": 49560,
+          "note": "AD Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-16"
+        },
+        {
+          "_key": "7tdk7j",
+          "amountFunded": 110000,
+          "note": "Service Amount & ORM",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-29"
+        },
+        {
+          "_key": "g1tl88",
+          "amountFunded": 41300,
+          "note": "AD Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-24"
+        },
+        {
+          "_key": "onr7tw",
+          "amountFunded": 110000,
+          "note": "Service Amount & ORM",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-04-01"
+        }
+      ],
+      "periodEnd": "2026-04-30",
+      "periodStart": "2026-04-01",
+      "preparedByName": "Danish k",
+      "preparedByTitle": "Digital Marketing Analyst",
+      "receiptsNote": "Payment receipts are attached below",
+      "totalCampaignSpend": 86564.56,
+      "totalCampaigns": 4,
+      "totalLeadsGenerated": 272
+    },
+    {
+      "_createdAt": "2026-04-02T12:39:24Z",
+      "_id": "qclVe2mGi0ApjH4TB4jLzE",
+      "_rev": "RnjBXvm4hDgkozSQAiCC6m",
+      "_type": "metaAdsReport",
+      "_updatedAt": "2026-04-07T13:25:30Z",
+      "adAccountId": "928974316312418",
+      "adAccountName": "IQUE CAP BLR",
+      "averageCpl": 181.72,
+      "companyName": "Admanics",
+      "createdAt": "2026-04-02T12:39:19.901Z",
+      "fundingReceipts": [
+        {
+          "_key": "99h8gm",
+          "amountFunded": 55000,
+          "note": "Marketing Service amount & ORM service amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-02"
+        },
+        {
+          "_key": "vwgr0j",
+          "amountFunded": 14160,
+          "note": "AD Amount charge",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-05"
+        },
+        {
+          "_key": "je99ol",
+          "amountFunded": 6500,
+          "note": "Motion Graphics",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-05"
+        },
+        {
+          "_key": "qzi9jl",
+          "amountFunded": 20000,
+          "note": "Payment Of Service (Andhra pradesh & telangana)",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-06"
+        },
+        {
+          "_key": "zxpmit",
+          "amountFunded": 59000,
+          "note": "Automation Service amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-06"
+        },
+        {
+          "_key": "f1fnhq",
+          "amountFunded": 29500,
+          "note": " AD amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-06"
+        },
+        {
+          "_key": "u039go",
+          "amountFunded": 42090,
+          "note": "Automation & Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-14"
+        },
+        {
+          "_key": "30r5m",
+          "amountFunded": 15000,
+          "note": "Motion Graphics",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-17"
+        },
+        {
+          "_key": "mnsm0ou",
+          "amountFunded": 24780,
+          "note": "Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-03-25"
+        }
+      ],
+      "periodEnd": "2026-03-25",
+      "periodStart": "2026-03-01",
+      "preparedByName": "Danish Admanics",
+      "preparedByTitle": "Marketer",
+      "receiptsNote": "Payment receipts are attached below",
+      "totalCampaignSpend": 92234.7,
+      "totalCampaigns": 7,
+      "totalLeadsGenerated": 243
+    },
+    {
+      "_createdAt": "2026-06-01T07:35:34Z",
+      "_id": "tVLyzLxq54snL75s6Dk7pC",
+      "_rev": "SFPOwKvlrglQHnTBrfisQw",
+      "_type": "metaAdsReport",
+      "_updatedAt": "2026-06-01T12:35:46Z",
+      "adAccountId": "1575239323688318",
+      "adAccountName": "IQUE CAP(KL)",
+      "averageCpl": 235.89,
+      "companyName": "ADMANICS SOLUTION",
+      "createdAt": "2026-06-01T07:35:34.591Z",
+      "fundingReceipts": [
+        {
+          "_key": "l4t9t",
+          "amountFunded": 41300,
+          "note": "AD Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-09"
+        },
+        {
+          "_key": "52he5r",
+          "amountFunded": 5000,
+          "note": "Payment of UGC",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-19"
+        },
+        {
+          "_key": "k0y4pp",
+          "amountFunded": 35400,
+          "note": "Ad Amount",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-23"
+        },
+        {
+          "_key": "6op9tk",
+          "amountFunded": 5000,
+          "note": "Automation",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-25"
+        },
+        {
+          "_key": "0vpmp8",
+          "amountFunded": 1500,
+          "note": "Creator Charge",
+          "paymentMethod": "Manual Payment",
+          "receiptDate": "2026-05-27"
+        }
+      ],
+      "periodEnd": "2026-05-31",
+      "periodStart": "2026-05-01",
+      "preparedByName": "Subah Hameed Savad ",
+      "preparedByTitle": "Digital Marketing Analyst",
+      "receiptsNote": "Payment receipts are attached below",
+      "totalCampaignSpend": 53669,
+      "totalCampaigns": 3,
+      "totalLeadsGenerated": 120
+    }
+  ]
+}

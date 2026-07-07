@@ -39,7 +39,7 @@ export function ReportsDashboard({ transactions }: { transactions: Transaction[]
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
     const link = document.createElement('a')
     link.href = URL.createObjectURL(blob)
-    link.download = `admanics-finance-report-${new Date().toISOString().split('T')[0]}.csv`
+    link.download = `admaniacs-finance-report-${new Date().toISOString().split('T')[0]}.csv`
     link.click()
   }
 
@@ -48,7 +48,7 @@ export function ReportsDashboard({ transactions }: { transactions: Transaction[]
       <div className="flex justify-end">
         <button
           onClick={downloadCSV}
-          className="bg-neutral-800 text-white font-medium py-2 px-4 rounded-lg hover:bg-neutral-700 transition-colors flex items-center gap-2"
+          className="bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg hover:bg-gray-200 border border-gray-200 transition-colors flex items-center gap-2"
         >
           <Download className="w-4 h-4" />
           Export CSV
@@ -56,29 +56,29 @@ export function ReportsDashboard({ transactions }: { transactions: Transaction[]
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-white mb-6">Income by Category</h3>
+        <div className="bg-white border border-gray-200 shadow-sm rounded-xl p-6">
+          <h3 className="text-lg font-bold text-gray-900 mb-6">Income by Category</h3>
           <div className="space-y-4">
             {Object.entries(incomeByCategory).sort((a,b) => b[1] - a[1]).map(([category, amount]) => (
               <div key={category} className="flex items-center justify-between">
-                <span className="text-neutral-400">{category}</span>
-                <span className="font-semibold text-white">{formatCurrency(amount, currency, exchangeRate)}</span>
+                <span className="text-gray-500">{category}</span>
+                <span className="font-semibold text-gray-900">{formatCurrency(amount, currency, exchangeRate)}</span>
               </div>
             ))}
-            {Object.keys(incomeByCategory).length === 0 && <p className="text-neutral-500 text-sm">No income recorded.</p>}
+            {Object.keys(incomeByCategory).length === 0 && <p className="text-gray-500 text-sm">No income recorded.</p>}
           </div>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-white mb-6">Expenses by Category</h3>
+        <div className="bg-white border border-gray-200 shadow-sm rounded-xl p-6">
+          <h3 className="text-lg font-bold text-gray-900 mb-6">Expenses by Category</h3>
           <div className="space-y-4">
             {Object.entries(expenseByCategory).sort((a,b) => b[1] - a[1]).map(([category, amount]) => (
               <div key={category} className="flex items-center justify-between">
-                <span className="text-neutral-400">{category}</span>
-                <span className="font-semibold text-white">{formatCurrency(amount, currency, exchangeRate)}</span>
+                <span className="text-gray-500">{category}</span>
+                <span className="font-semibold text-gray-900">{formatCurrency(amount, currency, exchangeRate)}</span>
               </div>
             ))}
-            {Object.keys(expenseByCategory).length === 0 && <p className="text-neutral-500 text-sm">No expenses recorded.</p>}
+            {Object.keys(expenseByCategory).length === 0 && <p className="text-gray-500 text-sm">No expenses recorded.</p>}
           </div>
         </div>
       </div>

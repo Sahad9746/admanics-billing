@@ -60,27 +60,27 @@ export function WorkLogForm({ initialData, clientsWithProjects, onSuccess, user,
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">Date</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
           <input
             type="date"
             name="date"
             required
             defaultValue={defaultDate}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:border-blue-500 transition-colors"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">Client</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Client</label>
           <select
             name="clientId"
             required
             value={selectedClientId}
             onChange={(e) => setSelectedClientId(e.target.value)}
             disabled={!!preselectedClientId && !initialData} // Lock it if creating new under a specific client view
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <option value="" disabled>Select a client...</option>
             {clientsWithProjects.map(client => (
@@ -92,13 +92,13 @@ export function WorkLogForm({ initialData, clientsWithProjects, onSuccess, user,
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">Project</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Project</label>
           <select
             name="project"
             required
             defaultValue={initialData?.project || ''}
             disabled={!selectedClientId || availableProjects.length === 0}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50"
           >
             <option value="" disabled>Select a project...</option>
             {availableProjects.map((project: any) => (
@@ -113,17 +113,17 @@ export function WorkLogForm({ initialData, clientsWithProjects, onSuccess, user,
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">Employee Name</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Employee Name</label>
           <input
             type="text"
             name="employeeName"
             required
             defaultValue={initialData?.employeeName || user.name}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white placeholder-neutral-600 focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">Hours Worked</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Hours Worked</label>
           <input
             type="number"
             name="hoursWorked"
@@ -132,31 +132,31 @@ export function WorkLogForm({ initialData, clientsWithProjects, onSuccess, user,
             step="0.5"
             placeholder="8"
             defaultValue={initialData?.hoursWorked || ''}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white placeholder-neutral-600 focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-neutral-300 mb-2">Task Summary</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Task Summary</label>
         <textarea
           name="taskSummary"
           required
           rows={3}
           placeholder="Briefly describe what you worked on..."
           defaultValue={initialData?.taskSummary || ''}
-          className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white placeholder-neutral-600 focus:outline-none focus:border-blue-500 transition-colors resize-y"
+          className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors resize-y"
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-neutral-300 mb-2">Status</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
           <select
             name="status"
             required
             defaultValue={initialData?.status || 'Completed'}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:border-blue-500 transition-colors"
           >
             <option value="Completed">Completed</option>
             <option value="In Progress">In Progress</option>
@@ -166,17 +166,17 @@ export function WorkLogForm({ initialData, clientsWithProjects, onSuccess, user,
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-neutral-300 mb-2">Additional Notes (Optional)</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Additional Notes (Optional)</label>
         <textarea
           name="notes"
           rows={2}
           placeholder="Any blockers or insights?"
           defaultValue={initialData?.notes || ''}
-          className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white placeholder-neutral-600 focus:outline-none focus:border-blue-500 transition-colors resize-y"
+          className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 transition-colors resize-y"
         />
       </div>
 
-      <div className="pt-4 border-t border-neutral-800 flex justify-end">
+      <div className="pt-4 border-t border-gray-200 shadow-sm flex justify-end">
         <button
           type="submit"
           disabled={loading}

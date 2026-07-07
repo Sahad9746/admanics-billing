@@ -45,7 +45,7 @@ export default async function ClientTransactionsPage({
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950">
+    <div className="min-h-screen bg-gray-50">
       <TransactionsHistory 
         initialTransactions={displayTransactions} 
         title={`${client.name} Transactions`}

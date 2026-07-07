@@ -23,7 +23,7 @@ export default async function ClientDetailPage({ params }: { params: { id: strin
     return (
       <AppLayout user={session.user} title="Client Not Found">
         <div className="text-center py-20">
-          <p className="text-neutral-400 mb-4">The client you are looking for does not exist or you don't have permission to view it.</p>
+          <p className="text-gray-500 mb-4">The client you are looking for does not exist or you don't have permission to view it.</p>
           <Link href="/clients" className="text-blue-500 hover:text-blue-400 inline-flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" /> Back to Clients
           </Link>
@@ -39,7 +39,7 @@ export default async function ClientDetailPage({ params }: { params: { id: strin
       description="Overview of client billing, payments, and work reports"
     >
       <div className="mb-6">
-        <Link href="/clients" className="text-neutral-400 hover:text-white inline-flex items-center gap-2 text-sm transition-colors">
+        <Link href="/clients" className="text-gray-500 hover:text-gray-700 inline-flex items-center gap-2 text-sm transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Clients List
         </Link>
       </div>

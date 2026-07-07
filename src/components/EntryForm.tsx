@@ -106,29 +106,29 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
   }
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl">
-      <h2 className="text-xl font-bold text-white mb-6">
+    <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 shadow-xl">
+      <h2 className="text-xl font-bold text-gray-900 mb-6">
         {initialData ? 'Edit Transaction' : 'New Entry'}
       </h2>
       <form key={resetCounter} id="entry-form" action={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm font-medium text-neutral-400 mb-1.5">Title</label>
+          <label className="block text-sm font-medium text-gray-500 mb-1.5">Title</label>
           <input
             name="title"
             required
             defaultValue={initialData?.title}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
             placeholder="e.g., Website Redesign"
           />
         </div>
 
         <div>
-           <label className="block text-sm font-medium text-neutral-400 mb-1.5">Description (Optional)</label>
+           <label className="block text-sm font-medium text-gray-500 mb-1.5">Description (Optional)</label>
            <textarea
              name="description"
              rows={3}
              defaultValue={initialData?.description}
-             className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600 resize-none"
+             className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400 resize-none"
              placeholder="Add details about this transaction..."
            />
         </div>
@@ -136,7 +136,7 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
         {/* Custom Fields */}
         <div className="space-y-3">
             <div className="flex items-center justify-between">
-                <label className="block text-sm font-medium text-neutral-400">Custom Fields</label>
+                <label className="block text-sm font-medium text-gray-500">Custom Fields</label>
                 <button
                     type="button"
                     onClick={handleAddField}
@@ -152,18 +152,18 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
                         placeholder="Label"
                         value={field.label}
                         onChange={(e) => handleFieldChange(index, 'label', e.target.value)}
-                        className="flex-1 bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-600 outline-none"
+                        className="flex-1 bg-gray-50 border border-gray-200 shadow-sm rounded-lg px-3 py-2 text-sm text-gray-900 focus:ring-2 focus:ring-blue-600 outline-none"
                     />
                     <input
                         placeholder="Value"
                         value={field.value}
                         onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
-                        className="flex-1 bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-blue-600 outline-none"
+                        className="flex-1 bg-gray-50 border border-gray-200 shadow-sm rounded-lg px-3 py-2 text-sm text-gray-900 focus:ring-2 focus:ring-blue-600 outline-none"
                     />
                     <button
                         type="button"
                         onClick={() => handleRemoveField(index)}
-                        className="p-2 text-neutral-500 hover:text-red-400 transition-colors"
+                        className="p-2 text-gray-500 hover:text-red-400 transition-colors"
                     >
                         <Trash2 className="w-4 h-4" />
                     </button>
@@ -173,25 +173,25 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1.5">Amount ({currency})</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1.5">Amount ({currency})</label>
             <input
               name="amount"
               type="number"
               required
               step="0.01"
               defaultValue={initialData?.amount}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600"
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
               placeholder="0.00"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1.5">Date</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1.5">Date</label>
             <input
               name="date"
               type="date"
               required
               defaultValue={initialData?.date ? format(new Date(initialData.date), 'yyyy-MM-dd') : ''}
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all [color-scheme:dark]"
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all [color-scheme:light]"
             />
           </div>
         </div>
@@ -220,7 +220,7 @@ export function EntryForm({ initialData, onSuccess }: EntryFormProps) {
           />
         </div>
 
-        <div className="space-y-4 pt-2 border-t border-neutral-800">
+        <div className="space-y-4 pt-2 border-t border-gray-200 shadow-sm">
            <SmartCombobox 
              name="walletId"
              label="Wallet"

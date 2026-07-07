@@ -44,7 +44,7 @@ export function SmartCombobox({ name, label, options, initialId, placeholder, re
 
   return (
     <div className="relative" ref={wrapperRef}>
-      <label className="block text-sm font-medium text-neutral-400 mb-1.5">{label}</label>
+      <label className="block text-sm font-medium text-gray-500 mb-1.5">{label}</label>
       {/* 
         If required is true and finalValue is empty, the hidden input will technically not block form submission 
         unless handled carefully. But the visible input has required.
@@ -58,13 +58,13 @@ export function SmartCombobox({ name, label, options, initialId, placeholder, re
           setShow(true)
         }}
         onFocus={() => setShow(true)}
-        className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+        className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
         placeholder={placeholder}
         autoComplete="off"
         required={required}
       />
       {show && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-neutral-900 border border-neutral-800 rounded-lg shadow-xl z-50 p-1 max-h-48 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 shadow-sm rounded-lg shadow-xl z-50 p-1 max-h-72 overflow-y-auto scrollbar-visible">
           {options.filter(o => o.name.toLowerCase().includes(val.toLowerCase())).map(o => (
             <div 
               key={o.id}
@@ -72,21 +72,21 @@ export function SmartCombobox({ name, label, options, initialId, placeholder, re
                 setVal(o.name)
                 setShow(false)
               }} 
-              className="cursor-pointer px-3 py-2 hover:bg-neutral-800 rounded-md text-white text-sm transition-colors"
+              className="cursor-pointer px-3 py-2 hover:bg-gray-100 rounded-md text-gray-900 text-sm transition-colors"
             >
               {o.name}
             </div>
           ))}
           {val && !matchedOption && (
             <div 
-                className="px-3 py-2 text-neutral-400 text-sm italic cursor-pointer hover:bg-neutral-800 rounded-md transition-colors"
+                className="px-3 py-2 text-gray-500 text-sm italic cursor-pointer hover:bg-gray-100 rounded-md transition-colors"
                 onClick={() => setShow(false)}
             >
               Press save to add "{val}"
             </div>
           )}
           {!val && options.length === 0 && (
-             <div className="px-3 py-2 text-neutral-500 text-sm">Type to search or create...</div>
+             <div className="px-3 py-2 text-gray-500 text-sm">Type to search or create...</div>
           )}
         </div>
       )}

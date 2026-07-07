@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Admanics Finance",
-  description: "Internal billing dashboard for Admanics",
+  title: "Admaniacs Finance",
+  description: "Internal billing dashboard for Admaniacs",
 };
 
 export default function RootLayout({

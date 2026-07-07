@@ -37,7 +37,7 @@ export function Chart({ transactions }: { transactions: Transaction[] }) {
   const chartData = [...data].reverse()
 
   return (
-    <div className="bg-neutral-900 p-6 rounded-xl border border-neutral-800 h-[400px]">
+    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm h-[400px]">
 
       <ResponsiveContainer width="100%" height="100%">
         <BarChart

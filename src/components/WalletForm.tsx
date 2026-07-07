@@ -33,34 +33,34 @@ export function WalletForm({ initialData, onSuccess, onCancel }: WalletFormProps
   }
 
   return (
-    <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl w-full max-w-md relative">
+    <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 shadow-xl w-full max-w-md relative">
       <button 
         onClick={onCancel}
-        className="absolute top-4 right-4 text-neutral-500 hover:text-white transition-colors"
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
       >
         <X className="w-5 h-5" />
       </button>
-      <h2 className="text-xl font-bold text-white mb-6">{initialData ? 'Edit Wallet' : 'Create New Wallet'}</h2>
+      <h2 className="text-xl font-bold text-gray-900 mb-6">{initialData ? 'Edit Wallet' : 'Create New Wallet'}</h2>
       
       <form action={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-neutral-400 mb-1.5">Wallet Name</label>
+          <label className="block text-sm font-medium text-gray-500 mb-1.5">Wallet Name</label>
           <input
             name="name"
             required
             defaultValue={initialData?.name}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-neutral-600"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
             placeholder="e.g., HDFC Current Account"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-neutral-400 mb-1.5">Type</label>
+          <label className="block text-sm font-medium text-gray-500 mb-1.5">Type</label>
           <select
             name="type"
             required
             defaultValue={initialData?.type || 'bank'}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
           >
             <option value="bank">Bank Account</option>
             <option value="cash">Cash</option>
@@ -69,12 +69,12 @@ export function WalletForm({ initialData, onSuccess, onCancel }: WalletFormProps
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-neutral-400 mb-1.5">Currency</label>
+          <label className="block text-sm font-medium text-gray-500 mb-1.5">Currency</label>
           <select
             name="currency"
             required
             defaultValue={initialData?.currency || 'INR'}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+            className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
           >
             <option value="INR">INR (₹)</option>
             <option value="USD">USD ($)</option>

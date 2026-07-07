@@ -71,10 +71,10 @@ export function ClientsList({ initialClients, userRole = 'viewer' }: { initialCl
         />
       )}
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-neutral-300">
-            <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+          <table className="w-full text-left text-sm text-gray-700">
+            <thead className="bg-gray-50 text-gray-500 uppercase font-medium">
               <tr>
                 <th className="px-6 py-4">Client Name</th>
                 <th className="px-6 py-4">Contact Person</th>
@@ -84,18 +84,18 @@ export function ClientsList({ initialClients, userRole = 'viewer' }: { initialCl
                 <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-800">
+            <tbody className="divide-y divide-gray-200">
               {initialClients.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-neutral-500">
+                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
                     No clients found. Add your first client to get started.
                   </td>
                 </tr>
               ) : (
                 initialClients.map((client) => (
-                  <tr key={client._id} className="hover:bg-neutral-800/50 transition-colors">
+                  <tr key={client._id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 font-medium">
-                      <Link href={`/clients/${client._id}`} className="text-white hover:text-blue-400 transition-colors">
+                      <Link href={`/clients/${client._id}`} className="text-gray-900 hover:text-blue-600 transition-colors">
                         {client.name}
                       </Link>
                     </td>
@@ -103,23 +103,23 @@ export function ClientsList({ initialClients, userRole = 'viewer' }: { initialCl
                     <td className="px-6 py-4">
                         <div className="flex flex-col">
                             <span>{client.email || '-'}</span>
-                            <span className="text-xs text-neutral-500">{client.phone || ''}</span>
+                            <span className="text-xs text-gray-500">{client.phone || ''}</span>
                         </div>
                     </td>
                     <td className="px-6 py-4">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-medium inline-block ${
-                        client.status === 'active' ? 'bg-green-500/10 text-green-400' : 'bg-neutral-800 text-neutral-400'
+                        client.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
                       }`}>
                         {client.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-neutral-400">
+                    <td className="px-6 py-4 text-gray-500">
                       {format(new Date(client.createdAt), 'MMM d, yyyy')}
                     </td>
                     <td className="px-6 py-4 text-right flex justify-end gap-2">
                       <Link
                         href={`/clients/${client._id}`}
-                        className="p-2 text-neutral-400 hover:text-blue-400 transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
+                        className="p-2 text-gray-400 hover:text-blue-600 transition-colors bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200"
                         title="View Dashboard"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-layout-dashboard"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
@@ -127,7 +127,7 @@ export function ClientsList({ initialClients, userRole = 'viewer' }: { initialCl
                       {userRole !== 'viewer' && (
                         <button
                           onClick={() => setEditingClient(client)}
-                          className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg"
+                          className="p-2 text-gray-400 hover:text-blue-600 transition-colors bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200"
                           title="Edit Client"
                         >
                           <Edit2 className="w-4 h-4" />
@@ -137,10 +137,10 @@ export function ClientsList({ initialClients, userRole = 'viewer' }: { initialCl
                         <button
                           onClick={() => setClientToDelete(client)}
                           disabled={deletingId === client._id}
-                          className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                          className="p-2 text-gray-400 hover:text-red-600 transition-colors bg-gray-50 hover:bg-gray-100 flex items-center justify-center rounded-lg border border-gray-200"
                           title="Delete Client"
                         >
-                          {deletingId === client._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}
+                          {deletingId === client._id ? <Loader2 className="w-4 h-4 animate-spin text-red-600" /> : <Trash2 className="w-4 h-4" />}
                         </button>
                       )}
                     </td>

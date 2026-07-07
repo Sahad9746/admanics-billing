@@ -88,8 +88,8 @@ export function ProcessClientComponent({ employees, pendingAdvances, existingRec
 
   if (employees.length === 0) {
     return (
-      <div className="bg-neutral-900 border border-neutral-800 p-8 rounded-xl text-center">
-        <p className="text-neutral-400">No active employees found to process payroll.</p>
+      <div className="bg-white border border-gray-200 shadow-sm p-8 rounded-xl text-center">
+        <p className="text-gray-500">No active employees found to process payroll.</p>
       </div>
     )
   }
@@ -107,26 +107,26 @@ export function ProcessClientComponent({ employees, pendingAdvances, existingRec
         description={`Are you sure you want to process and finalize payroll for ${rowToProcess?.name} for ${monthYear}? This action will permanently record the salary and update their pending advances.`}
         confirmText="Approve & Pay"
       />
-      <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden flex flex-col">
-      <div className="p-6 border-b border-neutral-800 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden flex flex-col">
+      <div className="p-6 border-b border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
          <div>
-           <h2 className="text-lg font-bold text-white">Payroll Worksheet</h2>
-           <p className="text-sm text-neutral-400">Review amounts and process each employee separately.</p>
+           <h2 className="text-lg font-bold text-gray-900">Payroll Worksheet</h2>
+           <p className="text-sm text-gray-500">Review amounts and process each employee separately.</p>
          </div>
          <div className="flex items-center gap-3">
-           <label className="text-sm text-neutral-400">Month:</label>
+           <label className="text-sm text-gray-500">Month:</label>
            <input 
              type="text" 
              value={monthYear}
              onChange={(e) => setMonthYear(e.target.value)}
-             className="bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-1.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+             className="bg-gray-50 border border-gray-200 shadow-sm rounded-lg px-3 py-1.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
            />
          </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm text-neutral-300">
-          <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+        <table className="w-full text-left text-sm text-gray-700">
+          <thead className="bg-gray-50/50 text-gray-500 uppercase font-medium">
             <tr>
               <th className="px-6 py-4">Employee</th>
               <th className="px-6 py-4">Base Salary</th>
@@ -137,12 +137,12 @@ export function ProcessClientComponent({ employees, pendingAdvances, existingRec
               <th className="px-6 py-4 text-center">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-800">
+          <tbody className="divide-y divide-gray-200">
             {payrollData.map((row) => (
-              <tr key={row.employeeId} className="hover:bg-neutral-800/50 transition-colors">
+              <tr key={row.employeeId} className="hover:bg-gray-100/50 transition-colors">
                 <td className="px-6 py-4">
-                  <div className="font-medium text-white">{row.name}</div>
-                  <div className="text-xs text-neutral-500">{row.designation}</div>
+                  <div className="font-medium text-gray-900">{row.name}</div>
+                  <div className="text-xs text-gray-500">{row.designation}</div>
                 </td>
                 <td className="px-6 py-4">₹{row.baseSalary.toLocaleString()}</td>
                 <td className="px-6 py-4 text-emerald-400">
@@ -150,7 +150,7 @@ export function ProcessClientComponent({ employees, pendingAdvances, existingRec
                 </td>
                 <td className="px-6 py-4 text-red-400">
                   {row.deductions > 0 ? `-₹${row.deductions.toLocaleString()}` : '-'}
-                  {row.advanceIds.length > 0 && <span className="text-xs text-neutral-500 ml-2">({row.advanceIds.length} pending)</span>}
+                  {row.advanceIds.length > 0 && <span className="text-xs text-gray-500 ml-2">({row.advanceIds.length} pending)</span>}
                 </td>
                 <td className="px-6 py-4">
                   <input 
@@ -160,10 +160,10 @@ export function ProcessClientComponent({ employees, pendingAdvances, existingRec
                     onChange={(e) => handleBonusChange(row.employeeId, e.target.value)}
                     placeholder="0"
                     disabled={row.isPaid}
-                    className="w-24 bg-neutral-950 border border-neutral-700 rounded-md px-2 py-1 text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
+                    className="w-24 bg-gray-50 border border-gray-300 rounded-md px-2 py-1 text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
                   />
                 </td>
-                <td className="px-6 py-4 text-right font-bold text-white text-base">
+                <td className="px-6 py-4 text-right font-bold text-gray-900 text-base">
                   ₹{row.netSalary.toLocaleString()}
                 </td>
                 <td className="px-6 py-4 text-center">
@@ -183,8 +183,8 @@ export function ProcessClientComponent({ employees, pendingAdvances, existingRec
                 </td>
               </tr>
             ))}
-            <tr className="bg-neutral-950/30">
-              <td colSpan={5} className="px-6 py-4 text-right font-medium text-neutral-400">Total Payout for {monthYear}:</td>
+            <tr className="bg-gray-50/30">
+              <td colSpan={5} className="px-6 py-4 text-right font-medium text-gray-500">Total Payout for {monthYear}:</td>
               <td className="px-6 py-4 text-right font-bold text-green-400 text-lg">
                 ₹{payrollData.reduce((sum, row) => sum + row.netSalary, 0).toLocaleString()}
               </td>

@@ -45,7 +45,7 @@ export async function GET() {
         ])
 
         // Append to specific sheet
-        await appendRows(rows, sheetId)
+        await appendRows(rows, sheetId, 'Work Logs!A:G')
         
         totalSynced += sheetLogs.length
         successIds.push(...sheetLogs.map(l => l._id))

@@ -56,10 +56,10 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
              </h1>
           </div>
           <div className="text-right flex flex-col items-end">
-            {/* Logo placeholder - using text to mimic the Admanics logo visually */}
+            {/* Logo placeholder - using text to mimic the Admaniacs logo visually */}
             <div className="flex items-center gap-2 mb-6">
                <div className="text-4xl text-blue-500 font-bold italic tracking-tighter">A</div>
-               <div className="text-2xl text-neutral-400 font-medium">Admanics</div>
+               <div className="text-2xl text-gray-500 font-medium">Admaniacs</div>
             </div>
             
             <div className="text-left text-sm space-y-1">
@@ -78,7 +78,7 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
               <div className="bg-[#eaf5f6] px-4 py-2 mb-4 font-bold tracking-wide w-4/5">
                  FROM
               </div>
-              <p className="font-bold text-sm px-4">ADMANICS SOLUTION</p>
+              <p className="font-bold text-sm px-4">ADMANIACS SOLUTION</p>
            </div>
            <div>
               <div className="bg-[#eaf5f6] px-4 py-2 mb-4 font-bold tracking-wide">
@@ -86,7 +86,7 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
               </div>
               <div className="px-4 text-sm">
                   <p className="font-bold uppercase">{data.clientName || 'CLIENT NAME'}</p>
-                  <p className="whitespace-pre-wrap uppercase text-xs mt-1 text-neutral-700">
+                  <p className="whitespace-pre-wrap uppercase text-xs mt-1 text-gray-700">
                     {data.clientAddress || 'Client Address'}
                   </p>
               </div>

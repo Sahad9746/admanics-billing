@@ -56,7 +56,7 @@ export function UserManagement() {
     setSaving(false)
   }
 
-  if (loading) return <div className="p-8 flex justify-center"><Loader2 className="animate-spin w-6 h-6 text-neutral-500" /></div>
+  if (loading) return <div className="p-8 flex justify-center"><Loader2 className="animate-spin w-6 h-6 text-gray-500" /></div>
 
   if (selectedUser) {
     return (
@@ -64,32 +64,32 @@ export function UserManagement() {
         <div className="flex items-center gap-4">
           <button 
             onClick={() => setSelectedUser(null)}
-            className="p-2 hover:bg-neutral-800 border border-neutral-700 rounded-lg text-neutral-400 hover:text-white transition-colors"
+            className="p-2 hover:bg-gray-100 border border-gray-300 rounded-lg text-gray-500 hover:text-gray-700 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h3 className="text-xl font-bold text-white flex items-center gap-2">
+            <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
               <Shield className="w-5 h-5 text-indigo-400" />
               Manage Access
             </h3>
-            <p className="text-neutral-400 text-sm">Configuring permissions for {selectedUser.name}</p>
+            <p className="text-gray-500 text-sm">Configuring permissions for {selectedUser.name}</p>
           </div>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 shadow-xl">
-          <div className="flex items-center justify-between pb-6 border-b border-neutral-800 mb-6">
+        <div className="bg-white border border-gray-200 shadow-sm rounded-xl p-6 shadow-xl">
+          <div className="flex items-center justify-between pb-6 border-b border-gray-200 shadow-sm mb-6">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-full flex items-center justify-center font-bold text-lg">
                 {selectedUser.name.charAt(0).toUpperCase()}
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-white">{selectedUser.name}</h4>
-                <div className="text-sm text-neutral-400">{selectedUser.email}</div>
+                <h4 className="text-lg font-semibold text-gray-900">{selectedUser.name}</h4>
+                <div className="text-sm text-gray-500">{selectedUser.email}</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-xs text-neutral-500 uppercase font-semibold tracking-wider mb-2">Global Role</div>
+              <div className="text-xs text-gray-500 uppercase font-semibold tracking-wider mb-2">Global Role</div>
               <select 
                 value={selectedUser.role?.toLowerCase()} 
                 onChange={(e) => handleRoleChange(e.target.value)}
@@ -103,7 +103,7 @@ export function UserManagement() {
           </div>
 
           <div className="space-y-4">
-            <h5 className="font-semibold text-white mb-2">Module Permissions</h5>
+            <h5 className="font-semibold text-gray-900 mb-2">Module Permissions</h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 { id: 'transactions', label: 'Transactions', desc: 'Financial records and entries' },
@@ -113,15 +113,15 @@ export function UserManagement() {
                 { id: 'finance', label: 'Finance / Wallets', desc: 'Treasury and account balances' },
                 { id: 'worklogs', label: 'Daily Work Logs', desc: 'Employee time and activity tracking' },
               ].map(mod => (
-                <div key={mod.id} className="flex items-start justify-between bg-neutral-950/50 p-4 rounded-xl border border-neutral-800/80 hover:border-neutral-700 transition-colors">
+                <div key={mod.id} className="flex items-start justify-between bg-gray-50/50 p-4 rounded-xl border border-gray-200 shadow-sm/80 hover:border-gray-300 transition-colors">
                   <div className="pr-4">
-                    <div className="font-medium text-white mb-0.5">{mod.label}</div>
-                    <div className="text-xs text-neutral-500">{mod.desc}</div>
+                    <div className="font-medium text-gray-900 mb-0.5">{mod.label}</div>
+                    <div className="text-xs text-gray-500">{mod.desc}</div>
                   </div>
                   <select 
                     value={selectedUser.permissions?.[mod.id] || 'none'} 
                     onChange={(e) => handlePermissionChange(mod.id, e.target.value)}
-                    className="bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer min-w-[110px]"
+                    className="bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer min-w-[110px]"
                   >
                     <option value="none">None</option>
                     <option value="viewer">Viewer</option>
@@ -151,46 +151,46 @@ export function UserManagement() {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
        <div>
-          <h3 className="text-xl font-bold text-white mb-1">Team & Access Management</h3>
-          <p className="text-neutral-400 text-sm">Select a user to configure their granular module permissions.</p>
+          <h3 className="text-xl font-bold text-gray-900 mb-1">Team & Access Management</h3>
+          <p className="text-gray-500 text-sm">Select a user to configure their granular module permissions.</p>
        </div>
        
-       <div className="bg-neutral-950 border border-neutral-800 rounded-xl overflow-hidden mt-6 shadow-xl">
+       <div className="bg-gray-50 border border-gray-200 shadow-sm rounded-xl overflow-hidden mt-6 shadow-xl">
          <div className="overflow-x-auto">
-           <table className="w-full text-left text-sm text-neutral-300">
-             <thead className="bg-neutral-900/50 border-b border-neutral-800">
+           <table className="w-full text-left text-sm text-gray-700">
+             <thead className="bg-white/50 border-b border-gray-200 shadow-sm">
                <tr>
-                 <th className="px-6 py-4 font-medium text-white whitespace-nowrap">User Name</th>
-                 <th className="px-6 py-4 font-medium text-white">Email Address</th>
-                 <th className="px-6 py-4 font-medium text-white">Global Role</th>
-                 <th className="px-6 py-4 font-medium text-white text-right">Actions</th>
+                 <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">User Name</th>
+                 <th className="px-6 py-4 font-medium text-gray-900">Email Address</th>
+                 <th className="px-6 py-4 font-medium text-gray-900">Global Role</th>
+                 <th className="px-6 py-4 font-medium text-gray-900 text-right">Actions</th>
                </tr>
              </thead>
-             <tbody className="divide-y divide-neutral-800">
+             <tbody className="divide-y divide-gray-200">
                {users.map(u => (
-                 <tr key={u._id} className="hover:bg-neutral-900/30 transition-colors group">
+                 <tr key={u._id} className="hover:bg-white/30 transition-colors group">
                    <td className="px-6 py-4 whitespace-nowrap">
-                     <div className="font-medium text-white flex items-center gap-3">
-                       <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center text-xs text-neutral-400 font-bold border border-neutral-700/50">
+                     <div className="font-medium text-gray-900 flex items-center gap-3">
+                       <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs text-gray-500 font-bold border border-gray-300/50">
                          {u.name.charAt(0).toUpperCase()}
                        </div>
                        {u.name}
                      </div>
                    </td>
-                   <td className="px-6 py-4 text-neutral-400">
+                   <td className="px-6 py-4 text-gray-500">
                      {u.email}
                    </td>
                    <td className="px-6 py-4">
-                     <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-medium bg-neutral-800 text-neutral-400 capitalize border border-neutral-700/50">
+                     <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-medium bg-gray-100 text-gray-500 capitalize border border-gray-300/50">
                        {u.role}
                      </span>
                    </td>
                    <td className="px-6 py-4 text-right">
                      <button 
                        onClick={() => setSelectedUser(u)}
-                       className="inline-flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white transition-colors py-1.5 px-3 rounded-lg text-xs font-medium border border-neutral-700 group-hover:border-neutral-500 group-hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                       className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors py-1.5 px-3 rounded-lg text-xs font-medium border border-gray-300 group-hover:border-gray-300 group-hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
                      >
-                       Manage Access <ChevronRight className="w-3 h-3 text-neutral-400 group-hover:text-white" />
+                       Manage Access <ChevronRight className="w-3 h-3 text-gray-500 group-hover:text-white" />
                      </button>
                    </td>
                  </tr>

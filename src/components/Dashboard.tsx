@@ -86,9 +86,9 @@ export function Dashboard({ initialTransactions, wallets, user }: DashboardProps
       {/* Wallet Balances */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {wallets.map((wallet: any) => (
-          <div key={wallet._id} className="bg-gradient-to-br from-blue-900/40 to-neutral-900 p-6 rounded-xl border border-blue-900/30">
-            <h3 className="text-blue-200 text-sm font-medium uppercase tracking-wider">{wallet.name}</h3>
-            <p className="text-2xl font-bold text-white mt-2">
+          <div key={wallet._id} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+            <h3 className="text-gray-500 text-sm font-medium uppercase tracking-wider">{wallet.name}</h3>
+            <p className="text-2xl font-bold text-gray-900 mt-2">
               {new Intl.NumberFormat('en-IN', { style: 'currency', currency: wallet.currency }).format(wallet.balance)}
             </p>
           </div>
@@ -109,7 +109,7 @@ export function Dashboard({ initialTransactions, wallets, user }: DashboardProps
         <div className="lg:col-span-2 space-y-8">
           <Chart transactions={filteredTransactions} />
           <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-white">Recent Transactions</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Recent Transactions</h2>
               <Link href="/transactions" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
                   View All
               </Link>
@@ -119,22 +119,22 @@ export function Dashboard({ initialTransactions, wallets, user }: DashboardProps
             onEdit={txRole !== 'viewer' ? handleEdit : undefined}
           />
           {totalPages > 1 && (
-            <div className="flex justify-between items-center bg-neutral-900 border border-neutral-800 p-4 rounded-xl">
-              <p className="text-sm text-neutral-400">
+            <div className="flex justify-between items-center bg-white border border-gray-200 shadow-sm p-4 rounded-xl">
+              <p className="text-sm text-gray-500">
                 Showing {((currentPage - 1) * PAGE_SIZE) + 1}–{Math.min(currentPage * PAGE_SIZE, filteredTransactions.length)} of {filteredTransactions.length}
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                  className="px-4 py-2 border border-gray-200 shadow-sm rounded-lg text-sm font-medium bg-gray-50 disabled:opacity-40 hover:bg-gray-100 transition-colors text-gray-700"
                 >
                   Previous
                 </button>
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-4 py-2 border border-neutral-800 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                  className="px-4 py-2 border border-gray-200 shadow-sm rounded-lg text-sm font-medium bg-gray-50 disabled:opacity-40 hover:bg-gray-100 transition-colors text-gray-700"
                 >
                   Next
                 </button>
@@ -154,7 +154,7 @@ export function Dashboard({ initialTransactions, wallets, user }: DashboardProps
                    {editingTransaction && (
                       <button 
                         onClick={() => setEditingTransaction(null)}
-                        className="w-full mt-4 bg-neutral-800 text-white font-medium py-2 rounded-xl hover:bg-neutral-700 transition"
+                        className="w-full mt-4 bg-gray-100 text-gray-700 font-medium py-2 rounded-xl hover:bg-gray-100 transition"
                       >
                         Cancel Edit
                       </button>

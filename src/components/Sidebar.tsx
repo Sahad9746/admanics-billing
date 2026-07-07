@@ -74,9 +74,15 @@ export function Sidebar({ role }: { role?: string }) {
   }
 
   return (
-    <aside className="w-64 bg-neutral-950 border-r border-neutral-900 hidden md:flex flex-col h-screen fixed left-0 top-0">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold text-white tracking-tight">Finance<span className="text-blue-500">Pro</span></h1>
+    <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col h-screen fixed left-0 top-0">
+      <div className="px-4 py-5 flex items-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo.png"
+          alt="Admaniacs Logo"
+          style={{ width: 52, height: 52, objectFit: 'contain' }}
+        />
+        <span className="ml-3 text-lg font-bold text-slate-800">Admaniacs</span>
       </div>
       <nav className="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
         {links.map((link) => {
@@ -92,12 +98,12 @@ export function Sidebar({ role }: { role?: string }) {
                   onClick={() => toggleSection(link.name)}
                   className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all w-full text-left ${
                     hasActiveSub && !isExpanded
-                      ? 'text-white' 
-                      : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
+                      ? 'text-slate-800' 
+                      : 'text-slate-500 hover:text-slate-900 hover:bg-gray-100'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className={`w-5 h-5 ${hasActiveSub ? 'text-blue-500' : ''}`} />
+                    <Icon className={`w-5 h-5 ${hasActiveSub ? '' : ''}`} style={{ color: hasActiveSub ? '#0D5740' : '' }} />
                     <span className="font-medium text-sm">{link.name}</span>
                   </div>
                   {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
@@ -116,9 +122,10 @@ export function Sidebar({ role }: { role?: string }) {
                           href={subItem.href}
                           className={`block px-4 py-2 rounded-lg transition-all text-sm font-medium ${
                             isSubActive
-                              ? 'bg-blue-600/10 text-blue-500'
-                              : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
+                              ? 'text-white'
+                              : 'text-slate-500 hover:text-slate-900 hover:bg-gray-100'
                           }`}
+                          style={isSubActive ? { backgroundColor: '#0D5740' } : {}}
                         >
                           {subItem.name}
                         </Link>
@@ -137,9 +144,10 @@ export function Sidebar({ role }: { role?: string }) {
               href={link.href!}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                 isActive 
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' 
-                  : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
+                  ? 'text-white shadow-lg'
+                  : 'text-slate-500 hover:text-slate-900 hover:bg-gray-100'
               }`}
+              style={isActive ? { backgroundColor: '#0D5740' } : {}}
             >
               <Icon className="w-5 h-5" />
               <span className="font-medium text-sm">{link.name}</span>
@@ -147,9 +155,9 @@ export function Sidebar({ role }: { role?: string }) {
           )
         })}
       </nav>
-      <div className="p-4 border-t border-neutral-900 mt-auto">
-        <div className="bg-neutral-900 rounded-xl p-4 text-xs text-neutral-400">
-          <p>© {new Date().getFullYear()} Admanics</p>
+      <div className="p-4 border-t border-gray-200 mt-auto">
+        <div className="bg-gray-50 rounded-xl p-4 text-xs text-slate-400">
+          <p>© {new Date().getFullYear()} Admaniacs</p>
           <p className="mt-1">Internal Finance System</p>
         </div>
       </div>

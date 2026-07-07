@@ -54,10 +54,10 @@ export function MetaAdsReportsDashboard({ reports: initialReports }: { reports: 
         />
       )}
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-neutral-300">
-            <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+          <table className="w-full text-left text-sm text-gray-700">
+            <thead className="bg-gray-50/50 text-gray-500 uppercase font-medium">
               <tr>
                 <th className="px-6 py-4">Company</th>
                 <th className="px-6 py-4">Ad Account</th>
@@ -66,35 +66,35 @@ export function MetaAdsReportsDashboard({ reports: initialReports }: { reports: 
                 <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-neutral-800">
+            <tbody className="divide-y divide-gray-200">
               {reports.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-neutral-500">
+                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
                     No reports found. Create your first report to get started.
                   </td>
                 </tr>
               ) : (
                 reports.map((report) => (
-                  <tr key={report._id} className="hover:bg-neutral-800/50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-white">{report.companyName}</td>
+                  <tr key={report._id} className="hover:bg-gray-100/50 transition-colors">
+                    <td className="px-6 py-4 font-medium text-gray-900">{report.companyName}</td>
                     <td className="px-6 py-4">{report.adAccountName}</td>
-                    <td className="px-6 py-4 text-neutral-400">
+                    <td className="px-6 py-4 text-gray-500">
                       {format(new Date(report.periodStart), 'd MMM yyyy')} - {format(new Date(report.periodEnd), 'd MMM yyyy')}
                     </td>
-                    <td className="px-6 py-4 text-neutral-400">
+                    <td className="px-6 py-4 text-gray-500">
                       {format(new Date(report.createdAt), 'MMM d, yyyy')}
                     </td>
                     <td className="px-6 py-4 text-right flex justify-end gap-2">
                       <Link
                         href={`/meta-ads-reports/${report._id}/edit`}
-                        className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg flex items-center justify-center"
+                        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition-colors bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center"
                         title="Edit Report"
                       >
                         <Pencil className="w-4 h-4" />
                       </Link>
                       <button
                         onClick={() => handlePrint(report._id)}
-                        className="p-2 text-neutral-400 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 rounded-lg flex items-center justify-center"
+                        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-200 transition-colors bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center"
                         title="Download PDF"
                       >
                         <Printer className="w-4 h-4" />
@@ -102,7 +102,7 @@ export function MetaAdsReportsDashboard({ reports: initialReports }: { reports: 
                       <button
                         onClick={() => setReportToDelete(report)}
                         disabled={deletingId === report._id}
-                        className="p-2 text-neutral-400 hover:text-red-400 transition-colors bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center rounded-lg"
+                        className="p-2 text-gray-500 hover:text-red-600 hover:bg-gray-200 transition-colors bg-gray-50 border border-gray-200 flex items-center justify-center rounded-lg"
                         title="Delete Report"
                       >
                         {deletingId === report._id ? <Loader2 className="w-4 h-4 animate-spin text-red-500" /> : <Trash2 className="w-4 h-4" />}

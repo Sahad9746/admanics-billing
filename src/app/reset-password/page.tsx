@@ -69,8 +69,8 @@ function ResetPasswordForm() {
         <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 className="w-10 h-10 text-green-500" />
         </div>
-        <h2 className="text-2xl font-bold text-white mb-2">Password Updated!</h2>
-        <p className="text-neutral-400 mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Password Updated!</h2>
+        <p className="text-gray-500 mb-6">
           Your password has been reset successfully. Redirecting you to login...
         </p>
         <Link 
@@ -86,7 +86,7 @@ function ResetPasswordForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-neutral-400 mb-2">
+        <label htmlFor="password" className="block text-sm font-medium text-gray-500 mb-2">
           New Password
         </label>
         <div className="relative">
@@ -96,13 +96,13 @@ function ResetPasswordForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-3 pr-12 text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+            className="w-full bg-gray-50 border border-gray-200 shadow-sm rounded-lg px-4 py-3 pr-12 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
             placeholder="••••••••"
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-300 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
           >
             {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -110,7 +110,7 @@ function ResetPasswordForm() {
       </div>
 
       <div>
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-neutral-400 mb-2">
+        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-500 mb-2">
           Confirm New Password
         </label>
         <input
@@ -119,7 +119,7 @@ function ResetPasswordForm() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-          className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-3 text-white placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+          className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
           placeholder="••••••••"
         />
       </div>
@@ -138,18 +138,18 @@ function ResetPasswordForm() {
 export default function ResetPasswordPage() {
   return (
     <main className="min-h-screen bg-black flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-neutral-900 rounded-2xl border border-neutral-800 p-8 shadow-2xl">
+      <div className="w-full max-w-md bg-white rounded-2xl border border-gray-200 shadow-sm p-8 shadow-2xl">
         <div className="mb-8 text-center">
           <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <Lock className="w-6 h-6 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-white">Create New Password</h1>
-          <p className="text-neutral-400 mt-2 text-sm">
+          <h1 className="text-2xl font-bold text-gray-900">Create New Password</h1>
+          <p className="text-gray-500 mt-2 text-sm">
             Enter your new password below.
           </p>
         </div>
 
-        <Suspense fallback={<div className="text-center text-neutral-400">Loading...</div>}>
+        <Suspense fallback={<div className="text-center text-gray-500">Loading...</div>}>
           <ResetPasswordForm />
         </Suspense>
       </div>

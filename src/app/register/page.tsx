@@ -28,14 +28,14 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 flex items-center justify-center p-6">
-      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 w-full max-w-md shadow-2xl">
-        <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
-        <p className="text-neutral-400 mb-6">Sign up for Admanics Finance</p>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-8 w-full max-w-md shadow-2xl">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
+        <p className="text-gray-500 mb-6">Sign up for Admaniacs Finance</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-neutral-400 mb-2">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-500 mb-2">
               Full Name
             </label>
             <input
@@ -43,13 +43,13 @@ export default function RegisterPage() {
               id="name"
               name="name"
               required
-              className="w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="John Doe"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-400 mb-2">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-500 mb-2">
               Email
             </label>
             <input
@@ -57,13 +57,13 @@ export default function RegisterPage() {
               id="email"
               name="email"
               required
-              className="w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="john@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-neutral-400 mb-2">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-500 mb-2">
               Password
             </label>
             <input
@@ -72,7 +72,7 @@ export default function RegisterPage() {
               name="password"
               required
               minLength={6}
-              className="w-full px-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
             />
           </div>
@@ -86,7 +86,7 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-neutral-400 text-sm">
+        <p className="mt-6 text-center text-gray-500 text-sm">
           Already have an account?{' '}
           <Link href="/login" className="text-blue-400 hover:text-blue-300 font-medium">
             Log in

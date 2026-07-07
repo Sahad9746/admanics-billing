@@ -3,6 +3,7 @@
 import { client } from "@/lib/sanity"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { updateSheetValues } from "@/lib/googleSheet"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth.config"
 import bcrypt from "bcryptjs"
@@ -135,6 +136,10 @@ export async function addTransaction(formData: FormData) {
     })
     
     revalidatePath('/')
+    
+    // Sync to Google Sheet
+    await syncTransactionsToGoogleSheet()
+
     return { success: true }
   } catch (error) {
     console.error("Failed to create transaction:", error)
@@ -155,6 +160,10 @@ export async function deleteTransaction(id: string) {
     revalidatePath('/')
     revalidatePath('/transactions')
     revalidatePath(`/transaction/${id}`)
+    
+    // Sync to Google Sheet
+    await syncTransactionsToGoogleSheet()
+
     return { success: true }
   } catch (error) {
     console.error("Failed to delete transaction:", error)
@@ -244,6 +253,10 @@ export async function editTransaction(id: string, formData: FormData) {
     revalidatePath('/')
     revalidatePath('/transactions')
     revalidatePath(`/transaction/${id}`)
+    
+    // Sync to Google Sheet
+    await syncTransactionsToGoogleSheet()
+
     return { success: true }
   } catch (error) {
     console.error("Failed to edit transaction:", error)
@@ -269,6 +282,9 @@ export async function deleteTransactions(ids: string[]) {
     revalidatePath('/transactions')
     ids.forEach((id) => revalidatePath(`/transaction/${id}`))
     
+    // Sync to Google Sheet
+    await syncTransactionsToGoogleSheet()
+
     return { success: true }
   } catch (error) {
     console.error("Failed to delete transactions:", error)
@@ -555,6 +571,20 @@ export async function getInvoices() {
   }
 }
 
+export async function getInvoiceById(id: string) {
+  try {
+    const invoice = await client.fetch(`*[_type == "invoice" && _id == $id][0] {
+      ...,
+      client->{_id, name, contactPerson, email, phone},
+      project->{_id, name}
+    }`, { id })
+    return invoice
+  } catch (error) {
+    console.error("Failed to fetch invoice:", error)
+    return null
+  }
+}
+
 export async function addInvoice(formData: FormData) {
   try {
     const user = await getCurrentUser()
@@ -589,6 +619,13 @@ export async function addInvoice(formData: FormData) {
     })
     
     revalidatePath('/invoices')
+    revalidatePath('/')
+    revalidatePath('/reports')
+    revalidatePath('/clients')
+    
+    // Sync to Google Sheet
+    await syncInvoicesToGoogleSheet()
+
     return { success: true }
   } catch (error) {
     console.error("Failed to create invoice:", error)
@@ -600,6 +637,9 @@ export async function editInvoice(id: string, formData: FormData) {
   try {
     const user = await getCurrentUser()
     if (!checkPermission(user, 'finance', ['edit'])) return { success: false, error: 'Unauthorized' }
+
+    // Fetch existing invoice to check its status before updating
+    const existingInvoice = await client.fetch(`*[_type == "invoice" && _id == $id][0] { status, client->{_id, name} }`, { id })
 
     const invoiceNumber = formData.get('invoiceNumber') as string
     const clientId = formData.get('clientId') as string
@@ -627,8 +667,63 @@ export async function editInvoice(id: string, formData: FormData) {
       hasSeparateGst,
       gstPercentage,
     }).commit()
+
+    // Handle Option A: Auto-create transaction when status changes to 'paid'
+    let transactionCreated = false
+    if (existingInvoice && existingInvoice.status !== 'paid' && status === 'paid') {
+      let walletId = null
+      let clientName = existingInvoice.client?.name || ""
+      
+      // If client changed, fetch new client name
+      if (clientId !== existingInvoice.client?._id) {
+         const newClient = await client.fetch(`*[_type == "client" && _id == $clientId][0]`, { clientId })
+         if (newClient) clientName = newClient.name
+      }
+
+      if (clientName) {
+         const walletMatch = await client.fetch(`*[_type == "wallet" && name match $clientName][0]`, { clientName: clientName + "*" })
+         if (walletMatch) {
+             walletId = walletMatch._id
+         } else {
+             // Fallback: pick any wallet (like Company Wallet)
+             const anyWallet = await client.fetch(`*[_type == "wallet"][0]`)
+             if (anyWallet) walletId = anyWallet._id
+         }
+      }
+
+      if (walletId) {
+         await client.create({
+           _type: 'transaction',
+           title: `Payment for Invoice ${invoiceNumber}`,
+           amount: amount,
+           type: 'income',
+           category: 'Service Fee',
+           date: new Date().toISOString(),
+           status: 'active',
+           client: { _type: 'reference', _ref: clientId },
+           project: projectId ? { _type: 'reference', _ref: projectId } : undefined,
+           invoice: { _type: 'reference', _ref: id },
+           wallet: { _type: 'reference', _ref: walletId },
+           createdBy: { _type: 'reference', _ref: user.id },
+           createdAt: new Date().toISOString()
+         })
+         transactionCreated = true
+      }
+    }
     
     revalidatePath('/invoices')
+    revalidatePath(`/invoices/${id}`)
+    revalidatePath('/')
+    revalidatePath('/reports')
+    revalidatePath('/clients')
+    revalidatePath(`/clients/${clientId}`)
+
+    // Sync to Google Sheet
+    await syncInvoicesToGoogleSheet()
+    if (transactionCreated) {
+      await syncTransactionsToGoogleSheet()
+    }
+
     return { success: true }
   } catch (error) {
     console.error("Failed to edit invoice:", error)
@@ -644,6 +739,13 @@ export async function deleteInvoice(id: string) {
     await client.delete(id)
     
     revalidatePath('/invoices')
+    revalidatePath('/')
+    revalidatePath('/reports')
+    revalidatePath('/clients')
+
+    // Sync to Google Sheet
+    await syncInvoicesToGoogleSheet()
+
     return { success: true }
   } catch (error) {
     console.error("Failed to delete invoice:", error)
@@ -1265,3 +1367,60 @@ export async function processPayroll(monthYear: string, payrollData: any[]) {
     return { success: false, error: 'Failed to process payroll' }
   }
 }
+
+// --- Google Sheets Sync Helpers ---
+
+export async function syncInvoicesToGoogleSheet() {
+  try {
+    const invoices = await client.fetch(`*[_type == "invoice"] | order(date desc) {
+      date,
+      invoiceNumber,
+      client->{name},
+      amount,
+      gstPercentage,
+      status
+    }`)
+
+    const rows = invoices.map((inv: any) => [
+      inv.date ? new Date(inv.date).toISOString().split('T')[0] : '',
+      inv.invoiceNumber || '',
+      inv.client?.name || '',
+      inv.amount ? inv.amount.toString() : '0',
+      inv.gstPercentage ? inv.gstPercentage.toString() : '0',
+      inv.status || 'draft'
+    ])
+
+    await updateSheetValues(rows, 'Invoices!A2')
+    console.log('Synced Invoices to Google Sheets')
+  } catch (error) {
+    console.error('Failed to sync invoices to Google Sheet:', error)
+  }
+}
+
+export async function syncTransactionsToGoogleSheet() {
+  try {
+    const transactions = await client.fetch(`*[_type == "transaction"] | order(date desc) {
+      date,
+      title,
+      type,
+      category,
+      amount,
+      wallet->{name}
+    }`)
+
+    const rows = transactions.map((tx: any) => [
+      tx.date ? new Date(tx.date).toISOString().split('T')[0] : '',
+      tx.title || '',
+      tx.type || '',
+      tx.category || '',
+      tx.amount ? tx.amount.toString() : '0',
+      tx.wallet?.name || ''
+    ])
+
+    await updateSheetValues(rows, 'Transactions!A2')
+    console.log('Synced Transactions to Google Sheets')
+  } catch (error) {
+    console.error('Failed to sync transactions to Google Sheet:', error)
+  }
+}
+

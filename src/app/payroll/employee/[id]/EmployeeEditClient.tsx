@@ -53,66 +53,66 @@ export function EmployeeEditClient({ employee }: { employee: any }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-      <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 max-w-md w-full shadow-2xl">
+      <div className="bg-white border border-gray-200 shadow-sm rounded-xl p-6 max-w-md w-full shadow-2xl">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-bold text-white">Edit Employee</h3>
-          <button onClick={() => setIsEditing(false)} className="text-neutral-500 hover:text-white transition-colors">
+          <h3 className="text-lg font-bold text-gray-900">Edit Employee</h3>
+          <button onClick={() => setIsEditing(false)} className="text-gray-500 hover:text-gray-700 transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
         
         <form onSubmit={handleUpdate} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1">Full Name</label>
             <input 
               type="text" 
               name="name" 
               defaultValue={employee.name} 
               required 
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1">Email Address</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1">Email Address</label>
             <input 
               type="email" 
               name="email" 
               defaultValue={employee.email} 
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1">Designation</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1">Designation</label>
             <input 
               type="text" 
               name="designation" 
               defaultValue={employee.designation} 
               required 
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1">Base Salary (₹)</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1">Base Salary (₹)</label>
             <input 
               type="number" 
               name="baseSalary" 
               defaultValue={employee.baseSalary} 
               required 
               min="0"
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             />
-            <p className="text-xs text-neutral-500 mt-1">Updates will affect all future payroll runs.</p>
+            <p className="text-xs text-gray-500 mt-1">Updates will affect all future payroll runs.</p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-1">Status</label>
+            <label className="block text-sm font-medium text-gray-500 mb-1">Status</label>
             <select 
               name="status" 
               defaultValue={employee.status || 'active'} 
-              className="w-full bg-neutral-950 border border-neutral-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>

@@ -39,7 +39,7 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
       case 'Completed': return 'bg-green-500/10 text-green-400'
       case 'In Progress': return 'bg-blue-500/10 text-blue-400'
       case 'Blocked': return 'bg-red-500/10 text-red-400'
-      default: return 'bg-neutral-800 text-neutral-400'
+      default: return 'bg-gray-100 text-gray-500'
     }
   }
 
@@ -88,10 +88,10 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
   return (
     <div className="space-y-8">
       {/* Header Info */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-neutral-900 border border-neutral-800 p-6 rounded-xl">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white border border-gray-200 shadow-sm p-6 rounded-xl">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-1">{client.name}</h1>
-          <div className="flex items-center gap-4 text-sm text-neutral-400">
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">{client.name}</h1>
+          <div className="flex items-center gap-4 text-sm text-gray-500">
             <span>{client.contactPerson || 'No Contact Person'}</span>
             {client.email && <span>• {client.email}</span>}
             {client.phone && <span>• {client.phone}</span>}
@@ -99,7 +99,7 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
         </div>
         <div>
           <span className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${
-            client.status === 'active' ? 'bg-green-500/10 text-green-400' : 'bg-neutral-800 text-neutral-400'
+            client.status === 'active' ? 'bg-green-500/10 text-green-400' : 'bg-gray-100 text-gray-500'
           }`}>
             {client.status} Client
           </span>
@@ -112,15 +112,15 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
           const Icon = stat.icon
 
           const CardContent = (
-            <div className={`bg-neutral-900 border border-neutral-800 p-6 rounded-xl ${stat.link ? 'hover:bg-neutral-800/80 transition-colors cursor-pointer group' : ''}`}>
+            <div className={`bg-white border border-gray-200 shadow-sm p-6 rounded-xl ${stat.link ? 'hover:bg-gray-100/80 transition-colors cursor-pointer group' : ''}`}>
               <div className="flex items-center justify-between mb-4">
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${stat.bgColor} ${stat.color} ${stat.link ? 'group-hover:scale-110 transition-transform' : ''}`}>
                   <Icon className="w-5 h-5" />
                 </div>
               </div>
               <div>
-                <p className="text-sm text-neutral-400 mb-1">{stat.title}</p>
-                <p className="text-2xl font-bold text-white">{stat.value}</p>
+                <p className="text-sm text-gray-500 mb-1">{stat.title}</p>
+                <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
               </div>
             </div>
           )
@@ -134,16 +134,16 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Invoices */}
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden flex flex-col">
-          <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
-             <h2 className="text-lg font-bold text-white">Recent Invoices</h2>
+        <div className="bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden flex flex-col">
+          <div className="p-6 border-b border-gray-200 shadow-sm flex justify-between items-center">
+             <h2 className="text-lg font-bold text-gray-900">Recent Invoices</h2>
              {invRole !== 'viewer' && (
                <Link href="/invoices/create" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">Create New</Link>
              )}
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-neutral-300">
-              <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+            <table className="w-full text-left text-sm text-gray-700">
+              <thead className="bg-gray-50/50 text-gray-500 uppercase font-medium">
                 <tr>
                   <th className="px-6 py-4">Invoice #</th>
                   <th className="px-6 py-4">Date</th>
@@ -151,21 +151,21 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
                   <th className="px-6 py-4">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-800">
+              <tbody className="divide-y divide-gray-200">
                 {invoices.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-8 text-center text-neutral-500">No invoices generated yet.</td>
+                    <td colSpan={4} className="px-6 py-8 text-center text-gray-500">No invoices generated yet.</td>
                   </tr>
                 ) : (
                   invoices.slice(0, 5).map((invoice) => (
-                    <tr key={invoice._id} className="hover:bg-neutral-800/50 transition-colors">
-                      <td className="px-6 py-4 font-medium text-white">
+                    <tr key={invoice._id} className="hover:bg-gray-100/50 transition-colors">
+                      <td className="px-6 py-4 font-medium text-gray-900">
                         <Link href={`/invoices/${invoice._id}`} className="hover:text-blue-400 transition-colors">
                           {invoice.invoiceNumber}
                         </Link>
                       </td>
                       <td className="px-6 py-4">{format(new Date(invoice.date), 'MMM d, yyyy')}</td>
-                      <td className="px-6 py-4 font-bold text-white">{formatCurrency(invoice.amount, currency, exchangeRate)}</td>
+                      <td className="px-6 py-4 font-bold text-gray-900">{formatCurrency(invoice.amount, currency, exchangeRate)}</td>
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-medium inline-block capitalize ${getStatusColor(invoice.status)}`}>
                           {invoice.status}
@@ -178,8 +178,8 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
             </table>
           </div>
           {invoices.length > 5 && (
-             <div className="p-4 border-t border-neutral-800 text-center">
-                <Link href="/invoices" className="text-sm text-neutral-400 hover:text-white transition-colors">View All Invoices</Link>
+             <div className="p-4 border-t border-gray-200 shadow-sm text-center">
+                <Link href="/invoices" className="text-sm text-gray-500 hover:text-gray-700 transition-colors">View All Invoices</Link>
              </div>
           )}
         </div>
@@ -187,14 +187,14 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
 
       {/* Recent Transactions */}
       {allTransactions && allTransactions.length > 0 && (
-        <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden flex flex-col mt-8">
-          <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
-             <h2 className="text-lg font-bold text-white">Recent Transactions</h2>
+        <div className="bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden flex flex-col mt-8">
+          <div className="p-6 border-b border-gray-200 shadow-sm flex justify-between items-center">
+             <h2 className="text-lg font-bold text-gray-900">Recent Transactions</h2>
              <Link href={`/clients/${client._id}/transactions`} className="text-sm text-blue-400 hover:text-blue-300 transition-colors">View All</Link>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-neutral-300">
-              <thead className="bg-neutral-950/50 text-neutral-400 uppercase font-medium">
+            <table className="w-full text-left text-sm text-gray-700">
+              <thead className="bg-gray-50/50 text-gray-500 uppercase font-medium">
                 <tr>
                   <th className="px-6 py-4">Date</th>
                   <th className="px-6 py-4">Title</th>
@@ -203,11 +203,11 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
                   <th className="px-6 py-4 text-right">Amount</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-800">
+              <tbody className="divide-y divide-gray-200">
                 {paginatedTx.map((tx) => (
-                  <tr key={tx._id} className="hover:bg-neutral-800/50 transition-colors">
+                  <tr key={tx._id} className="hover:bg-gray-100/50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">{tx.date ? format(new Date(tx.date), 'MMM d, yyyy') : '-'}</td>
-                    <td className="px-6 py-4 font-medium text-white">
+                    <td className="px-6 py-4 font-medium text-gray-900">
                       <Link href={`/transaction/${tx._id}`} className="hover:text-blue-400 transition-colors">
                         {tx.title}
                       </Link>
@@ -223,7 +223,7 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
                       </span>
                     </td>
                     <td className="px-6 py-4">{tx.category}</td>
-                    <td className="px-6 py-4 text-right font-bold text-white">
+                    <td className="px-6 py-4 text-right font-bold text-gray-900">
                       {formatCurrency(tx.amount || 0, currency, exchangeRate)}
                     </td>
                   </tr>
@@ -232,22 +232,22 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
             </table>
           </div>
           {totalTxPages > 1 && (
-            <div className="p-4 border-t border-neutral-800 flex justify-between items-center">
-              <p className="text-sm text-neutral-400">
+            <div className="p-4 border-t border-gray-200 shadow-sm flex justify-between items-center">
+              <p className="text-sm text-gray-500">
                 Showing {((txPage - 1) * TX_PER_PAGE) + 1}–{Math.min(txPage * TX_PER_PAGE, allTransactions.length)} of {allTransactions.length}
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => setTxPage(p => Math.max(1, p - 1))}
                   disabled={txPage === 1}
-                  className="px-4 py-2 border border-neutral-700 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium bg-gray-50 disabled:opacity-40 hover:bg-gray-100 transition-colors text-gray-700"
                 >
                   Previous
                 </button>
                 <button
                   onClick={() => setTxPage(p => Math.min(totalTxPages, p + 1))}
                   disabled={txPage === totalTxPages}
-                  className="px-4 py-2 border border-neutral-700 rounded-lg text-sm font-medium bg-neutral-950 disabled:opacity-40 hover:bg-neutral-800 transition-colors text-white"
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium bg-gray-50 disabled:opacity-40 hover:bg-gray-100 transition-colors text-gray-700"
                 >
                   Next
                 </button>
