@@ -5,7 +5,7 @@ import { format } from "date-fns"
 import { useCurrency } from "@/components/Providers"
 import { formatCurrency } from "@/lib/utils"
 import Link from "next/link"
-import { deleteInvoice } from "@/app/actions"
+import { deleteInvoice, updateInvoiceStatus } from "@/app/actions"
 import { DeleteModal } from "@/components/DeleteModal"
 import toast from "react-hot-toast"
 import { useState, useEffect } from "react"
@@ -146,9 +146,31 @@ export function InvoiceList({ initialInvoices, clients, projects, userRole = 'vi
                         {formatCurrency(invoice.amount, currency, exchangeRate)}
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`px-2.5 py-1 rounded-full text-xs font-medium inline-block capitalize ${getStatusColor(invoice.status)}`}>
-                        {invoice.status}
-                      </span>
+                      {userRole !== 'viewer' ? (
+                        <select
+                          value={invoice.status}
+                          onChange={async (e) => {
+                            const newStatus = e.target.value
+                            const updatePromise = updateInvoiceStatus(invoice._id, newStatus)
+                            toast.promise(updatePromise, {
+                              loading: 'Updating status...',
+                              success: `Invoice status updated to ${newStatus}`,
+                              error: (err) => err?.message || 'Failed to update status',
+                            })
+                          }}
+                          className={`px-2.5 py-1 rounded-full text-xs font-semibold bg-transparent cursor-pointer capitalize border border-transparent focus:border-slate-300 focus:ring-1 focus:ring-slate-300 hover:opacity-85 transition-opacity ${getStatusColor(invoice.status)} text-slate-800`}
+                          style={{ appearance: 'none', WebkitAppearance: 'none' }}
+                        >
+                          <option value="draft" className="text-gray-900 bg-white">Draft</option>
+                          <option value="sent" className="text-gray-900 bg-white">Sent</option>
+                          <option value="paid" className="text-gray-900 bg-white">Paid</option>
+                          <option value="void" className="text-gray-900 bg-white">Void</option>
+                        </select>
+                      ) : (
+                        <span className={`px-2.5 py-1 rounded-full text-xs font-medium inline-block capitalize ${getStatusColor(invoice.status)}`}>
+                          {invoice.status}
+                        </span>
+                      )}
                     </td>
                     <td className="px-6 py-4 text-right items-center justify-end flex gap-2">
                         {userRole !== 'viewer' && (

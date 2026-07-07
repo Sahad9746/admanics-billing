@@ -731,6 +731,73 @@ export async function editInvoice(id: string, formData: FormData) {
   }
 }
 
+export async function updateInvoiceStatus(id: string, status: string) {
+  try {
+    const user = await getCurrentUser()
+    if (!checkPermission(user, 'finance', ['edit'])) return { success: false, error: 'Unauthorized' }
+
+    // Fetch existing invoice to check its status before updating
+    const existingInvoice = await client.fetch(`*[_type == "invoice" && _id == $id][0] { _id, status, invoiceNumber, amount, client->{_id, name} }`, { id })
+
+    if (!existingInvoice) {
+      return { success: false, error: 'Invoice not found' }
+    }
+
+    await client.patch(id).set({ status }).commit()
+
+    let transactionCreated = false
+    // Handle Option A: Auto-create transaction when status changes to 'paid'
+    if (existingInvoice.status !== 'paid' && status === 'paid') {
+      let walletId = null
+      let clientName = existingInvoice.client?.name || ""
+
+      if (clientName) {
+         const walletMatch = await client.fetch(`*[_type == "wallet" && name match $clientName][0]`, { clientName: clientName + "*" })
+         if (walletMatch) {
+             walletId = walletMatch._id
+         } else {
+             // Fallback: pick any wallet
+             const anyWallet = await client.fetch(`*[_type == "wallet"][0]`)
+             if (anyWallet) walletId = anyWallet._id
+         }
+      }
+
+      if (walletId) {
+         await client.create({
+           _type: 'transaction',
+           title: `Payment for Invoice ${existingInvoice.invoiceNumber}`,
+           amount: existingInvoice.amount,
+           type: 'income',
+           category: 'Service Fee',
+           date: new Date().toISOString().split('T')[0],
+           wallet: { _type: 'reference', _ref: walletId }
+         })
+         transactionCreated = true
+      }
+    }
+
+    revalidatePath('/invoices')
+    revalidatePath(`/invoices/${id}`)
+    revalidatePath('/')
+    revalidatePath('/reports')
+    revalidatePath('/clients')
+    if (existingInvoice.client?._id) {
+      revalidatePath(`/clients/${existingInvoice.client._id}`)
+    }
+
+    // Sync to Google Sheet
+    await syncInvoicesToGoogleSheet()
+    if (transactionCreated) {
+      await syncTransactionsToGoogleSheet()
+    }
+
+    return { success: true }
+  } catch (error) {
+    console.error("Failed to update invoice status:", error)
+    return { success: false, error: 'Failed to update invoice status' }
+  }
+}
+
 export async function deleteInvoice(id: string) {
   try {
     const user = await getCurrentUser()
