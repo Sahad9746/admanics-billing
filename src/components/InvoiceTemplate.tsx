@@ -55,19 +55,19 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
                 INVOICE
              </h1>
           </div>
-          <div className="text-right flex flex-col items-end">
+          <div className="flex flex-col items-start text-left">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo.png"
               alt="Admaniacs Logo"
-              style={{ width: 130, height: 48, objectFit: 'contain' }}
+              style={{ width: 130, height: 48, objectFit: 'contain', objectPosition: 'left' }}
               className="mb-6"
             />
             
-            <div className="text-left text-sm space-y-1">
+            <div className="text-sm space-y-1 text-slate-700">
               <p>A/C Number: 4649540675</p>
               <p>IFSC : KKBK0008077</p>
-              <p>NAME: Subah</p>
+              <p>NAME: Admaniacs</p>
               <p>KOTAK MAHINDRA, BTM,</p>
               <p>BENGLURU</p>
             </div>
