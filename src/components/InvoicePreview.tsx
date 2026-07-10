@@ -34,7 +34,7 @@ export function InvoicePreview({ invoice }: { invoice: any }) {
     invoiceNumber: invoice.invoiceNumber,
     date: format(new Date(invoice.date), 'dd/MM/yyyy'),
     clientName: invoice.client?.name || 'CLIENT NAME',
-    clientAddress: `BILL TO:\n${invoice.client?.contactPerson || ''}\n${invoice.client?.email || ''}\n${invoice.client?.phone || ''}`,
+    clientAddress: invoice.clientAddress || invoice.client?.address || '',
     hasSeparateGst,
     gstPercentage: 0,
     items: [] as any[]

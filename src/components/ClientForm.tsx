@@ -35,7 +35,7 @@ export function ClientForm({ initialData, onSuccess, onCancel }: ClientFormProps
   }
 
   return (
-    <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 shadow-xl w-full max-w-md relative">
+    <div className="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto relative">
       <button 
         onClick={onCancel}
         className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
@@ -46,7 +46,9 @@ export function ClientForm({ initialData, onSuccess, onCancel }: ClientFormProps
       
       <form action={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-500 mb-1.5">Company Name</label>
+          <label className="block text-sm font-medium text-gray-500 mb-1.5">
+            Company Name <span className="text-red-500">*</span>
+          </label>
           <input
             name="name"
             required
@@ -57,7 +59,9 @@ export function ClientForm({ initialData, onSuccess, onCancel }: ClientFormProps
         </div>
 
         <div>
-           <label className="block text-sm font-medium text-gray-500 mb-1.5">Contact Person</label>
+           <label className="block text-sm font-medium text-gray-500 mb-1.5">
+             Contact Person <span className="text-red-500">*</span>
+           </label>
            <input
              name="contactPerson"
              required
@@ -86,6 +90,20 @@ export function ClientForm({ initialData, onSuccess, onCancel }: ClientFormProps
              defaultValue={initialData?.phone}
              className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400"
              placeholder="+1 234 567 890"
+           />
+        </div>
+
+        <div>
+           <label className="block text-sm font-medium text-gray-500 mb-1.5">
+             Address {!initialData && <span className="text-red-500">*</span>}
+           </label>
+           <textarea
+             name="address"
+             required={!initialData}
+             rows={3}
+             defaultValue={initialData?.address}
+             className="w-full bg-white border border-gray-200 shadow-sm rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all placeholder:text-gray-400 resize-none text-sm"
+             placeholder="e.g., 123 Main Street, Suite 400, City, State, ZIP"
            />
         </div>
         

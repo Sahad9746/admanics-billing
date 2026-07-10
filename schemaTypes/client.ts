@@ -26,6 +26,12 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'address',
+      title: 'Address',
+      type: 'text',
+      validation: (Rule) => Rule.required().error('Address is required'),
+    }),
+    defineField({
       name: 'status',
       title: 'Status',
       type: 'string',

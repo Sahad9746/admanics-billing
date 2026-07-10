@@ -89,10 +89,12 @@ export const InvoiceTemplate = forwardRef<HTMLDivElement, InvoiceTemplateProps>(
                  BILL TO
               </div>
               <div className="px-4 text-sm">
-                  <p className="font-bold uppercase">{data.clientName || 'CLIENT NAME'}</p>
-                  <p className="whitespace-pre-wrap uppercase text-xs mt-1 text-gray-700">
-                    {data.clientAddress || 'Client Address'}
-                  </p>
+                  <p className="font-bold uppercase">{data.clientName || ''}</p>
+                  {data.clientAddress ? (
+                    <p className="whitespace-pre-wrap uppercase text-xs mt-1 text-gray-700">
+                      {data.clientAddress}
+                    </p>
+                  ) : null}
               </div>
            </div>
         </div>

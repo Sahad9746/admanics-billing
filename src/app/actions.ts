@@ -400,6 +400,11 @@ export async function addClient(formData: FormData) {
     const contactPerson = formData.get('contactPerson') as string
     const email = formData.get('email') as string
     const phone = formData.get('phone') as string
+    const address = formData.get('address') as string
+
+    if (!address || !address.trim()) {
+      return { success: false, error: 'Address is compulsory when adding a new client' }
+    }
 
     const newClient = await client.create({
       _type: 'client',
@@ -407,6 +412,7 @@ export async function addClient(formData: FormData) {
       contactPerson,
       email,
       phone,
+      address: address.trim(),
       status: 'active',
       createdAt: new Date().toISOString(),
     })
@@ -437,15 +443,23 @@ export async function editClient(id: string, formData: FormData) {
     const contactPerson = formData.get('contactPerson') as string
     const email = formData.get('email') as string
     const phone = formData.get('phone') as string
+    const address = formData.get('address') as string
     const status = formData.get('status') as string || 'active'
 
-    await client.patch(id).set({
+    const patchData: any = {
       name,
       contactPerson,
       email,
       phone,
       status,
-    }).commit()
+    }
+    if (address && address.trim()) {
+      patchData.address = address.trim()
+    } else {
+      patchData.address = null
+    }
+
+    await client.patch(id).set(patchData).commit()
     
     revalidatePath('/clients')
     return { success: true }
@@ -561,7 +575,7 @@ export async function getInvoices() {
   try {
     const invoices = await client.fetch(`*[_type == "invoice"] | order(createdAt desc) {
       ...,
-      client->{_id, name},
+      client->{_id, name, address},
       project->{_id, name}
     }`)
     return invoices
@@ -575,7 +589,7 @@ export async function getInvoiceById(id: string) {
   try {
     const invoice = await client.fetch(`*[_type == "invoice" && _id == $id][0] {
       ...,
-      client->{_id, name, contactPerson, email, phone},
+      client->{_id, name, contactPerson, email, phone, address},
       project->{_id, name}
     }`, { id })
     return invoice

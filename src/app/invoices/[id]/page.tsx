@@ -20,7 +20,7 @@ export default async function InvoicePreviewPage({ params }: { params: Promise<{
   const invoice = await client.fetch(`
     *[_type == "invoice" && _id == $id][0] {
       ...,
-      client->{_id, name, contactPerson, email, phone},
+      client->{_id, name, contactPerson, email, phone, address},
       project->{_id, name}
     }
   `, { id })

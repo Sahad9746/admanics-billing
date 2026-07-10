@@ -34,7 +34,7 @@ export function InvoiceBuilder({ clients, projects, initialInvoice }: InvoiceBui
   const [dueDate, setDueDate] = useState(
     initialInvoice?.dueDate ? format(new Date(initialInvoice.dueDate), 'yyyy-MM-dd') : format(new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd')
   )
-  const [clientAddress, setClientAddress] = useState('')
+  const [clientAddress, setClientAddress] = useState(initialInvoice?.clientAddress || '')
   const [gstPercentage, setGstPercentage] = useState(initialInvoice?.gstPercentage || 0)
   const [hasSeparateGst, setHasSeparateGst] = useState(initialInvoice?.hasSeparateGst || false)
   const [status, setStatus] = useState(initialInvoice?.status || 'draft')
@@ -59,11 +59,9 @@ export function InvoiceBuilder({ clients, projects, initialInvoice }: InvoiceBui
   // Set default address if client is selected and has one (though schema doesn't have address yet, we can use a manual field for the PDF)
   useEffect(() => {
      if (selectedClient) {
-        // You might want to update Client schema to have an address. 
-        // For now, we allow manual override for the visual template.
-        setClientAddress(`PLACEHOLDER ADDRESS FOR\n${selectedClient.name}`)
+        setClientAddress(selectedClient.address || initialInvoice?.clientAddress || '')
      } else {
-        setClientAddress('')
+        setClientAddress(initialInvoice?.clientAddress || '')
      }
   }, [selectedClient])
 
@@ -294,7 +292,15 @@ export function InvoiceBuilder({ clients, projects, initialInvoice }: InvoiceBui
                 
                 <div className="space-y-3">
                   {items.map((item, index) => {
-                    const suggestionOptions = ['Service Fee', 'Ad Funds', 'Consulting', 'Website Maintenance', 'Hosting', 'Domain Registration']
+                    const suggestionOptions = [
+                      'Professional Service Fee',
+                      'Agency Management & Retainer Fee',
+                      'Advertising Budget / Media Spend',
+                      'Strategic Consulting Services',
+                      'Website Maintenance & Support',
+                      'Cloud Hosting & Infrastructure',
+                      'Domain Registration & Renewal'
+                    ]
                     const filteredOptions = suggestionOptions.filter(opt => opt.toLowerCase().includes(item.description.toLowerCase()))
                     const optionsToRender = filteredOptions.length > 0 ? filteredOptions : suggestionOptions
 
@@ -309,7 +315,7 @@ export function InvoiceBuilder({ clients, projects, initialInvoice }: InvoiceBui
                             onBlur={() => {
                               setTimeout(() => setFocusedItemIndex(null), 200)
                             }}
-                            placeholder="Description (e.g. Service, Ad Fund)"
+                            placeholder="Select or type item description..."
                             className="w-full bg-gray-50 border border-gray-200 shadow-sm rounded-lg pl-3 pr-8 py-2 text-sm text-gray-900 outline-none focus:ring-2 focus:ring-blue-600"
                           />
                           <ChevronDown className="w-4 h-4 text-gray-400 absolute right-2.5 pointer-events-none" />
@@ -328,8 +334,8 @@ export function InvoiceBuilder({ clients, projects, initialInvoice }: InvoiceBui
                                   {opt}
                                 </div>
                               ))}
-                              <div className="border-t border-gray-100 mt-1.5 pt-1.5 px-3 py-1 text-xs text-gray-500 italic text-center select-none bg-gray-50 rounded-b-md">
-                                Type directly to enter a custom description
+                              <div className="border-t border-gray-100 mt-1.5 pt-2 pb-1.5 px-3 text-[11px] text-gray-400 text-center select-none bg-gray-50/75 rounded-b-md">
+                                Select a preset above or type any custom description
                               </div>
                             </div>
                           )}

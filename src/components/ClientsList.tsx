@@ -95,9 +95,14 @@ export function ClientsList({ initialClients, userRole = 'viewer' }: { initialCl
                 initialClients.map((client) => (
                   <tr key={client._id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 font-medium">
-                      <Link href={`/clients/${client._id}`} className="text-gray-900 hover:text-blue-600 transition-colors">
+                      <Link href={`/clients/${client._id}`} className="text-gray-900 hover:text-blue-600 transition-colors block">
                         {client.name}
                       </Link>
+                      {client.address && (
+                        <p className="text-xs text-gray-400 font-normal mt-0.5 line-clamp-1" title={client.address}>
+                          {client.address}
+                        </p>
+                      )}
                     </td>
                     <td className="px-6 py-4">{client.contactPerson || '-'}</td>
                     <td className="px-6 py-4">

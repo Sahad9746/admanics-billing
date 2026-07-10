@@ -91,10 +91,11 @@ export function ClientDashboard({ data, user }: ClientDashboardProps) {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white border border-gray-200 shadow-sm p-6 rounded-xl">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 mb-1">{client.name}</h1>
-          <div className="flex items-center gap-4 text-sm text-gray-500">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
             <span>{client.contactPerson || 'No Contact Person'}</span>
             {client.email && <span>• {client.email}</span>}
             {client.phone && <span>• {client.phone}</span>}
+            {client.address && <span>• {client.address}</span>}
           </div>
         </div>
         <div>
